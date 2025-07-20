@@ -2,12 +2,12 @@
 
 namespace WX.Services.API
 {
-    public class LocationAPISender : IAPISender
+    public class LocationAPIService : IAPIService
     {
         public string BaseURL { get; set; }
         public string CombinedURL { get; set; }
         
-        public LocationAPISender(string baseURL)
+        public LocationAPIService(string baseURL)
         {
             BaseURL = baseURL;
             CombinedURL = baseURL;
@@ -24,7 +24,7 @@ namespace WX.Services.API
 
         public void RegisterParameter(string parameterName, string parameterValue)
         {
-            if (CombinedURL[-1] == BaseURL[-1])
+            if (CombinedURL.Last() == BaseURL.Last())
                 CombinedURL += $"{parameterName}={parameterValue}";
             else
                 CombinedURL += $"&{parameterName}={parameterValue}";

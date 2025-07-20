@@ -1,6 +1,6 @@
 ﻿namespace WX.Services.API.Interfaces
 {
-    public interface IAPISender
+    public interface IAPIService
     {
         public string BaseURL { get; set; }
         public string CombinedURL { get; set; }
