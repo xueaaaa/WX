@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace WX.Models.Location
 {
@@ -6,12 +7,19 @@ namespace WX.Models.Location
     public partial class Location
     {
         [ObservableProperty]
-        private string _latitude;
+        [property: JsonPropertyName("name")]
+        private string _name;
         [ObservableProperty]
-        private string _longitude;
+        [property: JsonPropertyName("latitude")]
+        private float _latitude;
         [ObservableProperty]
-        private string _elevation;
+        [property: JsonPropertyName("longitude")]
+        private float _longitude;
         [ObservableProperty]
+        [property: JsonPropertyName("elevation")]
+        private float _elevation;
+        [ObservableProperty]
+        [property: JsonPropertyName("country")]
         private string _country;
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace WX
+﻿using WX.Services.API;
+using WX.Services.Preferences;
+
+namespace WX
 {
     public partial class MainPage : ContentPage
     {
