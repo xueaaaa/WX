@@ -27,10 +27,10 @@ namespace WX.Models.Weather
         private float _minimumApparentTemperature2m;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.SUNRISE)]
-        private TimeSpan _sunrise;
+        private TimeOnly _sunrise;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.SUNSET)]
-        private TimeSpan _sunset;
+        private TimeOnly _sunset;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.DAYLIGHT_DURATION)]
         private float _daylightDuration;

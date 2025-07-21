@@ -22,6 +22,11 @@ namespace WX
                 CounterBtn.Text = $"Clicked {count} times";
 
             SemanticScreenReader.Announce(CounterBtn.Text);
+
+            var se = new WeatherAPIService("https://api.open-meteo.com/v1/forecast?", new PreferencesService());
+            se.RegisterParameter("latitude", "52.52");
+            se.RegisterParameter("longitude", "13.41");
+            await se.FetchData();
         }
     }
 }

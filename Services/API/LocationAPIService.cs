@@ -2,7 +2,6 @@
 using System.Text.Json;
 using WX.Services.Preferences.Interfaces;
 using Location = WX.Models.Location.Location;
-using System.Diagnostics;
 
 namespace WX.Services.API
 {
