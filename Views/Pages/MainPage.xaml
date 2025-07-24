@@ -5,6 +5,6 @@
              x:Class="WX.Views.Pages.MainPage"
              Title="MainPage">
     <VerticalStackLayout>
-        <Label Text="{x:Static locale:Locale.TestString}"/>
+
     </VerticalStackLayout>
 </ContentPage>
