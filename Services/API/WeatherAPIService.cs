@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.Extensions.Options;
+using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -17,11 +18,11 @@ namespace WX.Services.API
         public string BaseURL { get; set; }
         public string CombinedURL { get; set; }
 
-        public WeatherAPIService(string baseURL, IPreferencesService preferencesService)
+        public WeatherAPIService(IOptions<WeatherAPIOptions> options)
         {
-            BaseURL = baseURL;
-            CombinedURL = baseURL;
-            _preferencesService = preferencesService;
+            BaseURL = options.Value.BaseURL;
+            CombinedURL = options.Value.BaseURL;
+            _preferencesService = options.Value.PreferencesService;
 
             SetDefaultParameters();
         }

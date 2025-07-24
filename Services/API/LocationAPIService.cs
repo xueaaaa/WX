@@ -2,6 +2,7 @@
 using System.Text.Json;
 using WX.Services.Preferences.Interfaces;
 using Location = WX.Models.Location.Location;
+using Microsoft.Extensions.Options;
 
 namespace WX.Services.API
 {
@@ -12,11 +13,11 @@ namespace WX.Services.API
         public string BaseURL { get; set; }
         public string CombinedURL { get; set; }
 
-        public LocationAPIService(string baseURL, IPreferencesService preferencesService)
+        public LocationAPIService(IOptions<LocationAPIOptions> options)
         {
-            BaseURL = baseURL;
-            CombinedURL = baseURL;
-            _preferencesService = preferencesService;
+            BaseURL = options.Value.BaseURL;
+            CombinedURL = options.Value.BaseURL;
+            _preferencesService = options.Value.PreferencesService;
 
             SetDefaultParameters();
         }

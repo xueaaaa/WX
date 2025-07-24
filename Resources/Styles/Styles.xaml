@@ -2,7 +2,16 @@
 <?xaml-comp compile="true" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <Style TargetType="ContentPage">
+    <Style x:Key="RootPage"
+           TargetType="TabbedPage">
+        <Setter Property="BarBackgroundColor" Value="{DynamicResource BackgroundColor}"/>
+        <Setter Property="BarTextColor" Value="{DynamicResource TextColor}"/>
+        <Setter Property="SelectedTabColor" Value="{DynamicResource TextColor}"/>
+        <Setter Property="UnselectedTabColor" Value="Transparent"/>
+    </Style>
+
+    <Style x:Key="ContentPage"
+           TargetType="ContentPage">
         <Setter Property="BackgroundColor" Value="{DynamicResource BackgroundColor}"/>
     </Style>
 </ResourceDictionary>

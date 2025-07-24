@@ -59,5 +59,23 @@ namespace WX.Resources.Locales {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на По дням.
+        /// </summary>
+        internal static string DailyTabName {
+            get {
+                return ResourceManager.GetString("DailyTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Hourly.
+        /// </summary>
+        internal static string HourlyTabName {
+            get {
+                return ResourceManager.GetString("HourlyTabName", resourceCulture);
+            }
+        }
     }
 }
