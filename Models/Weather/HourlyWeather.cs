@@ -9,51 +9,51 @@ namespace WX.Models.Weather
     {
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.TIME)]
-        private DateTime _time;
+        private DateTime? _time;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.TEMPERATURE_2M)]
-        private float _temperature2m;
+        private float? _temperature2m;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.RELATIVE_HUMIDITY_2M)]
-        private float _relativeHumidity2m;
+        private float? _relativeHumidity2m;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.APPARENT_TEMPERATURE)]
-        private float _apparentTemperature;
+        private float? _apparentTemperature;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.PRECIPITATION_PROBABILITY)]
-        private float _precipitationProbability;
+        private float? _precipitationProbability;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.PRECIPITATION)]
-        private float _precipitation;
+        private float? _precipitation;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.SNOW_DEPTH)]
-        private float _snowDepth;
+        private float? _snowDepth;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.WEATHER_CODE)]
-        private WeatherInterpretationCode _weatherCode;
+        private WeatherInterpretationCode? _weatherCode;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.SURFACE_PRESSURE)]
-        private float _surfacePressure;
+        private float? _surfacePressure;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.CLOUD_COVER)]
-        private float _cloudCoverTotal;
+        private float? _cloudCoverTotal;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.VISIBILITY)]
-        private float _visibility;
+        private float? _visibility;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.WIND_SPEED_10M)]
-        private float _windSpeed10m;
+        private float? _windSpeed10m;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.WIND_GUSTS_10M)]
-        private float _windGusts10m;
+        private float? _windGusts10m;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.UV_INDEX)]
-        private float _UVIndex;
+        private float? _UVIndex;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.IS_DAY)]
         private bool _isDayOrNight;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.SUNSHINE_DURATION)]
-        private float _sunshineDuration;
+        private float? _sunshineDuration;
     }
 }

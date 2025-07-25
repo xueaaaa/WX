@@ -4,6 +4,7 @@ using WX.Services.API;
 using WX.Services.API.Interfaces;
 using WX.Services.Preferences;
 using WX.Services.Preferences.Interfaces;
+using WX.ViewModels;
 using WX.ViewModels.Pages;
 using WX.Views.Pages;
 using Location = WX.Models.Location.Location;
@@ -46,6 +47,7 @@ namespace WX
                 conf.BaseURL = "\"https://open-meteo.com/en/docs/geocoding-api?";
                 conf.PreferencesService = prefService;
             });
+            builder.Services.AddTransient<RootPageViewModel>();
             builder.Services.AddTransient<HourlyWeatherPage>();
             builder.Services.AddTransient<HourlyWeatherPageViewModel>();
             builder.Services.AddTransient<DailyWeatherPage>();

@@ -4,9 +4,6 @@
              x:Class="WX.Views.Pages.HourlyWeatherPage"
              Style="{DynamicResource ContentPage}">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <CollectionView ItemsSource="{Binding Data}"/>
     </VerticalStackLayout>
 </ContentPage>

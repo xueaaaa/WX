@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using WX.Models.Weather;
 using WX.Models.Weather.FieldNames;
+using WX.Services.API.FieldNames;
 using WX.Services.API.Interfaces;
 using WX.Services.Preferences.FieldNames;
 using WX.Services.Preferences.Interfaces;
@@ -31,17 +32,17 @@ namespace WX.Services.API
         {
             UnregisterParameters();
 
-            RegisterParameter("forecast_days", "14");
-            RegisterParameter("past_days", "2");
-            RegisterParameter("temperature_unit", _preferencesService.Get(PreferencesNames.TEMPERATURE_UNIT, Units.Celsius.ToStrValue()));
-            RegisterParameter("wind_speed_unit", _preferencesService.Get(PreferencesNames.WIND_SPEED_UNIT, Units.MetersHour.ToStrValue()));
-            RegisterParameter("precipitation_unit", _preferencesService.Get(PreferencesNames.PRECIPITATION_UNIT, Units.Millimeters.ToStrValue()));
-            RegisterParameter("timezone", "auto");
+            RegisterParameter(WeatherAPIFieldNames.FORECAST_DAYS, "14");
+            RegisterParameter(WeatherAPIFieldNames.PAST_DAYS, "2");
+            RegisterParameter(WeatherAPIFieldNames.TEMPERATURE_UNIT, _preferencesService.Get(PreferencesNames.TEMPERATURE_UNIT, Units.Celsius.ToStrValue()));
+            RegisterParameter(WeatherAPIFieldNames.WIND_SPEED_UNIT, _preferencesService.Get(PreferencesNames.WIND_SPEED_UNIT, Units.MetersHour.ToStrValue()));
+            RegisterParameter(WeatherAPIFieldNames.PRECIPITATION_UNIT, _preferencesService.Get(PreferencesNames.PRECIPITATION_UNIT, Units.Millimeters.ToStrValue()));
+            RegisterParameter(WeatherAPIFieldNames.TIMEZONE, "auto");
 
             var hourlyString = string.Join(",", WeatherAPIHourlyFieldNames.All);
             var dailyString = string.Join(",", WeatherAPIDailyFieldNames.All);
-            RegisterParameter("hourly", hourlyString);
-            RegisterParameter("daily", dailyString);
+            RegisterParameter(WeatherAPIFieldNames.HOURLY, hourlyString);
+            RegisterParameter(WeatherAPIFieldNames.DAILY, dailyString);
         }
 
         public async Task<IEnumerable<WeatherData>> FetchData()
