@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MauiIcons.Material;
+using Microsoft.Extensions.Logging;
 using WX.Models.Weather;
 using WX.Services.API;
 using WX.Services.API.Interfaces;
@@ -24,6 +25,8 @@ namespace WX
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.UseMaterialMauiIcons();
+
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
@@ -47,11 +50,11 @@ namespace WX
                 conf.BaseURL = "\"https://open-meteo.com/en/docs/geocoding-api?";
                 conf.PreferencesService = prefService;
             });
-            builder.Services.AddTransient<RootPageViewModel>();
-            builder.Services.AddTransient<HourlyWeatherPage>();
-            builder.Services.AddTransient<HourlyWeatherPageViewModel>();
-            builder.Services.AddTransient<DailyWeatherPage>();
-            builder.Services.AddTransient<DailyWeatherPageViewModel>();
+            builder.Services.AddSingleton<RootPageViewModel>();
+            builder.Services.AddSingleton<HourlyWeatherPage>();
+            builder.Services.AddSingleton<HourlyWeatherPageViewModel>();
+            builder.Services.AddSingleton<DailyWeatherPage>();
+            builder.Services.AddSingleton<DailyWeatherPageViewModel>();
 
             return builder.Build();
         }

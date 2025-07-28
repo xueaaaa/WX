@@ -8,5 +8,5 @@
 
     <Color x:Key="BackgroundColor">#F0EDE5</Color>
     <Color x:Key="TextColor">#312F2C</Color>
-    <Color x:Key="TextMutedColor">#4B4844</Color>
+    <Color x:Key="TextMutedColor">#817C74</Color>
 </ResourceDictionary>

@@ -5,6 +5,8 @@ namespace WX.Views.Pages;
 
 public partial class HourlyWeatherPage : ContentPage
 {
+	private bool _initialized = false;
+
 	public HourlyWeatherPage(HourlyWeatherPageViewModel viewModel)
 	{
 		InitializeComponent();
@@ -16,6 +18,10 @@ public partial class HourlyWeatherPage : ContentPage
     {
         base.OnAppearing();
 
-		await (BindingContext as IInitializableViewModel)!.Initialize();
+		if (!_initialized)
+		{
+			await (BindingContext as IInitializableViewModel)!.Initialize();
+			_initialized = true;
+		}
     }
 }

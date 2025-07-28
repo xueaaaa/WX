@@ -61,6 +61,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Feels like.
+        /// </summary>
+        internal static string ApparentTemperatureLabel {
+            get {
+                return ResourceManager.GetString("ApparentTemperatureLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на По дням.
         /// </summary>
         internal static string DailyTabName {

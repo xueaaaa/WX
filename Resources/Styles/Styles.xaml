@@ -1,7 +1,19 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <?xaml-comp compile="true" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+    <v:String x:Key="FontName">Sansation-Regular</v:String>
+    <v:String x:Key="FontBoldName">Sansation-Bold</v:String>
+    <v:String x:Key="FontItalicName">Sansation-Italic</v:String>
+    <v:String x:Key="FontLightName">Sansation-Light</v:String>
+
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="{DynamicResource FontName}"/>
+        <Setter Property="TextColor" Value="{DynamicResource TextColor}"/>
+    </Style>
+
     <Style x:Key="RootPage"
            TargetType="TabbedPage">
         <Setter Property="BarBackgroundColor" Value="{DynamicResource BackgroundColor}"/>
@@ -13,5 +25,6 @@
     <Style x:Key="ContentPage"
            TargetType="ContentPage">
         <Setter Property="BackgroundColor" Value="{DynamicResource BackgroundColor}"/>
+        <Setter Property="Padding" Value="10"/>
     </Style>
 </ResourceDictionary>

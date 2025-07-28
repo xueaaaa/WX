@@ -16,6 +16,8 @@ namespace WX.ViewModels.Pages
 
         [ObservableProperty]
         private ObservableCollection<HourlyWeather> _data;
+        [ObservableProperty]
+        private HourlyWeather _currentHourlyWeather;
 
         public HourlyWeatherPageViewModel(IAPIService<WeatherData> weatherService, IPreferencesService preferencesService)
         {
@@ -30,7 +32,7 @@ namespace WX.ViewModels.Pages
 
             IEnumerable<WeatherData> data = await _weatherService.FetchData();
             if (data.Any())
-                Data = data.First().Hourly;
+                Data = [data.First().Hourly.First(), data.First().Hourly.Last()];
         }
     }
 }

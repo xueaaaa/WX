@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
 using System.Collections.ObjectModel;
-using System.Reflection;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using WX.Models.Weather;
+using WX.Models.Weather.DTOs;
 using WX.Models.Weather.FieldNames;
 using WX.Services.API.FieldNames;
 using WX.Services.API.Interfaces;
@@ -54,12 +53,65 @@ namespace WX.Services.API
             var data = await response.Content.ReadAsStringAsync();
 
             using var doc = JsonDocument.Parse(data);
-            var hourlyElement = doc.RootElement.GetProperty(WeatherAPIWeatherDataFieldNames.HOURLY);
-            var dailyElement = doc.RootElement.GetProperty(WeatherAPIWeatherDataFieldNames.DAILY);
+            var sasd = doc.RootElement.GetProperty("hourly").GetRawText();
+            var hourlyDTO = JsonSerializer.Deserialize<HourlyWeatherDTO>(doc.RootElement.GetProperty(WeatherAPIWeatherDataFieldNames.HOURLY));
+            var dailyDTO = JsonSerializer.Deserialize<DailyWeatherDTO>(doc.RootElement.GetProperty(WeatherAPIWeatherDataFieldNames.DAILY));
 
             var wData = new WeatherData();
-            wData.Hourly = MapProperties<HourlyWeather>(hourlyElement);
-            wData.Daily = MapProperties<DailyWeather>(dailyElement);
+            var hourly = new ObservableCollection<HourlyWeather>();
+            for (int i = 0; i < hourlyDTO!.Time.Count; i++)
+            {
+                var entity = new HourlyWeather()
+                {
+                    Time = hourlyDTO.Time[i],
+                    Temperature2m = hourlyDTO.Temperature2m[i],
+                    RelativeHumidity2m = hourlyDTO.RelativeHumidity2m[i],
+                    ApparentTemperature = hourlyDTO.ApparentTemperature[i],
+                    PrecipitationProbability = hourlyDTO.PrecipitationProbability[i],
+                    Precipitation = hourlyDTO.Precipitation[i],
+                    SnowDepth = hourlyDTO.SnowDepth[i],
+                    WeatherCode = hourlyDTO.WeatherCode[i],
+                    SurfacePressure = hourlyDTO.SurfacePressure[i],
+                    CloudCoverTotal = hourlyDTO.CloudCoverTotal[i],
+                    Visibility = hourlyDTO.Visibility[i],
+                    WindSpeed10m = hourlyDTO.WindSpeed10m[i],
+                    WindGusts10m = hourlyDTO.WindGusts10m[i],
+                    UVIndex = hourlyDTO.UVIndex[i],
+                    IsDay = Convert.ToBoolean(hourlyDTO.IsDay[i]),
+                    SunshineDuration = hourlyDTO.SunshineDuration[i]
+                };
+
+                hourly.Add(entity);
+            }
+
+            var daily = new ObservableCollection<DailyWeather>();
+            for (int i = 0; i < dailyDTO!.Time.Count; i++)
+            {
+                var entity = new DailyWeather()
+                {
+                    Time = DateOnly.FromDateTime(dailyDTO.Time[i]),
+                    WeatherCode = dailyDTO.WeatherCode[i],
+                    MaximumTemperature2m = dailyDTO.MaximumTemperature2m[i],
+                    MinimumTemperature2m = dailyDTO.MinimumTemperature2m[i],
+                    MaximumApparentTemperature2m = dailyDTO.MaximumApparentTemperature2m[i],
+                    MinimumApparentTemperature2m = dailyDTO.MinimumApparentTemperature2m[i],
+                    Sunrise = TimeOnly.Parse(dailyDTO.Sunrise[i]),
+                    Sunset = TimeOnly.Parse(dailyDTO.Sunset[i]),
+                    DaylightDuration = dailyDTO.DaylightDuration[i],
+                    SunshineDuration = dailyDTO.SunshineDuration[i],
+                    UVIndex = dailyDTO.UVIndex[i],
+                    PrecipitationSum = dailyDTO.PrecipitationSum[i],
+                    PrecipitationHours = dailyDTO.PrecipitationHours[i],
+                    PrecipitationProbabilityMax = dailyDTO.PrecipitationProbabilityMax[i],
+                    MaximumWindSpeed = dailyDTO.MaximumWindSpeed[i],
+                    MaximumWindGusts = dailyDTO.MaximumWindGusts[i]
+                };
+
+                daily.Add(entity);
+            }
+
+            wData.Hourly = hourly;
+            wData.Daily = daily;
 
             return [wData];
         }
@@ -74,57 +126,5 @@ namespace WX.Services.API
 
         public void UnregisterParameters() =>
             CombinedURL = BaseURL;
-
-        private ObservableCollection<T> MapProperties<T>(JsonElement element) where T : class, new()
-        {
-            var res = new ObservableCollection<T>();
-
-            var props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                                 .Where(p => p.GetCustomAttribute<JsonPropertyNameAttribute>() != null)
-                                 .ToList();
-
-            var dataArrays = new Dictionary<string, JsonElement>();
-            foreach (var property in element.EnumerateObject())
-                dataArrays[property.Name] = property.Value;
-
-            if (!dataArrays.TryGetValue(WeatherAPIHourlyFieldNames.TIME, out var timeArray)) 
-                return res;
-            int count = timeArray.GetArrayLength();
-
-            for (int i = 0; i < count; i++)
-            {
-                var item = new T();
-
-                foreach (var prop in props)
-                {
-                    var attr = prop.GetCustomAttribute<JsonPropertyNameAttribute>();
-                    var jsonField = attr.Name;
-
-                    if (!dataArrays.TryGetValue(jsonField, out var jsonArray)) continue;
-                    if (jsonArray.ValueKind != JsonValueKind.Array || i >= jsonArray.GetArrayLength()) continue;
-
-                    var valueElement = jsonArray[i];
-
-                    object? value = prop.PropertyType switch
-                    {
-                        Type t when t == typeof(float) => valueElement.GetSingle(),
-                        Type t when t == typeof(int) => valueElement.GetInt32(),
-                        Type t when t == typeof(bool) => valueElement.GetInt32() == 1,
-                        Type t when t == typeof(DateTime) => DateTime.Parse(valueElement.GetString()!),
-                        Type t when t == typeof(DateOnly) => DateOnly.Parse(valueElement.GetString()!),
-                        Type t when t == typeof(TimeOnly) => TimeOnly.Parse(valueElement.GetString()!),
-                        Type t when t.IsEnum => Enum.ToObject(t, valueElement.GetInt32()),
-                        _ => null
-                    };
-
-                    if (value != null)
-                        prop.SetValue(item, value);
-                }
-
-                res.Add(item);
-            }
-
-            return res;
-        }
     }
 }
