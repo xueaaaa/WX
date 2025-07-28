@@ -86,5 +86,77 @@ namespace WX.Resources.Locales {
                 return ResourceManager.GetString("HourlyTabName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Humidity.
+        /// </summary>
+        internal static string HumidityLabel {
+            get {
+                return ResourceManager.GetString("HumidityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на km/h.
+        /// </summary>
+        internal static string kmh {
+            get {
+                return ResourceManager.GetString("kmh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на knots.
+        /// </summary>
+        internal static string kn {
+            get {
+                return ResourceManager.GetString("kn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на mi/h.
+        /// </summary>
+        internal static string mph {
+            get {
+                return ResourceManager.GetString("mph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на m/s.
+        /// </summary>
+        internal static string ms {
+            get {
+                return ResourceManager.GetString("ms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Precipitation probability.
+        /// </summary>
+        internal static string PrecipitationProbabilityLabel {
+            get {
+                return ResourceManager.GetString("PrecipitationProbabilityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на UV Index.
+        /// </summary>
+        internal static string UVIndexLabel {
+            get {
+                return ResourceManager.GetString("UVIndexLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Wind speed.
+        /// </summary>
+        internal static string WindSpeedLabel {
+            get {
+                return ResourceManager.GetString("WindSpeedLabel", resourceCulture);
+            }
+        }
     }
 }

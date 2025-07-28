@@ -11,6 +11,8 @@
         <converters:DateToWeekDayConverter x:Key="DateToWeekDayConverter"/>
         <converters:DateToStringDateConverter x:Key="DateToStringDateConverter"/>
         <converters:TemperatureAddUnitConverter x:Key="TemperatureAddUnitConverter"/>
+        <converters:NumberToPercentsConverter x:Key="NumberToPercentsConverter"/>
+        <converters:WindAddUnitsConverter x:Key="WindAddUnitsConverter"/>
     </ContentPage.Resources>
     
     <Grid>
@@ -23,6 +25,8 @@
         <Grid Grid.Row="1"
               BindingContext="{Binding CurrentHourlyWeather}">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -75,6 +79,78 @@
                     </Label.FormattedText>
                 </Label>
             </VerticalStackLayout>
+
+            <BoxView Grid.Row="2"
+                     Style="{DynamicResource Separator}"/>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <HorizontalStackLayout>
+                    <Image Source="{mi:Material Icon=WaterDrop, IconColor={StaticResource TextColor}}"/>
+                    <Label Style="{DynamicResource PropertyTitle}"
+                           Text="{x:Static loc:Locale.HumidityLabel}"/>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1">
+                    <ProgressBar Progress="{Binding RelativeHumidity2m, Converter={StaticResource NumberToPercentsConverter}}"/>
+                    <Label Style="{DynamicResource PropertyHint}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding RelativeHumidity2m}"/>
+                                <Span Text=" %"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="1"
+                                       Margin="0,5,0,0">
+                    <Image Source="{mi:Material Icon=Shower, IconColor={StaticResource TextColor}}"/>
+                    <Label Style="{DynamicResource PropertyTitle}"
+                           Text="{x:Static loc:Locale.PrecipitationProbabilityLabel}"/>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Grid.Row="1"
+                                     Margin="0,5,0,0">
+                    <ProgressBar Progress="{Binding PrecipitationProbability, Converter={StaticResource NumberToPercentsConverter}}"/>
+                    <Label Style="{DynamicResource PropertyHint}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding PrecipitationProbability}"/>
+                                <Span Text=" %"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="2"
+                                       Margin="0,5,0,0">
+                    <Image Source="{mi:Material Icon=Air, IconColor={StaticResource TextColor}}"/>
+                    <Label Style="{DynamicResource PropertyTitle}"
+                           Text="{x:Static loc:Locale.WindSpeedLabel}"/>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Grid.Row="2"
+                                     Margin="0,5,0,0"
+                                     VerticalOptions="Center">
+                    <Label Style="{DynamicResource PropertyHint}"
+                           HorizontalOptions="Start"
+                           Text="{Binding WindSpeed10m, Converter={StaticResource WindAddUnitsConverter}}"/>
+                </VerticalStackLayout>
+            </Grid>
         </Grid>
 
         <VerticalStackLayout Grid.Row="2">

@@ -34,7 +34,7 @@ namespace WX.Services.API
             RegisterParameter(WeatherAPIFieldNames.FORECAST_DAYS, "14");
             RegisterParameter(WeatherAPIFieldNames.PAST_DAYS, "2");
             RegisterParameter(WeatherAPIFieldNames.TEMPERATURE_UNIT, _preferencesService.Get(PreferencesNames.TEMPERATURE_UNIT, Units.Celsius.ToStrValue()));
-            RegisterParameter(WeatherAPIFieldNames.WIND_SPEED_UNIT, _preferencesService.Get(PreferencesNames.WIND_SPEED_UNIT, Units.MetersHour.ToStrValue()));
+            RegisterParameter(WeatherAPIFieldNames.WIND_SPEED_UNIT, _preferencesService.Get(PreferencesNames.WIND_SPEED_UNIT, Units.MetersSecond.ToStrValue()));
             RegisterParameter(WeatherAPIFieldNames.PRECIPITATION_UNIT, _preferencesService.Get(PreferencesNames.PRECIPITATION_UNIT, Units.Millimeters.ToStrValue()));
             RegisterParameter(WeatherAPIFieldNames.TIMEZONE, "auto");
 

@@ -6,7 +6,7 @@
         Fahrenheit,
         KilometersHour,
         MilesHour,
-        MetersHour,
+        MetersSecond,
         Knots,
         Millimeters,
         Inches
@@ -26,7 +26,7 @@
                     return "kmh";
                 case Units.MilesHour:
                     return "mph";
-                case Units.MetersHour:
+                case Units.MetersSecond:
                     return "ms";
                 case Units.Knots:
                     return "kn";
