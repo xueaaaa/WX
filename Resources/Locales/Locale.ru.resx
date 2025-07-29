@@ -135,6 +135,9 @@
   <data name="kn" xml:space="preserve">
     <value>узлов</value>
   </data>
+  <data name="MoreButton" xml:space="preserve">
+    <value>Ещё</value>
+  </data>
   <data name="mph" xml:space="preserve">
     <value>миль/ч</value>
   </data>

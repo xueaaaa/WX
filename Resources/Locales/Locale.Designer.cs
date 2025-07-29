@@ -115,6 +115,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на More.
+        /// </summary>
+        internal static string MoreButton {
+            get {
+                return ResourceManager.GetString("MoreButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на mi/h.
         /// </summary>
         internal static string mph {

@@ -14,6 +14,9 @@
         <converters:NumberToPercentsConverter x:Key="NumberToPercentsConverter"/>
         <converters:WindAddUnitsConverter x:Key="WindAddUnitsConverter"/>
         <converters:UVIndexToColorConverter x:Key="UVIndexToColorConverter"/>
+        <converters:TimeToIsCurrentTimeConverter x:Key="TimeToIsCurrentTimeConverter"/>
+        <converters:IsCurrentItemConverter x:Key="IsCurrentItemConverter"/>
+        <converters:IsNotCurrentItemConverter x:Key="IsNotCurrentItemConverter"/>
     </ContentPage.Resources>
     
     <Grid>
@@ -26,6 +29,7 @@
         <Grid Grid.Row="1"
               BindingContext="{Binding CurrentHourlyWeather}">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -58,10 +62,10 @@
             <VerticalStackLayout Grid.Row="1"
                                  Margin="0,10,0,0"
                                  HorizontalOptions="Center">
-                <Image Source="{mi:Material Icon=Place, IconColor={StaticResource TextColor}, IconSize=108}"/>
+                <Image Source="{mi:Material Icon=Place, IconColor={StaticResource TextColor}, IconSize=178}"/>
 
                 <Label Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
-                       FontSize="36"
+                       FontSize="48"
                        FontFamily="{DynamicResource FontBoldName}"
                        HorizontalTextAlignment="Center"/>
 
@@ -82,7 +86,8 @@
             </VerticalStackLayout>
 
             <BoxView Grid.Row="2"
-                     Style="{DynamicResource Separator}"/>
+                     Style="{DynamicResource Separator}"
+                     Margin="15"/>
 
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
@@ -179,28 +184,64 @@
                            HorizontalOptions="Center"/>
                 </Grid>
             </Grid>
+
+            <BoxView Grid.Row="4"
+                     Style="{DynamicResource Separator}"
+                     Margin="15"/>
+
+            <Button Grid.Row="5"
+                    Style="{DynamicResource TransparentButton}"
+                    Margin="15"
+                    ImageSource="{mi:Material Icon=KeyboardArrowDown, IconColor={StaticResource TextMutedColor}}"
+                    Text="{x:Static loc:Locale.MoreButton}"/>
         </Grid>
 
         <VerticalStackLayout Grid.Row="2">
-            <CarouselView ItemsSource="{Binding Data}"
+            <CarouselView x:Name="HourlyWeatherPicker"
+                          ItemsSource="{Binding Data}"
                           CurrentItem="{Binding CurrentHourlyWeather}"
-                          IndicatorView="HourCarouselIndicator"
+                          IndicatorView="HourlyCarouselIndicator"
+                          PeekAreaInsets="{Binding Path=Width, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                          Loop="False"
                           HorizontalScrollBarVisibility="Never">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"
+                                       ItemSpacing="20"/>
+                </CarouselView.ItemsLayout>
+                
                 <CarouselView.ItemTemplate>
                     <DataTemplate x:DataType="m:HourlyWeather">
-                        <VerticalStackLayout HorizontalOptions="Center">
-                            <Label Text="{Binding Temperature2m}"
-                                   FontSize="Title"
-                                   FontAttributes="Bold"/>
-                            <Label Text="{Binding Time, StringFormat='{0:HH}'}"
-                                   HorizontalOptions="Center"
-                                   TextColor="{DynamicResource TextMutedColor}"/>
-                        </VerticalStackLayout>
+                        <Grid>
+                            <VerticalStackLayout HorizontalOptions="Center"
+                                                 IsVisible="{Binding .,
+                                                                     Converter={StaticResource IsCurrentItemConverter},
+                                                                     ConverterParameter={x:Reference HourlyWeatherPicker}}">
+                                <Label Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
+                                       FontSize="Title"
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding Time, StringFormat='{0:HH:mm}'}"
+                                       HorizontalOptions="Center"
+                                       TextColor="{DynamicResource TextMutedColor}"/>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout HorizontalOptions="Center"
+                                                 IsVisible="{Binding .,
+                                                                     Converter={StaticResource IsNotCurrentItemConverter},
+                                                                     ConverterParameter={x:Reference HourlyWeatherPicker}}">
+                                <Label Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
+                                       TextColor="{DynamicResource TextMutedColor}"
+                                       FontSize="Title"
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding Time, StringFormat='{0:HH:mm}'}"
+                                       HorizontalOptions="Center"
+                                       TextColor="{DynamicResource TextMutedColor}"/>
+                            </VerticalStackLayout>
+                        </Grid>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
 
-            <IndicatorView x:Name="HourCarouselIndicator"
+            <IndicatorView x:Name="HourlyCarouselIndicator"
                            HorizontalOptions="Center"
                            Margin="0,5,0,0"
                            SelectedIndicatorColor="{DynamicResource TextColor}"/>

@@ -12,7 +12,7 @@ public partial class HourlyWeatherPage : ContentPage
 		InitializeComponent();
 		
 		BindingContext = viewModel;
-	}
+    }
 
     protected override async void OnAppearing()
     {

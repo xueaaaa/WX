@@ -135,6 +135,9 @@
   <data name="kn" xml:space="preserve">
     <value>knots</value>
   </data>
+  <data name="MoreButton" xml:space="preserve">
+    <value>More</value>
+  </data>
   <data name="mph" xml:space="preserve">
     <value>mi/h</value>
   </data>
