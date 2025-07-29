@@ -186,4 +186,22 @@
   <data name="min" xml:space="preserve">
     <value>min.</value>
   </data>
+  <data name="MoreAboutUVLabel" xml:space="preserve">
+    <value>You can learn more about UV index</value>
+  </data>
+  <data name="HereLink" xml:space="preserve">
+    <value>here</value>
+  </data>
+  <data name="LowUVLabel" xml:space="preserve">
+    <value>No protection needed. You can safely stay outside using minimal sun protection.</value>
+  </data>
+  <data name="MtoHUVLabel" xml:space="preserve">
+    <value>Protection needed. Seek shade during late morning through mid-afternoon. When outside, generously apply broad-spectrum SPF-15 or higher sunscreen on exposed skin, and wear protective clothing, a wide-brimmed hat, and sunglasses.</value>
+  </data>
+  <data name="VHtoEUVLabel" xml:space="preserve">
+    <value>Extra protection needed. Be careful outside, especially during late morning through mid-afternoon. If your shadow is shorter than you, seek shade and wear protective clothing, a wide-brimmed hat, and sunglasses, and generously apply a minimum of  SPF-15, broad-spectrum sunscreen on exposed skin.</value>
+  </data>
+  <data name="SourceLabel" xml:space="preserve">
+    <value>Source</value>
+  </data>
 </root>

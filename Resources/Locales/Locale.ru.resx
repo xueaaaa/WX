@@ -186,4 +186,22 @@
   <data name="min" xml:space="preserve">
     <value>мин.</value>
   </data>
+  <data name="MoreAboutUVLabel" xml:space="preserve">
+    <value>Вы можете узнать больше про УФ-индекс</value>
+  </data>
+  <data name="HereLink" xml:space="preserve">
+    <value>здесь</value>
+  </data>
+  <data name="LowUVLabel" xml:space="preserve">
+    <value>Защита не требуется. Вы можете безопасно находиться на улице, используя минимальную защиту от солнца.</value>
+  </data>
+  <data name="MtoHUVLabel" xml:space="preserve">
+    <value>Необходима защита. Оставайтесь в тени с позднего утра до середины дня. Выходя на улицу, обильно наносите солнцезащитный крем широкого спектра действия с SPF 15+ на открытые участки кожи, а также носите защитную одежду, шляпу с широкими полями и солнцезащитные очки.</value>
+  </data>
+  <data name="VHtoEUVLabel" xml:space="preserve">
+    <value>Необходима дополнительная защита. Будьте осторожны на улице, особенно с позднего утра до середины дня. Если ваша тень короче вас, найдите тень и наденьте защитную одежду, шляпу с широкими полями и солнцезащитные очки, а также обильно нанесите на открытые участки кожи солнцезащитный крем широкого спектра действия с фактором защиты SPF-15+.</value>
+  </data>
+  <data name="SourceLabel" xml:space="preserve">
+    <value>Источник</value>
+  </data>
 </root>

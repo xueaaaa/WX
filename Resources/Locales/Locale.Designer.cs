@@ -97,6 +97,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на here.
+        /// </summary>
+        internal static string HereLink {
+            get {
+                return ResourceManager.GetString("HereLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Hourly.
         /// </summary>
         internal static string HourlyTabName {
@@ -142,6 +151,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на No protection needed. You can safely stay outside using minimal sun protection..
+        /// </summary>
+        internal static string LowUVLabel {
+            get {
+                return ResourceManager.GetString("LowUVLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на m.
         /// </summary>
         internal static string m {
@@ -156,6 +174,15 @@ namespace WX.Resources.Locales {
         internal static string min {
             get {
                 return ResourceManager.GetString("min", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на You can learn more about UV index.
+        /// </summary>
+        internal static string MoreAboutUVLabel {
+            get {
+                return ResourceManager.GetString("MoreAboutUVLabel", resourceCulture);
             }
         }
         
@@ -187,6 +214,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Protection needed. Seek shade during late morning through mid-afternoon. When outside, generously apply broad-spectrum SPF-15 or higher sunscreen on exposed skin, and wear protective clothing, a wide-brimmed hat, and sunglasses..
+        /// </summary>
+        internal static string MtoHUVLabel {
+            get {
+                return ResourceManager.GetString("MtoHUVLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Amount of precipitation.
         /// </summary>
         internal static string PrecipitationLabel {
@@ -214,6 +250,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Source.
+        /// </summary>
+        internal static string SourceLabel {
+            get {
+                return ResourceManager.GetString("SourceLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Sunshine duration.
         /// </summary>
         internal static string SunshineDurationLabel {
@@ -237,6 +282,15 @@ namespace WX.Resources.Locales {
         internal static string UVIndexLabel {
             get {
                 return ResourceManager.GetString("UVIndexLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Extra protection needed. Be careful outside, especially during late morning through mid-afternoon. If your shadow is shorter than you, seek shade and wear protective clothing, a wide-brimmed hat, and sunglasses, and generously apply a minimum of  SPF-15, broad-spectrum sunscreen on exposed skin..
+        /// </summary>
+        internal static string VHtoEUVLabel {
+            get {
+                return ResourceManager.GetString("VHtoEUVLabel", resourceCulture);
             }
         }
         

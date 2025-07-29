@@ -43,10 +43,12 @@
            TargetType="ContentPage">
         <Setter Property="BackgroundColor" Value="{DynamicResource BackgroundColor}"/>
         <Setter Property="Padding" Value="10"/>
+        <Setter Property="Padding" Value="10"/>
     </Style>
 
     <Style x:Key="PropertyTitle"
            TargetType="Label">
+        <Setter Property="FontAttributes" Value="Bold"/>
         <Setter Property="Margin" Value="5,0,0,0"/>
         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
