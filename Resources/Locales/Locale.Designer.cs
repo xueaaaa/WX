@@ -79,6 +79,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Cloud cover.
+        /// </summary>
+        internal static string CloudCoverTotalLabel {
+            get {
+                return ResourceManager.GetString("CloudCoverTotalLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на По дням.
         /// </summary>
         internal static string DailyTabName {
@@ -93,6 +102,15 @@ namespace WX.Resources.Locales {
         internal static string HourlyTabName {
             get {
                 return ResourceManager.GetString("HourlyTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на hPa.
+        /// </summary>
+        internal static string hpa {
+            get {
+                return ResourceManager.GetString("hpa", resourceCulture);
             }
         }
         
@@ -124,6 +142,24 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на m.
+        /// </summary>
+        internal static string m {
+            get {
+                return ResourceManager.GetString("m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на min..
+        /// </summary>
+        internal static string min {
+            get {
+                return ResourceManager.GetString("min", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на More.
         /// </summary>
         internal static string MoreButton {
@@ -151,6 +187,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Amount of precipitation.
+        /// </summary>
+        internal static string PrecipitationLabel {
+            get {
+                return ResourceManager.GetString("PrecipitationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Precipitation probability.
         /// </summary>
         internal static string PrecipitationProbabilityLabel {
@@ -160,11 +205,56 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Snow depth.
+        /// </summary>
+        internal static string SnowDepthLabel {
+            get {
+                return ResourceManager.GetString("SnowDepthLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Sunshine duration.
+        /// </summary>
+        internal static string SunshineDurationLabel {
+            get {
+                return ResourceManager.GetString("SunshineDurationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Surface pressure.
+        /// </summary>
+        internal static string SurfacePressureLabel {
+            get {
+                return ResourceManager.GetString("SurfacePressureLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на UV Index.
         /// </summary>
         internal static string UVIndexLabel {
             get {
                 return ResourceManager.GetString("UVIndexLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Visibility.
+        /// </summary>
+        internal static string VisibilityLabel {
+            get {
+                return ResourceManager.GetString("VisibilityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Wind gusts.
+        /// </summary>
+        internal static string WindGustsLabel {
+            get {
+                return ResourceManager.GetString("WindGustsLabel", resourceCulture);
             }
         }
         

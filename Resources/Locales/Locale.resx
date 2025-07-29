@@ -156,4 +156,34 @@
   <data name="CloseButton" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="PrecipitationLabel" xml:space="preserve">
+    <value>Amount of precipitation</value>
+  </data>
+  <data name="SnowDepthLabel" xml:space="preserve">
+    <value>Snow depth</value>
+  </data>
+  <data name="SurfacePressureLabel" xml:space="preserve">
+    <value>Surface pressure</value>
+  </data>
+  <data name="CloudCoverTotalLabel" xml:space="preserve">
+    <value>Cloud cover</value>
+  </data>
+  <data name="VisibilityLabel" xml:space="preserve">
+    <value>Visibility</value>
+  </data>
+  <data name="WindGustsLabel" xml:space="preserve">
+    <value>Wind gusts</value>
+  </data>
+  <data name="SunshineDurationLabel" xml:space="preserve">
+    <value>Sunshine duration</value>
+  </data>
+  <data name="hpa" xml:space="preserve">
+    <value>hPa</value>
+  </data>
+  <data name="m" xml:space="preserve">
+    <value>m</value>
+  </data>
+  <data name="min" xml:space="preserve">
+    <value>min.</value>
+  </data>
 </root>
