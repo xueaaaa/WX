@@ -9,4 +9,10 @@
     <Color x:Key="BackgroundColor">#F0EDE5</Color>
     <Color x:Key="TextColor">#312F2C</Color>
     <Color x:Key="TextMutedColor">#817C74</Color>
+
+    <Color x:Key="UVIndexLowColor">#819A91</Color>
+    <Color x:Key="UVIndexModerateColor">#FADA7A</Color>
+    <Color x:Key="UVIndexHighColor">#E16A54</Color>
+    <Color x:Key="UVIndexVeryHighColor">#9F5255</Color>
+    <Color x:Key="UVIndexExtremeColor">#574964</Color>
 </ResourceDictionary>

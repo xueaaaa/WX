@@ -36,7 +36,7 @@ namespace WX.Models.Weather.DTOs
         public List<float?> SunshineDuration { get; set; }
 
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.UV_INDEX_MAX)]
-        public List<float?> UVIndex { get; set; }
+        public List<decimal?> UVIndex { get; set; }
 
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.PRECIPITATION_SUM)]
         public List<float?> PrecipitationSum { get; set; }

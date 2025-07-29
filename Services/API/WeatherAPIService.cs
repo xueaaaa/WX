@@ -76,7 +76,7 @@ namespace WX.Services.API
                     Visibility = hourlyDTO.Visibility[i],
                     WindSpeed10m = hourlyDTO.WindSpeed10m[i],
                     WindGusts10m = hourlyDTO.WindGusts10m[i],
-                    UVIndex = hourlyDTO.UVIndex[i],
+                    UVIndex = (int)Math.Round(hourlyDTO.UVIndex[i]!.Value),
                     IsDay = Convert.ToBoolean(hourlyDTO.IsDay[i]),
                     SunshineDuration = hourlyDTO.SunshineDuration[i]
                 };
@@ -99,7 +99,7 @@ namespace WX.Services.API
                     Sunset = TimeOnly.Parse(dailyDTO.Sunset[i]),
                     DaylightDuration = dailyDTO.DaylightDuration[i],
                     SunshineDuration = dailyDTO.SunshineDuration[i],
-                    UVIndex = dailyDTO.UVIndex[i],
+                    UVIndex = (int)Math.Round(dailyDTO.UVIndex[i]!.Value),
                     PrecipitationSum = dailyDTO.PrecipitationSum[i],
                     PrecipitationHours = dailyDTO.PrecipitationHours[i],
                     PrecipitationProbabilityMax = dailyDTO.PrecipitationProbabilityMax[i],

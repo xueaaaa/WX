@@ -13,6 +13,7 @@
         <converters:TemperatureAddUnitConverter x:Key="TemperatureAddUnitConverter"/>
         <converters:NumberToPercentsConverter x:Key="NumberToPercentsConverter"/>
         <converters:WindAddUnitsConverter x:Key="WindAddUnitsConverter"/>
+        <converters:UVIndexToColorConverter x:Key="UVIndexToColorConverter"/>
     </ContentPage.Resources>
     
     <Grid>
@@ -150,6 +151,33 @@
                            HorizontalOptions="Start"
                            Text="{Binding WindSpeed10m, Converter={StaticResource WindAddUnitsConverter}}"/>
                 </VerticalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="3"
+                                       Margin="0,5,0,0">
+                    <Image Source="{mi:Material Icon=Sunny, IconColor={StaticResource TextColor}}"/>
+                    <Label Style="{DynamicResource PropertyTitle}"
+                           Text="{x:Static loc:Locale.UVIndexLabel}"/>
+                </HorizontalStackLayout>
+
+                <Grid Grid.Column="1"
+                      Grid.Row="3"
+                      Margin="0,5,0,0"
+                      VerticalOptions="Center"
+                      HorizontalOptions="Start">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <BoxView WidthRequest="16"
+                             HeightRequest="16"
+                             BackgroundColor="{Binding UVIndex, Converter={StaticResource UVIndexToColorConverter}}"
+                             CornerRadius="8"/>
+
+                    <Label TextColor="{DynamicResource BackgroundColor}"
+                           Text="{Binding UVIndex}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                </Grid>
             </Grid>
         </Grid>
 

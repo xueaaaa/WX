@@ -39,7 +39,7 @@ namespace WX.Models.Weather
         private float? _sunshineDuration;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.UV_INDEX_MAX)]
-        private float? _UVIndex;
+        private int? _UVIndex;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.PRECIPITATION_SUM)]
         private float? _precipitationSum;

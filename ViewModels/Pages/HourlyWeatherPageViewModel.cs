@@ -32,7 +32,7 @@ namespace WX.ViewModels.Pages
 
             IEnumerable<WeatherData> data = await _weatherService.FetchData();
             if (data.Any())
-                Data = [data.First().Hourly.First(), data.First().Hourly.Last()];
+                Data = [data.First().Hourly.First(), data.First().Hourly.Last(), data.First().Hourly[14]];
         }
     }
 }

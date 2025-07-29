@@ -48,7 +48,7 @@ namespace WX.Models.Weather
         private float? _windGusts10m;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.UV_INDEX)]
-        private float? _UVIndex;
+        private int? _UVIndex;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.IS_DAY)]
         private bool _isDay;

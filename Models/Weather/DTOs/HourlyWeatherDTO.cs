@@ -45,7 +45,7 @@ namespace WX.Models.Weather.DTOs
         public List<float?> WindGusts10m { get; set; }
 
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.UV_INDEX)]
-        public List<float?> UVIndex { get; set; }
+        public List<decimal?> UVIndex { get; set; }
 
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.IS_DAY)]
         public List<int?> IsDay { get; set; }
