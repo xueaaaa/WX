@@ -1,11 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using WX.Models.Weather;
+using WX.Services;
 using WX.Services.API.FieldNames;
 using WX.Services.API.Interfaces;
 using WX.Services.Preferences.FieldNames;
 using WX.Services.Preferences.Interfaces;
 using WX.ViewModels.Interfaces;
+using WX.Views.Modals;
 
 namespace WX.ViewModels.Pages
 {
@@ -13,6 +16,7 @@ namespace WX.ViewModels.Pages
     {
         private readonly IAPIService<WeatherData> _weatherService;
         private readonly IPreferencesService _preferencesService;
+        private INavigation _navigation;
 
         [ObservableProperty]
         private ObservableCollection<HourlyWeather> _data;
@@ -27,6 +31,8 @@ namespace WX.ViewModels.Pages
 
         public async Task Initialize()
         {
+            _navigation = Application.Current?.MainPage?.Navigation;
+
             _weatherService.RegisterParameter(WeatherAPIFieldNames.LATITUDE, _preferencesService.Get(PreferencesNames.CURRENT_LATITUDE, "14.14"));
             _weatherService.RegisterParameter(WeatherAPIFieldNames.LONGITUDE, _preferencesService.Get(PreferencesNames.CURRENT_LONGITUDE, "55.55"));
 
@@ -34,5 +40,9 @@ namespace WX.ViewModels.Pages
             if (data.Any())
                 Data = [data.First().Hourly.First(), data.First().Hourly.Last(), data.First().Hourly[14]];
         }
+
+        [RelayCommand]
+        private async Task OpenDetails() =>
+            await _navigation.PushModalAsync(new HourlyWeatherDetails(CurrentHourlyWeather, _navigation));
     }
 }

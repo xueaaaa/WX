@@ -193,7 +193,8 @@
                     Style="{DynamicResource TransparentButton}"
                     Margin="15"
                     ImageSource="{mi:Material Icon=KeyboardArrowDown, IconColor={StaticResource TextMutedColor}}"
-                    Text="{x:Static loc:Locale.MoreButton}"/>
+                    Text="{x:Static loc:Locale.MoreButton}"
+                    Command="{Binding BindingContext.OpenDetailsCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"/>
         </Grid>
 
         <VerticalStackLayout Grid.Row="2">
