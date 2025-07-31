@@ -2,19 +2,20 @@
 
 namespace WX.Converters
 {
-    public class IsNotCurrentItemConverter : IValueConverter
+    public class IsNotCurrentItemConverter : IMultiValueConverter
     {
-        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (parameter is not CarouselView)
-                return true;
+            if (values.Length < 2)
+                return false;
 
-            var carousel = parameter as CarouselView;
+            var item = values[0];
+            var currentItem = values[1];
 
-            return !Equals(carousel!.CurrentItem, value);
+            return !Equals(item, currentItem);
         }
 
-        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

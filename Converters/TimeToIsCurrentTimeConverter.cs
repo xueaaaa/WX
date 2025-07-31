@@ -11,7 +11,7 @@ namespace WX.Converters
             var val = (DateTime)value;
             TimeSpan diff = (DateTime.Now - val).Duration();
 
-            return diff <= TimeSpan.FromHours(1);
+            return diff <= TimeSpan.FromDays(1) && val.Hour == DateTime.Now.Hour;
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

@@ -207,4 +207,7 @@
   <data name="HereLink" xml:space="preserve">
     <value>here</value>
   </data>
+  <data name="NowLabel" xml:space="preserve">
+    <value>Now</value>
+  </data>
 </root>

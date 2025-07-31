@@ -200,7 +200,7 @@
         <VerticalStackLayout Grid.Row="2">
             <CarouselView x:Name="HourlyWeatherPicker"
                           ItemsSource="{Binding Data}"
-                          CurrentItem="{Binding CurrentHourlyWeather}"
+                          CurrentItem="{Binding CurrentHourlyWeather, Mode=TwoWay}"
                           IndicatorView="HourlyCarouselIndicator"
                           PeekAreaInsets="{Binding Path=Width, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                           Loop="False"
@@ -213,10 +213,19 @@
                 <CarouselView.ItemTemplate>
                     <DataTemplate x:DataType="m:HourlyWeather">
                         <Grid>
-                            <VerticalStackLayout HorizontalOptions="Center"
-                                                 IsVisible="{Binding .,
-                                                                     Converter={StaticResource IsCurrentItemConverter},
-                                                                     ConverterParameter={x:Reference HourlyWeatherPicker}}">
+                            <VerticalStackLayout HorizontalOptions="Center">
+                                <VerticalStackLayout.IsVisible>
+                                    <MultiBinding Converter="{StaticResource IsCurrentItemConverter}">
+                                        <Binding Path="."/>
+                                        <Binding Path="CurrentItem" Source="{RelativeSource AncestorType={x:Type CarouselView}}"/>
+                                    </MultiBinding>
+                                </VerticalStackLayout.IsVisible>
+
+                                <Label Text="{x:Static loc:Locale.NowLabel}"
+                                       TextColor="{DynamicResource TextMutedColor}"
+                                       FontSize="Caption"
+                                       FontFamily="{DynamicResource FontLightName}"
+                                       IsVisible="{Binding Time, Converter={StaticResource TimeToIsCurrentTimeConverter}}"/>
                                 <Label Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
                                        FontSize="Title"
                                        FontAttributes="Bold"/>
@@ -225,10 +234,19 @@
                                        TextColor="{DynamicResource TextMutedColor}"/>
                             </VerticalStackLayout>
 
-                            <VerticalStackLayout HorizontalOptions="Center"
-                                                 IsVisible="{Binding .,
-                                                                     Converter={StaticResource IsNotCurrentItemConverter},
-                                                                     ConverterParameter={x:Reference HourlyWeatherPicker}}">
+                            <VerticalStackLayout HorizontalOptions="Center">
+                                <VerticalStackLayout.IsVisible>
+                                    <MultiBinding Converter="{StaticResource IsNotCurrentItemConverter}">
+                                        <Binding Path="."/>
+                                        <Binding Path="CurrentItem" Source="{RelativeSource AncestorType={x:Type CarouselView}}"/>
+                                    </MultiBinding>
+                                </VerticalStackLayout.IsVisible>
+
+                                <Label Text="{x:Static loc:Locale.NowLabel}"
+                                       TextColor="{DynamicResource TextMutedColor}"
+                                       FontSize="Caption"
+                                       FontFamily="{DynamicResource FontLightName}"
+                                       IsVisible="{Binding Time, Converter={StaticResource TimeToIsCurrentTimeConverter}}"/>
                                 <Label Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
                                        TextColor="{DynamicResource TextMutedColor}"
                                        FontSize="Title"

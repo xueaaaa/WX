@@ -44,6 +44,8 @@ namespace WX.ViewModels.Pages
             {
                 vm.Data.Clear();
                 vm.Data = _worker.Data.Hourly;
+                CurrentHourlyWeather = vm.Data.Where(x => 
+                        (DateTime.Now - x.Time!.Value).Duration() <= TimeSpan.FromDays(1) && DateTime.Now.Hour == x.Time.Value.Hour).First();
             });
         }
 

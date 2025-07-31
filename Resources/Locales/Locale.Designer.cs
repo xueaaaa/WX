@@ -232,6 +232,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Now.
+        /// </summary>
+        internal static string NowLabel {
+            get {
+                return ResourceManager.GetString("NowLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Amount of precipitation.
         /// </summary>
         internal static string PrecipitationLabel {
