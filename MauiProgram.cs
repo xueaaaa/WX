@@ -6,6 +6,7 @@ using WX.Services.API.LocationAPI;
 using WX.Services.API.WeatherAPI;
 using WX.Services.Preferences;
 using WX.Services.Preferences.Interfaces;
+using WX.Services.Workers.WeatherWorkers;
 using WX.ViewModels;
 using WX.ViewModels.Pages;
 using WX.Views.Pages;
@@ -35,6 +36,8 @@ namespace WX
             builder.Services.AddSingleton<IAPIService<Location>, LocationAPIService>();
             builder.Services.AddSingleton<IAPIService<WeatherData>, WeatherAPIService>();
             builder.Services.AddSingleton<IPreferencesService, PreferencesService>();
+
+            builder.Services.AddSingleton<WeatherBackgroudWorker>();
 
             builder.Services.AddSingleton<App>();
             builder.Services.AddTransient<RootPage>();

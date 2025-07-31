@@ -127,6 +127,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Resources\Images\" />
+	  <Folder Include="Services\Workers\LocationWorkers\" />
 	</ItemGroup>
 
 </Project>
