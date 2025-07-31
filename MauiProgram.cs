@@ -1,8 +1,9 @@
 ﻿using MauiIcons.Material;
 using Microsoft.Extensions.Logging;
 using WX.Models.Weather;
-using WX.Services.API;
 using WX.Services.API.Interfaces;
+using WX.Services.API.LocationAPI;
+using WX.Services.API.WeatherAPI;
 using WX.Services.Preferences;
 using WX.Services.Preferences.Interfaces;
 using WX.ViewModels;

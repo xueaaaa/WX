@@ -4,12 +4,12 @@ using System.Text.Json;
 using WX.Models.Weather;
 using WX.Models.Weather.DTOs;
 using WX.Models.Weather.FieldNames;
-using WX.Services.API.FieldNames;
 using WX.Services.API.Interfaces;
+using WX.Services.API.WeatherAPI.FieldNames;
 using WX.Services.Preferences.FieldNames;
 using WX.Services.Preferences.Interfaces;
 
-namespace WX.Services.API
+namespace WX.Services.API.WeatherAPI
 {
     public class WeatherAPIService : IAPIService<WeatherData>
     {
@@ -54,8 +54,8 @@ namespace WX.Services.API
 
             using var doc = JsonDocument.Parse(data);
             var sasd = doc.RootElement.GetProperty("hourly").GetRawText();
-            var hourlyDTO = JsonSerializer.Deserialize<HourlyWeatherDTO>(doc.RootElement.GetProperty(WeatherAPIWeatherDataFieldNames.HOURLY));
-            var dailyDTO = JsonSerializer.Deserialize<DailyWeatherDTO>(doc.RootElement.GetProperty(WeatherAPIWeatherDataFieldNames.DAILY));
+            var hourlyDTO = doc.RootElement.GetProperty(WeatherAPIWeatherDataFieldNames.HOURLY).Deserialize<HourlyWeatherDTO>();
+            var dailyDTO = doc.RootElement.GetProperty(WeatherAPIWeatherDataFieldNames.DAILY).Deserialize<DailyWeatherDTO>();
 
             var wData = new WeatherData();
             var hourly = new ObservableCollection<HourlyWeather>();

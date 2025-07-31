@@ -1,6 +1,6 @@
 ﻿using WX.Services.Preferences.Interfaces;
 
-namespace WX.Services.API
+namespace WX.Services.API.LocationAPI
 {
     public class LocationAPIOptions
     {

@@ -4,7 +4,7 @@ using WX.Services.Preferences.Interfaces;
 using Location = WX.Models.Location.Location;
 using Microsoft.Extensions.Options;
 
-namespace WX.Services.API
+namespace WX.Services.API.LocationAPI
 {
     public class LocationAPIService : IAPIService<Location>
     {

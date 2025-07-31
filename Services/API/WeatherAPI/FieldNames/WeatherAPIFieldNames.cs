@@ -1,4 +1,4 @@
-﻿namespace WX.Services.API.FieldNames
+﻿namespace WX.Services.API.WeatherAPI.FieldNames
 {
     public static class WeatherAPIFieldNames
     {

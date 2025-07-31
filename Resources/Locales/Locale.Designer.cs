@@ -61,6 +61,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Additional info.
+        /// </summary>
+        internal static string AdditionalInfoLabel {
+            get {
+                return ResourceManager.GetString("AdditionalInfoLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Feels like.
         /// </summary>
         internal static string ApparentTemperatureLabel {
@@ -178,7 +187,7 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на You can learn more about UV index.
+        ///   Ищет локализованную строку, похожую на More about UV-index.
         /// </summary>
         internal static string MoreAboutUVLabel {
             get {
