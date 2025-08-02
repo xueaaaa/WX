@@ -4,11 +4,14 @@
              xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
              x:Class="WX.Views.Controls.ControlButtonsPanel">
     <HorizontalStackLayout>
-        <Button Style="{DynamicResource TransparentButton}"
+        <Button x:Name="SelectLocationButton"
+                Style="{DynamicResource TransparentButton}"
                 ImageSource="{mi:Material Icon=LocationPin, IconColor={StaticResource TextColor}}"
-                Padding="2"/>
+                Padding="2"
+                Clicked="SelectLocationButton_Clicked"/>
 
-        <Button Style="{DynamicResource TransparentButton}"
+        <Button x:Name="OpenSettingsButton"
+                Style="{DynamicResource TransparentButton}"
                 ImageSource="{mi:Material Icon=Settings, IconColor={StaticResource TextColor}}"
                 Margin="5,0,0,0"
                 Padding="2"/>

@@ -61,8 +61,8 @@ namespace WX
             builder.Services.AddSingleton<HourlyWeatherPageViewModel>();
             builder.Services.AddSingleton<DailyWeatherPage>();
             builder.Services.AddSingleton<DailyWeatherPageViewModel>();
-            builder.Services.AddTransient<SelectLocationModal>();
-            builder.Services.AddTransient<SelectLocationModalViewModel>();
+            builder.Services.AddTransient<AboutUVModal>();
+            builder.Services.AddTransient<AboutUVModalViewModel>();
 
             return builder.Build();
         }

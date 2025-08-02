@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WX.Models.Weather;
+using WX.Services;
 using WX.Views.Modals;
 
 namespace WX.ViewModels.Modals
@@ -21,7 +22,7 @@ namespace WX.ViewModels.Modals
 
         [RelayCommand]
         private async Task MoreAboutUV() =>
-            await _navigation.PushModalAsync(new AboutUVModal(_navigation));
+            await _navigation.PushModalAsync(ServiceHelper.GetService<AboutUVModal>());
 
         [RelayCommand]
         private async Task CloseDetails() =>

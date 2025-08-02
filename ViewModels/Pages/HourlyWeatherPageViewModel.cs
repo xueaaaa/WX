@@ -32,7 +32,7 @@ namespace WX.ViewModels.Pages
 
         public async Task Initialize()
         {
-            _navigation = Application.Current?.MainPage?.Navigation;
+            _navigation = Application.Current!.MainPage.Navigation;
             _messenger = WeakReferenceMessenger.Default;
             Data = new();
 
