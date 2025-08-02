@@ -1,4 +1,3 @@
-using WX.ViewModels;
 using WX.Views.Pages;
 using Locale = WX.Resources.Locales.Locale;
 
@@ -6,11 +5,9 @@ namespace WX;
 
 public partial class RootPage : TabbedPage
 {
-	public RootPage(IServiceProvider serviceProvider, RootPageViewModel viewModel)
+	public RootPage(IServiceProvider serviceProvider)
 	{
 		InitializeComponent();
-
-        BindingContext = viewModel;
 
         var hourlyPage = serviceProvider.GetRequiredService<HourlyWeatherPage>();
         hourlyPage.Title = Locale.HourlyTabName;

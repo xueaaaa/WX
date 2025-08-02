@@ -2,9 +2,8 @@
 using CommunityToolkit.Mvvm.Messaging;
 using WX.Models.Weather;
 using WX.Services.API.Interfaces;
-using WX.Services.API.WeatherAPI.FieldNames;
 
-namespace WX.Services.Workers.WeatherWorkers
+namespace WX.Services.Workers
 {
     public partial class WeatherBackgroudWorker : ObservableObject
     {

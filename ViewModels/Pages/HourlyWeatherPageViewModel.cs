@@ -6,13 +6,13 @@ using WX.Models.Weather;
 using WX.Services.API.WeatherAPI.FieldNames;
 using WX.Services.Preferences.FieldNames;
 using WX.Services.Preferences.Interfaces;
-using WX.Services.Workers.WeatherWorkers;
+using WX.Services.Workers;
 using WX.ViewModels.Interfaces;
 using WX.Views.Modals;
 
 namespace WX.ViewModels.Pages
 {
-    public partial class HourlyWeatherPageViewModel : ObservableObject, IInitializableViewModel
+    public partial class HourlyWeatherPageViewModel : ObservableObject, IInitializableViewModel, IRecipient<object>
     {
         private readonly WeatherBackgroudWorker _worker;
         private readonly IPreferencesService _preferencesService;
@@ -40,13 +40,15 @@ namespace WX.ViewModels.Pages
             _worker.Sender.RegisterParameter(WeatherAPIFieldNames.LONGITUDE, _preferencesService.Get(PreferencesNames.CURRENT_LONGITUDE, "55.55"));
             _worker.Initialize();
 
-            _messenger.Register<HourlyWeatherPageViewModel, object>(this, (vm, _) =>
-            {
-                vm.Data.Clear();
-                vm.Data = _worker.Data.Hourly;
-                CurrentHourlyWeather = vm.Data.Where(x => 
-                        (DateTime.Now - x.Time!.Value).Duration() <= TimeSpan.FromDays(1) && DateTime.Now.Hour == x.Time.Value.Hour).First();
-            });
+            _messenger.Register(this);
+        }
+
+        public void Receive(object message)
+        {
+            Data.Clear();
+            Data = _worker.Data.Hourly;
+            CurrentHourlyWeather = Data.Where(x =>
+                    (DateTime.Now - x.Time!.Value).Duration() <= TimeSpan.FromDays(1) && DateTime.Now.Hour == x.Time.Value.Hour).First();
         }
 
         [RelayCommand]

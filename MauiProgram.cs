@@ -1,4 +1,5 @@
 ﻿using MauiIcons.Material;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using WX.Models.Weather;
 using WX.Services.API.Interfaces;
@@ -6,9 +7,11 @@ using WX.Services.API.LocationAPI;
 using WX.Services.API.WeatherAPI;
 using WX.Services.Preferences;
 using WX.Services.Preferences.Interfaces;
-using WX.Services.Workers.WeatherWorkers;
+using WX.Services.Workers;
 using WX.ViewModels;
+using WX.ViewModels.Modals;
 using WX.ViewModels.Pages;
+using WX.Views.Modals;
 using WX.Views.Pages;
 using Location = WX.Models.Location.Location;
 
@@ -40,7 +43,7 @@ namespace WX
             builder.Services.AddSingleton<WeatherBackgroudWorker>();
 
             builder.Services.AddSingleton<App>();
-            builder.Services.AddTransient<RootPage>();
+            builder.Services.AddSingleton<RootPage>();
 
             var tempProvider = builder.Services.BuildServiceProvider();
             var prefService = tempProvider.GetRequiredService<IPreferencesService>();
@@ -54,11 +57,12 @@ namespace WX
                 conf.BaseURL = "\"https://open-meteo.com/en/docs/geocoding-api?";
                 conf.PreferencesService = prefService;
             });
-            builder.Services.AddSingleton<RootPageViewModel>();
             builder.Services.AddSingleton<HourlyWeatherPage>();
             builder.Services.AddSingleton<HourlyWeatherPageViewModel>();
             builder.Services.AddSingleton<DailyWeatherPage>();
             builder.Services.AddSingleton<DailyWeatherPageViewModel>();
+            builder.Services.AddTransient<SelectLocationModal>();
+            builder.Services.AddTransient<SelectLocationModalViewModel>();
 
             return builder.Build();
         }

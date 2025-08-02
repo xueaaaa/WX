@@ -5,6 +5,7 @@
              xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
              xmlns:loc="clr-namespace:WX.Resources.Locales"
              xmlns:converters="clr-namespace:WX.Converters"
+             xmlns:controls="clr-namespace:WX.Views.Controls"
              x:Class="WX.Views.Pages.HourlyWeatherPage"
              Style="{DynamicResource ContentPage}">
     <ContentPage.Resources>
@@ -30,38 +31,49 @@
               BindingContext="{Binding CurrentHourlyWeather}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <VerticalStackLayout>
-                <Label FontSize="Large">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{Binding Time, Converter={StaticResource DateToWeekDayConverter}}"
-                                  TextColor="{DynamicResource TextColor}"
-                                  FontFamily="{DynamicResource FontBoldName}"/>
-                            <Span Text=", "
-                                  TextColor="{DynamicResource TextMutedColor}"
-                                  FontFamily="{DynamicResource FontBoldName}"/>
-                            <Span Text="{Binding Time, Converter={StaticResource DateToStringDateConverter}}"
-                                  TextColor="{DynamicResource TextMutedColor}"
-                                  FontFamily="{DynamicResource FontBoldName}"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions> 
+                
+                <VerticalStackLayout>
+                    <Label FontSize="Large">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Time, Converter={StaticResource DateToWeekDayConverter}}"
+                                      TextColor="{DynamicResource TextColor}"
+                                      FontFamily="{DynamicResource FontBoldName}"/>
+                                <Span Text=", "
+                                      TextColor="{DynamicResource TextMutedColor}"
+                                      FontFamily="{DynamicResource FontBoldName}"/>
+                                <Span Text="{Binding Time, Converter={StaticResource DateToStringDateConverter}}"
+                                      TextColor="{DynamicResource TextMutedColor}"
+                                      FontFamily="{DynamicResource FontBoldName}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
-                <Label Text="{Binding Time, StringFormat='{0:HH:mm}'}"
-                       TextColor="{DynamicResource TextMutedColor}"
-                       FontFamily="{DynamicResource FontBoldName}"/>
-            </VerticalStackLayout>
+                    <Label Text="{Binding Time, StringFormat='{0:HH:mm}'}"
+                           TextColor="{DynamicResource TextMutedColor}"
+                           FontFamily="{DynamicResource FontBoldName}"/>
+                </VerticalStackLayout>
+
+                <controls:ControlButtonsPanel Grid.Column="1"
+                                              HorizontalOptions="End"
+                                              VerticalOptions="Center"/>
+            </Grid>
 
             <VerticalStackLayout Grid.Row="1"
-                                 Margin="0,10,0,0"
-                                 HorizontalOptions="Center">
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center">
                 <Image Source="{mi:Material Icon=Place, IconColor={StaticResource TextColor}, IconSize=178}"/>
 
                 <Label Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
@@ -87,7 +99,7 @@
 
             <BoxView Grid.Row="2"
                      Style="{DynamicResource Separator}"
-                     Margin="15"/>
+                     Margin="15,0,15,15"/>
 
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
@@ -187,7 +199,7 @@
 
             <BoxView Grid.Row="4"
                      Style="{DynamicResource Separator}"
-                     Margin="15"/>
+                     Margin="15,15,15,0"/>
 
             <Button Grid.Row="5"
                     Style="{DynamicResource TransparentButton}"
