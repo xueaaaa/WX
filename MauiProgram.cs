@@ -1,5 +1,4 @@
 ﻿using MauiIcons.Material;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using WX.Models.Weather;
 using WX.Services.API.Interfaces;
@@ -8,7 +7,7 @@ using WX.Services.API.WeatherAPI;
 using WX.Services.Preferences;
 using WX.Services.Preferences.Interfaces;
 using WX.Services.Workers;
-using WX.ViewModels;
+using WX.Services.Workers.Interfaces;
 using WX.ViewModels.Modals;
 using WX.ViewModels.Pages;
 using WX.Views.Modals;
@@ -41,6 +40,7 @@ namespace WX
             builder.Services.AddSingleton<IPreferencesService, PreferencesService>();
 
             builder.Services.AddSingleton<WeatherBackgroudWorker>();
+            builder.Services.AddSingleton<LocationWorker>();
 
             builder.Services.AddSingleton<App>();
             builder.Services.AddSingleton<RootPage>();
