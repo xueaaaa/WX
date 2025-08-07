@@ -210,4 +210,10 @@
   <data name="NowLabel" xml:space="preserve">
     <value>Now</value>
   </data>
+  <data name="FromCurrentLocationButton" xml:space="preserve">
+    <value>From current location</value>
+  </data>
+  <data name="SearchLocationPlaceholder" xml:space="preserve">
+    <value>Enter the location name...</value>
+  </data>
 </root>

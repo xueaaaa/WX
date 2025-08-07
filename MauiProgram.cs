@@ -1,5 +1,6 @@
 ﻿using MauiIcons.Material;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 using WX.Models.Weather;
 using WX.Services.API.Interfaces;
 using WX.Services.API.LocationAPI;
@@ -54,7 +55,7 @@ namespace WX
             });
             builder.Services.Configure<LocationAPIOptions>(conf =>
             {
-                conf.BaseURL = "\"https://open-meteo.com/en/docs/geocoding-api?";
+                conf.BaseURL = "https://geocoding-api.open-meteo.com/v1/search?";
                 conf.PreferencesService = prefService;
             });
             builder.Services.AddSingleton<HourlyWeatherPage>();

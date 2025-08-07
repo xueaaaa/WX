@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using WX.Services.Preferences.Interfaces;
 using WX.Services.Workers;
 using WX.ViewModels.Interfaces;
+using Location = WX.Models.Location.Location;
 
 namespace WX.ViewModels.Modals
 {
@@ -13,6 +14,8 @@ namespace WX.ViewModels.Modals
         private readonly INavigation _navigation;
         private readonly LocationWorker _locationWorker;
 
+        [ObservableProperty]
+        private ObservableCollection<Location> _searchedLocations;
         [ObservableProperty]
         private ObservableCollection<Location> _locations;
         [ObservableProperty]
@@ -27,7 +30,16 @@ namespace WX.ViewModels.Modals
 
         public async Task Initialize()
         {
-            
+
+        }
+
+        [RelayCommand]
+        private async Task SearchLocation(object parameter)
+        {
+            var key = parameter as string;
+
+            var data = await _locationWorker.LoadLocations(key);
+            SearchedLocations = new(data);
         }
 
         [RelayCommand]

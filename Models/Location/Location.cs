@@ -22,5 +22,8 @@ namespace WX.Models.Location
         [ObservableProperty]
         [property: JsonPropertyName(LocationAPIFieldNames.COUNTRY)]
         private string _country;
+        [ObservableProperty]
+        [property: JsonPropertyName(LocationAPIFieldNames.COUNTRY_CODE)]
+        private string _countryCode;
     }
 }

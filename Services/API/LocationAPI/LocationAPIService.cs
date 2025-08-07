@@ -3,6 +3,7 @@ using System.Text.Json;
 using WX.Services.Preferences.Interfaces;
 using Location = WX.Models.Location.Location;
 using Microsoft.Extensions.Options;
+using WX.Services.API.LocationAPI.FieldNames;
 
 namespace WX.Services.API.LocationAPI
 {
@@ -25,9 +26,10 @@ namespace WX.Services.API.LocationAPI
         public void SetDefaultParameters()
         {
             UnregisterParameters();
-            RegisterParameter("count", "10");
-            RegisterParameter("format", "json");
-            RegisterParameter("language", _preferencesService.GetLanguage());
+
+            RegisterParameter(LocationAPIFieldNames.COUNT, "10");
+            RegisterParameter(LocationAPIFieldNames.FORMAT, "json");
+            RegisterParameter(LocationAPIFieldNames.LANGUAGE, _preferencesService.GetLanguage());
         }
 
         public async Task<IEnumerable<Location>> FetchData()

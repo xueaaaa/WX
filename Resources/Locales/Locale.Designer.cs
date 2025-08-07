@@ -106,6 +106,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на From current location.
+        /// </summary>
+        internal static string FromCurrentLocationButton {
+            get {
+                return ResourceManager.GetString("FromCurrentLocationButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на here.
         /// </summary>
         internal static string HereLink {
@@ -255,6 +264,15 @@ namespace WX.Resources.Locales {
         internal static string PrecipitationProbabilityLabel {
             get {
                 return ResourceManager.GetString("PrecipitationProbabilityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Enter the location name....
+        /// </summary>
+        internal static string SearchLocationPlaceholder {
+            get {
+                return ResourceManager.GetString("SearchLocationPlaceholder", resourceCulture);
             }
         }
         

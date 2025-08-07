@@ -210,4 +210,10 @@
   <data name="NowLabel" xml:space="preserve">
     <value>Сейчас</value>
   </data>
+  <data name="FromCurrentLocationButton" xml:space="preserve">
+    <value>Из текущего местоположения</value>
+  </data>
+  <data name="SearchLocationPlaceholder" xml:space="preserve">
+    <value>Введите название локации...</value>
+  </data>
 </root>

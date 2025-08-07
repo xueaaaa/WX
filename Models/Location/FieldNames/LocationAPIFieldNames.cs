@@ -7,5 +7,6 @@
         public const string LONGITUDE = "longitude";
         public const string ELEVATION = "elevation";
         public const string COUNTRY = "country";
+        public const string COUNTRY_CODE = "country_code";
     }
 }

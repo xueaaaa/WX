@@ -53,7 +53,6 @@ namespace WX.Services.API.WeatherAPI
             var data = await response.Content.ReadAsStringAsync();
 
             using var doc = JsonDocument.Parse(data);
-            var sasd = doc.RootElement.GetProperty("hourly").GetRawText();
             var hourlyDTO = doc.RootElement.GetProperty(WeatherAPIWeatherDataFieldNames.HOURLY).Deserialize<HourlyWeatherDTO>();
             var dailyDTO = doc.RootElement.GetProperty(WeatherAPIWeatherDataFieldNames.DAILY).Deserialize<DailyWeatherDTO>();
 

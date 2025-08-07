@@ -1,15 +1,61 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:m="clr-namespace:WX.Models.Location"
              xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
              xmlns:loc="clr-namespace:WX.Resources.Locales"
+             xmlns:converters="clr-namespace:WX.Converters"
              x:Class="WX.Views.Modals.SelectLocationModal"
              Style="{DynamicResource ContentPage}">
+    <ContentPage.Resources>
+        <converters:CountryCodeToFlagURLConverter x:Key="CountryCodeToFlagURLConverter"/>
+    </ContentPage.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
+        <VerticalStackLayout>
+            <Button Style="{DynamicResource TransparentButton}"
+                    ImageSource="{mi:Material Icon=LocationPin, IconColor={StaticResource TextColor}}"
+                    Text="{x:Static loc:Locale.FromCurrentLocationButton}"
+                    TextColor="{DynamicResource TextColor}"/>
+
+            <BoxView Style="{DynamicResource Separator}"/>
+
+            <SearchBar x:Name="SearchLocationBar"
+                       Placeholder="{x:Static loc:Locale.SearchLocationPlaceholder}"
+                       SearchCommand="{Binding SearchLocationCommand}"
+                       SearchCommandParameter="{Binding Text, x:DataType='SearchBar', Source={x:Reference SearchLocationBar}}"/>
+
+            <CollectionView ItemsSource="{Binding SearchedLocations}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type m:Location}">
+                        <HorizontalStackLayout Padding="10">
+                            <Image Source="{Binding CountryCode, Converter={StaticResource CountryCodeToFlagURLConverter}}"
+                                   WidthRequest="20"
+                                   HeightRequest="15"
+                                   VerticalOptions="End"/>
+                            
+                            <Label Margin="5,0,0,0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Name}"
+                                              TextColor="{DynamicResource TextColor}"/>
+                                        <Span Text=", "
+                                              TextColor="{DynamicResource TextMutedColor}"/>
+                                        <Span Text="{Binding Country}"
+                                              TextColor="{DynamicResource TextMutedColor}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
 
         <Button Grid.Row="1"
                 Style="{DynamicResource TransparentButton}"
