@@ -12,7 +12,12 @@ namespace WX.ViewModels.Modals
     {
         private readonly IPreferencesService _preferencesService;
         private readonly INavigation _navigation;
+
         private readonly LocationWorker _locationWorker;
+        public LocationWorker LocationWorker
+        {
+            get => _locationWorker;
+        }
 
         [ObservableProperty]
         private ObservableCollection<Location> _searchedLocations;
@@ -52,6 +57,13 @@ namespace WX.ViewModels.Modals
 
             var data = await _locationWorker.LoadLocations(key);
             SearchedLocations = new(data);
+        }
+
+        [RelayCommand]
+        private async Task AddSearchedLocation()
+        {
+            if (SelectedSearchedLocation != null)
+                _locationWorker.AllLocations.Add(SelectedSearchedLocation);
         }
 
         [RelayCommand]

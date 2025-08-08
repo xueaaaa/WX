@@ -21,7 +21,6 @@ namespace WX.Services.Workers
 			get => _sender;
 		}
 
-
 		private ObservableCollection<Location> _allLocations;
 		public ObservableCollection<Location> AllLocations
 		{
@@ -43,7 +42,6 @@ namespace WX.Services.Workers
 				SaveCurrentLocation(value);
 			}
 		}
-
 
 		public LocationWorker(IAPIService<Location> sender, IPreferencesService preferencesService)
 		{
