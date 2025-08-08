@@ -216,4 +216,10 @@
   <data name="SearchLocationPlaceholder" xml:space="preserve">
     <value>Enter the location name...</value>
   </data>
+  <data name="AddButton" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="SavedLocationsLabel" xml:space="preserve">
+    <value>Saved locations</value>
+  </data>
 </root>

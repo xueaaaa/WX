@@ -9,6 +9,7 @@
              Style="{DynamicResource ContentPage}">
     <ContentPage.Resources>
         <converters:CountryCodeToFlagURLConverter x:Key="CountryCodeToFlagURLConverter"/>
+        <converters:IsCurrentItemConverter x:Key="IsCurrentItemConverter"/>
     </ContentPage.Resources>
     
     <Grid>
@@ -21,7 +22,8 @@
             <Button Style="{DynamicResource TransparentButton}"
                     ImageSource="{mi:Material Icon=LocationPin, IconColor={StaticResource TextColor}}"
                     Text="{x:Static loc:Locale.FromCurrentLocationButton}"
-                    TextColor="{DynamicResource TextColor}"/>
+                    TextColor="{DynamicResource TextColor}"
+                    Command="{Binding SetFromUserLocationCommand}"/>
 
             <BoxView Style="{DynamicResource Separator}"/>
 
@@ -30,14 +32,40 @@
                        SearchCommand="{Binding SearchLocationCommand}"
                        SearchCommandParameter="{Binding Text, x:DataType='SearchBar', Source={x:Reference SearchLocationBar}}"/>
 
-            <CollectionView ItemsSource="{Binding SearchedLocations}">
+            <CollectionView ItemsSource="{Binding SearchedLocations}"
+                            SelectedItem="{Binding SelectedSearchedLocation}"
+                            
+                            SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type m:Location}">
                         <HorizontalStackLayout Padding="10">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal"/>
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="Transparent"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            
+                            <Image Source="{mi:Material Icon=Check, IconColor={StaticResource TextMutedColor}}"
+                                   WidthRequest="20"
+                                   HeightRequest="20"
+                                   Margin="0,0,10,0">
+                                <Image.IsVisible>
+                                    <MultiBinding Converter="{StaticResource IsCurrentItemConverter}">
+                                        <Binding Path="."/>
+                                        <Binding Path="SelectedItem" Source="{RelativeSource AncestorType={x:Type CollectionView}}"/>
+                                    </MultiBinding>
+                                </Image.IsVisible>
+                            </Image>
+
                             <Image Source="{Binding CountryCode, Converter={StaticResource CountryCodeToFlagURLConverter}}"
                                    WidthRequest="20"
-                                   HeightRequest="15"
-                                   VerticalOptions="End"/>
+                                   HeightRequest="20"
+                                   VerticalOptions="Center"/>
                             
                             <Label Margin="5,0,0,0">
                                 <Label.FormattedText>
@@ -55,6 +83,17 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <Button Margin="0,10,0,0"
+                    Style="{DynamicResource TransparentButton}"
+                    Text="{x:Static loc:Locale.AddButton}"
+                    ImageSource="{mi:Material Icon=Add, IconColor={StaticResource TextMutedColor}}"/>
+
+            <BoxView Style="{DynamicResource Separator}"/>
+
+            <Label Text="{x:Static loc:Locale.SavedLocationsLabel}"
+                   FontSize="Large"
+                   FontFamily="{DynamicResource FontBoldName}"/>
         </VerticalStackLayout>
 
         <Button Grid.Row="1"

@@ -61,6 +61,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Add.
+        /// </summary>
+        internal static string AddButton {
+            get {
+                return ResourceManager.GetString("AddButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Additional info.
         /// </summary>
         internal static string AdditionalInfoLabel {
@@ -264,6 +273,15 @@ namespace WX.Resources.Locales {
         internal static string PrecipitationProbabilityLabel {
             get {
                 return ResourceManager.GetString("PrecipitationProbabilityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Saved locations.
+        /// </summary>
+        internal static string SavedLocationsLabel {
+            get {
+                return ResourceManager.GetString("SavedLocationsLabel", resourceCulture);
             }
         }
         

@@ -17,9 +17,7 @@ namespace WX.ViewModels.Modals
         [ObservableProperty]
         private ObservableCollection<Location> _searchedLocations;
         [ObservableProperty]
-        private ObservableCollection<Location> _locations;
-        [ObservableProperty]
-        private Location _currentLocation;
+        private Location _selectedSearchedLocation;
 
         public SelectLocationModalViewModel(IPreferencesService preferencesService, INavigation navigation, LocationWorker locationWorker)
         {
@@ -30,7 +28,21 @@ namespace WX.ViewModels.Modals
 
         public async Task Initialize()
         {
+            await _locationWorker.Initialize();
+        }
 
+        [RelayCommand]
+        private async Task SetFromUserLocation()
+        {
+            var loc = await _locationWorker.GetUserLocation();
+
+            if (loc != null)
+            {
+                _locationWorker.SelectedLocation = loc;
+
+                if (!_locationWorker.AllLocations.Contains(loc))
+                    _locationWorker.AllLocations.Add(loc);
+            }
         }
 
         [RelayCommand]

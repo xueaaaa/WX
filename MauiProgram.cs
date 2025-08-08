@@ -1,6 +1,5 @@
 ﻿using MauiIcons.Material;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 using WX.Models.Weather;
 using WX.Services.API.Interfaces;
 using WX.Services.API.LocationAPI;
@@ -8,10 +7,7 @@ using WX.Services.API.WeatherAPI;
 using WX.Services.Preferences;
 using WX.Services.Preferences.Interfaces;
 using WX.Services.Workers;
-using WX.Services.Workers.Interfaces;
-using WX.ViewModels.Modals;
 using WX.ViewModels.Pages;
-using WX.Views.Modals;
 using WX.Views.Pages;
 using Location = WX.Models.Location.Location;
 
@@ -62,8 +58,6 @@ namespace WX
             builder.Services.AddSingleton<HourlyWeatherPageViewModel>();
             builder.Services.AddSingleton<DailyWeatherPage>();
             builder.Services.AddSingleton<DailyWeatherPageViewModel>();
-            builder.Services.AddTransient<AboutUVModal>();
-            builder.Services.AddTransient<AboutUVModalViewModel>();
 
             return builder.Build();
         }

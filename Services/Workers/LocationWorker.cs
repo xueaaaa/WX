@@ -1,4 +1,7 @@
-﻿using System.Text.Json;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Text.Json;
 using WX.Services.API.Interfaces;
 using WX.Services.API.LocationAPI.FieldNames;
 using WX.Services.Preferences.FieldNames;
@@ -8,7 +11,7 @@ using Location = WX.Models.Location.Location;
 
 namespace WX.Services.Workers
 {
-    public class LocationWorker : IInitializibleWorker
+    public class LocationWorker : ObservableObject, IInitializibleWorker
     {
 		private IPreferencesService _preferencesService;
 
@@ -18,6 +21,30 @@ namespace WX.Services.Workers
 			get => _sender;
 		}
 
+
+		private ObservableCollection<Location> _allLocations;
+		public ObservableCollection<Location> AllLocations
+		{
+			get => _allLocations;
+			set 
+			{ 
+				SetProperty(ref _allLocations, value);
+				SaveAllLocations(value);
+			}
+		}
+
+		private Location? _selectedLocation;
+		public Location? SelectedLocation
+		{
+			get => _selectedLocation;
+			set 
+			{ 
+				SetProperty(ref _selectedLocation, value);
+				SaveCurrentLocation(value);
+			}
+		}
+
+
 		public LocationWorker(IAPIService<Location> sender, IPreferencesService preferencesService)
 		{
 			_sender = sender;
@@ -26,7 +53,13 @@ namespace WX.Services.Workers
 
         public async Task Initialize()
         {
-            
+			SelectedLocation = LoadCurrentLocation();
+			AllLocations = new(LoadAllLocations() ?? []);
+
+			AllLocations.CollectionChanged += (o, e) =>
+			{
+				SaveAllLocations(AllLocations);
+			};
         }
 
 		public async Task<IEnumerable<Location>> LoadLocations(string name)
@@ -41,20 +74,28 @@ namespace WX.Services.Workers
 
 		public async Task<Location?> GetUserLocation()
 		{
-			var data = await Geolocation.Default.GetLocationAsync();
-			var location = new Location
+			try
 			{
-				Latitude = (float)data!.Latitude,
-				Longitude = (float)data!.Longitude,
-				Elevation = (float)data!.Altitude,
-			};
+				var data = await Geolocation.Default.GetLocationAsync();
+				var location = new Location
+				{
+					Latitude = (float)data!.Latitude,
+					Longitude = (float)data!.Longitude,
+					Elevation = (float)data!.Altitude,
+				};
 
-			return location;
+				return location;
+			}
+			catch (Exception ex) 
+			{
+				Debug.WriteLine(ex.Message);
+				return null;
+			}
 		}
 
-		public IEnumerable<Location>? LoadSavedLocations()
+		public IEnumerable<Location>? LoadAllLocations()
 		{
-			var data = _preferencesService.Get(PreferencesNames.ALL_LOCATIONS, string.Empty);
+			var data = _preferencesService.Get(PreferencesNames.ALL_LOCATIONS, "[]");
 			var locations = JsonSerializer.Deserialize<IEnumerable<Location>>(data);
 
 			return locations;
@@ -62,7 +103,7 @@ namespace WX.Services.Workers
 
 		public Location? LoadCurrentLocation()
 		{
-			var data = _preferencesService.Get(PreferencesNames.CURRENT_LOCATION, string.Empty);
+			var data = _preferencesService.Get(PreferencesNames.CURRENT_LOCATION, "{}");
 			var location = JsonSerializer.Deserialize<Location>(data);
 
 			return location;
