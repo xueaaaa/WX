@@ -33,7 +33,7 @@ namespace WX.ViewModels.Modals
 
         public async Task Initialize()
         {
-            await _locationWorker.Initialize();
+            
         }
 
         [RelayCommand]

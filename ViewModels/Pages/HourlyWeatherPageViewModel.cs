@@ -4,7 +4,6 @@ using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
 using WX.Models.Weather;
 using WX.Services.API.WeatherAPI.FieldNames;
-using WX.Services.Preferences.FieldNames;
 using WX.Services.Preferences.Interfaces;
 using WX.Services.Workers;
 using WX.ViewModels.Interfaces;
@@ -14,7 +13,8 @@ namespace WX.ViewModels.Pages
 {
     public partial class HourlyWeatherPageViewModel : ObservableObject, IInitializableViewModel, IRecipient<object>
     {
-        private readonly WeatherBackgroudWorker _worker;
+        private readonly LocationWorker _locationWorker;
+        private readonly WeatherBackgroudWorker _weatherWorker;
         private readonly IPreferencesService _preferencesService;
         private INavigation _navigation;
         private WeakReferenceMessenger _messenger;
@@ -24,21 +24,23 @@ namespace WX.ViewModels.Pages
         [ObservableProperty]
         private HourlyWeather _currentHourlyWeather;
 
-        public HourlyWeatherPageViewModel(WeatherBackgroudWorker worker, IPreferencesService preferencesService)
+        public HourlyWeatherPageViewModel(LocationWorker locationWorker, WeatherBackgroudWorker worker, IPreferencesService preferencesService)
         {
-            _worker = worker;
+            _locationWorker = locationWorker;
+            _weatherWorker = worker;
             _preferencesService = preferencesService;
         }
 
         public async Task Initialize()
         {
+            await _locationWorker.Initialize();
             _navigation = Application.Current!.MainPage.Navigation;
             _messenger = WeakReferenceMessenger.Default;
             Data = new();
 
-            _worker.Sender.RegisterParameter(WeatherAPIFieldNames.LATITUDE, _preferencesService.Get(PreferencesNames.CURRENT_LATITUDE, "14.14"));
-            _worker.Sender.RegisterParameter(WeatherAPIFieldNames.LONGITUDE, _preferencesService.Get(PreferencesNames.CURRENT_LONGITUDE, "55.55"));
-            _worker.Initialize();
+            _weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LATITUDE, _locationWorker.SelectedLocation!.Latitude.ToString());
+            _weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LONGITUDE, _locationWorker.SelectedLocation!.Longitude.ToString());
+            await _weatherWorker.Initialize();
 
             _messenger.Register(this);
         }
@@ -46,7 +48,7 @@ namespace WX.ViewModels.Pages
         public void Receive(object message)
         {
             Data.Clear();
-            Data = _worker.Data.Hourly;
+            Data = _weatherWorker.Data.Hourly;
             CurrentHourlyWeather = Data.Where(x =>
                     (DateTime.Now - x.Time!.Value).Duration() <= TimeSpan.FromDays(1) && DateTime.Now.Hour == x.Time.Value.Hour).First();
         }
