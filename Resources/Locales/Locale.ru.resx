@@ -222,4 +222,7 @@
   <data name="SavedLocationsLabel" xml:space="preserve">
     <value>Сохраненные локации</value>
   </data>
+  <data name="CustomLocationLabel" xml:space="preserve">
+    <value>Собственное местоположение</value>
+  </data>
 </root>

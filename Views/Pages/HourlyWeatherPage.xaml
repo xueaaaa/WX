@@ -18,7 +18,10 @@
         <converters:TimeToIsCurrentTimeConverter x:Key="TimeToIsCurrentTimeConverter"/>
         <converters:IsCurrentItemConverter x:Key="IsCurrentItemConverter"/>
         <converters:IsNotCurrentItemConverter x:Key="IsNotCurrentItemConverter"/>
-    </ContentPage.Resources>
+        <converters:IsNamedLocationConverter x:Key="IsNamedLocationConverter"/>
+        <converters:IsNotNamedLocationConverter x:Key="IsNotNamedLocationConverter"/>
+        <converters:CountryCodeToFlagURLConverter x:Key="CountryCodeToFlagURLConverter"/>
+    </ContentPage.Resources> 
     
     <Grid>
         <Grid.RowDefinitions>
@@ -39,12 +42,35 @@
             </Grid.RowDefinitions>
 
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions> 
-                
-                <VerticalStackLayout>
+                </Grid.ColumnDefinitions>
+
+                <Grid BindingContext="{Binding BindingContext.LocationWorker.SelectedLocation, Source={RelativeSource AncestorType={x:Type ContentPage}}}">
+                    <HorizontalStackLayout IsVisible="{Binding ., Converter={StaticResource IsNamedLocationConverter}}">
+                        <Image Source="{Binding CountryCode, Converter={StaticResource CountryCodeToFlagURLConverter}}"
+                               WidthRequest="20"
+                               HeightRequest="20"
+                               VerticalOptions="Center"/>
+
+                        <Label Margin="5,0,0,0"
+                               VerticalOptions="Center"
+                               Text="{Binding Name}"
+                               FontSize="Header"
+                               FontFamily="{DynamicResource FontBoldName}"/>
+                    </HorizontalStackLayout>
+
+                    <Label IsVisible="{Binding ., Converter={StaticResource IsNotNamedLocationConverter}}"
+                           Text="{x:Static loc:Locale.CustomLocationLabel}"/>
+                </Grid>
+
+                <VerticalStackLayout Grid.Row="1">
                     <Label FontSize="Large">
                         <Label.FormattedText>
                             <FormattedString>
@@ -66,7 +92,8 @@
                            FontFamily="{DynamicResource FontBoldName}"/>
                 </VerticalStackLayout>
 
-                <controls:ControlButtonsPanel Grid.Column="1"
+                <controls:ControlButtonsPanel Grid.RowSpan="2"
+                                              Grid.Column="1"
                                               HorizontalOptions="End"
                                               VerticalOptions="Center"/>
             </Grid>

@@ -8,6 +8,7 @@ namespace WX.Services.Workers
     public partial class WeatherBackgroudWorker
     {
         private DateTime _previousCheckTime;
+        private string _previousURL;
         private Timer _timer;
         private WeakReferenceMessenger _messenger;
 
@@ -49,10 +50,11 @@ namespace WX.Services.Workers
 
         private async void UpdateDataTimerCallback(object? _)
         {
-            if(_previousCheckTime.Hour != DateTime.Now.Hour)
+            if((_previousCheckTime.Hour != DateTime.Now.Hour) || _previousURL != _sender.CombinedURL)
                 await UpdateData();
 
             _previousCheckTime = DateTime.Now;
+            _previousURL = _sender.CombinedURL;
         }
     }
 }

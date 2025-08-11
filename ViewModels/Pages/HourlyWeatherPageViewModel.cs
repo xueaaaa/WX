@@ -13,10 +13,15 @@ namespace WX.ViewModels.Pages
 {
     public partial class HourlyWeatherPageViewModel : ObservableObject, IInitializableViewModel, IRecipient<HourChangedMessage>, IRecipient<LocationChangedMessage>
     {
-        private readonly LocationWorker _locationWorker;
         private readonly WeatherBackgroudWorker _weatherWorker;
         private INavigation _navigation;
         private WeakReferenceMessenger _messenger;
+
+        private readonly LocationWorker _locationWorker;
+        public LocationWorker LocationWorker
+        {
+            get => _locationWorker;
+        }
 
         [ObservableProperty]
         private ObservableCollection<HourlyWeather> _data;
@@ -31,11 +36,11 @@ namespace WX.ViewModels.Pages
 
         public async Task Initialize()
         {
-            await _locationWorker.Initialize();
             _navigation = Application.Current!.MainPage.Navigation;
             _messenger = WeakReferenceMessenger.Default;
             Data = new();
 
+            await _locationWorker.Initialize();
             _weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LATITUDE, _locationWorker.SelectedLocation!.Latitude.ToString().Replace(',', '.'));
             _weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LONGITUDE, _locationWorker.SelectedLocation!.Longitude.ToString().Replace(',', '.'));
             await _weatherWorker.Initialize();
@@ -55,8 +60,6 @@ namespace WX.ViewModels.Pages
             _weatherWorker.Sender.SetDefaultParameters();
             _weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LATITUDE, message.Value.Latitude.ToString().Replace(',', '.'));
             _weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LONGITUDE, message.Value.Longitude.ToString().Replace(',', '.'));
-            await _weatherWorker.UpdateData();
-            SelectCurrentHour(DateTime.Now);
         }
 
         [RelayCommand]

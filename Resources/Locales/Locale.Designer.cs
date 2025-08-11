@@ -106,6 +106,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Own location.
+        /// </summary>
+        internal static string CustomLocationLabel {
+            get {
+                return ResourceManager.GetString("CustomLocationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на По дням.
         /// </summary>
         internal static string DailyTabName {
