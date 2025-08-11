@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using WX.Models.Message;
 using WX.Models.Weather;
 using WX.Services.API.Interfaces;
 
@@ -8,8 +9,8 @@ namespace WX.Services.Workers
     {
         private DateTime _previousCheckTime;
         private Timer _timer;
-
         private WeakReferenceMessenger _messenger;
+
         private IAPIService<WeatherData> _sender;
         public IAPIService<WeatherData> Sender
         {
@@ -43,7 +44,7 @@ namespace WX.Services.Workers
             WeatherData data = (await _sender.FetchData()).First();
             Data = data;
 
-            _messenger.Send <object>();
+            _messenger.Send(new HourChangedMessage(_previousCheckTime));
         }
 
         private async void UpdateDataTimerCallback(object? _)

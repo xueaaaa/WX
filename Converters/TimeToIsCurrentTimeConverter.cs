@@ -9,9 +9,8 @@ namespace WX.Converters
             if (value is not DateTime) return false;
 
             var val = (DateTime)value;
-            TimeSpan diff = (DateTime.Now - val).Duration();
 
-            return diff <= TimeSpan.FromDays(1) && val.Hour == DateTime.Now.Hour;
+            return val.Date == DateTime.Now.Date && val.Hour == DateTime.Now.Hour;
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

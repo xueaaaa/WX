@@ -60,10 +60,14 @@ namespace WX.ViewModels.Modals
         }
 
         [RelayCommand]
-        private async Task AddSearchedLocation()
+        private void AddSearchedLocation()
         {
             if (SelectedSearchedLocation != null)
+            {
                 _locationWorker.AllLocations.Add(SelectedSearchedLocation);
+                SearchedLocations.Clear();
+                SelectedSearchedLocation = null;
+            }
         }
 
         [RelayCommand]

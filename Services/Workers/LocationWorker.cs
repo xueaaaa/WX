@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text.Json;
+using WX.Models.Message;
 using WX.Services.API.Interfaces;
 using WX.Services.API.LocationAPI.FieldNames;
 using WX.Services.Preferences.FieldNames;
@@ -14,6 +16,7 @@ namespace WX.Services.Workers
     public class LocationWorker : ObservableObject, IInitializibleWorker
     {
 		private IPreferencesService _preferencesService;
+		private WeakReferenceMessenger _messenger;
 
 		private IAPIService<Location> _sender;
 		public IAPIService<Location> Sender
@@ -39,6 +42,7 @@ namespace WX.Services.Workers
 			set 
 			{ 
 				SetProperty(ref _selectedLocation, value);
+				_messenger.Send(new LocationChangedMessage(value));
 				SaveCurrentLocation(value);
 			}
 		}
@@ -47,6 +51,7 @@ namespace WX.Services.Workers
 		{
 			_sender = sender;
 			_preferencesService = preferencesService;
+			_messenger = WeakReferenceMessenger.Default;
 		}
 
         public async Task Initialize()
