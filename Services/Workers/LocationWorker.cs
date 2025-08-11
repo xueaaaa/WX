@@ -51,10 +51,12 @@ namespace WX.Services.Workers
 
         public async Task Initialize()
         {
-			SelectedLocation = LoadCurrentLocation();
 			AllLocations = new(LoadAllLocations() ?? []);
 
-			AllLocations.CollectionChanged += (o, e) =>
+			var loadedLocation = LoadCurrentLocation();
+			SelectedLocation = AllLocations.FirstOrDefault(x => x.Equals(loadedLocation));
+
+            AllLocations.CollectionChanged += (o, e) =>
 			{
 				SaveAllLocations(AllLocations);
 			};

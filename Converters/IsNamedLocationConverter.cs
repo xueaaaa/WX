@@ -12,10 +12,10 @@ namespace WX.Converters
 
             var val = value as Location;
 
-            if (val.Name == string.Empty || val.Name == null)
-                return false;
+            if (val.Name != null)
+                return true;
 
-            return true;
+            return false;
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

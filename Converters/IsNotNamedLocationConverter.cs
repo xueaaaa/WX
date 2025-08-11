@@ -12,8 +12,8 @@ namespace WX.Converters
 
             var val = value as Location;
 
-            if (val.Name == string.Empty || val.Name == null)
-                return true;
+            if (val.Name != null)
+                return false;
 
             return true;
         }

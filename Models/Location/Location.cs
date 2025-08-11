@@ -25,5 +25,18 @@ namespace WX.Models.Location
         [ObservableProperty]
         [property: JsonPropertyName(LocationAPIFieldNames.COUNTRY_CODE)]
         private string _countryCode;
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is not Location)
+                return false;
+
+            var val = obj as Location;
+
+            if (Name != val.Name || Latitude != val.Latitude || Longitude != val.Longitude || Elevation != val.Elevation || Country != val.Country || CountryCode != val.CountryCode)
+                return false;
+
+            return true;
+        }
     }
 }
