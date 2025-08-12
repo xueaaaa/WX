@@ -8,6 +8,7 @@
     <v:String x:Key="FontBoldName">Sansation-Bold</v:String>
     <v:String x:Key="FontItalicName">Sansation-Italic</v:String>
     <v:String x:Key="FontLightName">Sansation-Light</v:String>
+    <v:String x:Key="MaterialIconsFont">MaterialIcons</v:String>
 
     <Style TargetType="Label">
         <Setter Property="FontFamily" Value="{DynamicResource FontName}"/>
