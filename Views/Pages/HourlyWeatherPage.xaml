@@ -8,6 +8,7 @@
              xmlns:converters="clr-namespace:WX.Converters"
              xmlns:controls="clr-namespace:WX.Views.Controls"
              x:Class="WX.Views.Pages.HourlyWeatherPage"
+             x:Name="HWeatherPage"
              Style="{DynamicResource ContentPage}">
     <ContentPage.Resources>
         <converters:DateToWeekDayConverter x:Key="DateToWeekDayConverter"/>
@@ -23,6 +24,7 @@
         <converters:IsNotNamedLocationConverter x:Key="IsNotNamedLocationConverter"/>
         <converters:CountryCodeToFlagURLConverter x:Key="CountryCodeToFlagURLConverter"/>
         <converters:WICToIconConverter x:Key="WICToIconConverter"/>
+        <converters:WICToColorConverter x:Key="WICToColorConverter"/>
     </ContentPage.Resources>
 
     <Grid>
@@ -103,15 +105,16 @@
             <VerticalStackLayout Grid.Row="1"
                                  HorizontalOptions="Center"
                                  VerticalOptions="Center">
+                <Path Data="clear_sky.svg"
+                      WidthRequest="100"
+                      HeightRequest="100"/>
                 <Image Source="{Binding WeatherCode, Converter={StaticResource WICToIconConverter}}"
                        WidthRequest="148"
                        HeightRequest="148">
-                    <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{StaticResource TextColor}"/>
-                    </Image.Behaviors>
-                </Image>
+                    </Image>
 
                 <Label Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
+                       TextColor="{Binding WeatherCode, Converter={StaticResource WICToColorConverter}}"
                        FontSize="48"
                        FontFamily="{DynamicResource FontBoldName}"
                        HorizontalTextAlignment="Center"/>

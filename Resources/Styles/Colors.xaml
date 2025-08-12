@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <?xaml-comp compile="true" ?>
-<ResourceDictionary 
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
@@ -15,4 +14,33 @@
     <Color x:Key="UVIndexHighColor">#E16A54</Color>
     <Color x:Key="UVIndexVeryHighColor">#9F5255</Color>
     <Color x:Key="UVIndexExtremeColor">#574964</Color>
+
+    <Color x:Key="ClearSkyColor">#c1c8d7</Color>
+    <Color x:Key="MainlyClearColor">#b2bacd</Color>
+    <Color x:Key="PartlyCloudyColor">#cccccc</Color>
+    <Color x:Key="OvercastColor">#bebebe</Color>
+    <Color x:Key="FogColor">#a6a6a6</Color>
+    <Color x:Key="DepositingRimeFogColor">#9da9af</Color>
+    <Color x:Key="LightDrizzleColor">#9daeaf</Color>
+    <Color x:Key="ModerateDrizzleColor">#8fa2a3</Color>
+    <Color x:Key="DenseDrizzleColor">#819798</Color>
+    <Color x:Key="LightFreezingDrizzleColor">#a5c0b5</Color>
+    <Color x:Key="DenseFreezingDrizzleColor">#97b5a8</Color>
+    <Color x:Key="SlightRainColor">#8e9da4</Color>
+    <Color x:Key="ModerateRainColor">#809199</Color>
+    <Color x:Key="HeavyRainColor">#71858e</Color>
+    <Color x:Key="LightFreezingRainColor">#5e8687</Color>
+    <Color x:Key="HeavyFreezingRainColor">#547778</Color>
+    <Color x:Key="SlightSnowFallColor">#c9cfcc</Color>
+    <Color x:Key="ModerateSnowFallColor">#bcc2bf</Color>
+    <Color x:Key="HeavySnowFallColor">#afb6b3</Color>
+    <Color x:Key="SnowGrainsColor">#c9cfcc</Color>
+    <Color x:Key="SlightRainShowersColor">#716b94</Color>
+    <Color x:Key="ModerateRainShowersColor">#5b5676</Color>
+    <Color x:Key="ViolentRainShowersColor">#444059</Color>
+    <Color x:Key="SlightSnowShowersColor">#b6b4af</Color>
+    <Color x:Key="HeavySnowShowersColor">#9d9a95</Color>
+    <Color x:Key="Thunderstorm95Color">#cc0029</Color>
+    <Color x:Key="Thunderstorm96Color">#b30024</Color>
+    <Color x:Key="Thunderstorm99Color">#99001f</Color>
 </ResourceDictionary>
