@@ -225,4 +225,13 @@
   <data name="CustomLocationLabel" xml:space="preserve">
     <value>Own location</value>
   </data>
+  <data name="ConfirmActionAlertTitle" xml:space="preserve">
+    <value>Confirm action</value>
+  </data>
+  <data name="YesButton" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="NoButton" xml:space="preserve">
+    <value>No</value>
+  </data>
 </root>

@@ -211,7 +211,7 @@
     <value>Сейчас</value>
   </data>
   <data name="FromCurrentLocationButton" xml:space="preserve">
-    <value>Из текущего местоположения</value>
+    <value>Из текущей локации</value>
   </data>
   <data name="SearchLocationPlaceholder" xml:space="preserve">
     <value>Введите название локации...</value>
@@ -223,6 +223,15 @@
     <value>Сохраненные локации</value>
   </data>
   <data name="CustomLocationLabel" xml:space="preserve">
-    <value>Собственное местоположение</value>
+    <value>Собственная локация</value>
+  </data>
+  <data name="ConfirmActionAlertTitle" xml:space="preserve">
+    <value>Подтвердите действие</value>
+  </data>
+  <data name="YesButton" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="NoButton" xml:space="preserve">
+    <value>Нет</value>
   </data>
 </root>

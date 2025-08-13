@@ -106,6 +106,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Confirm action.
+        /// </summary>
+        internal static string ConfirmActionAlertTitle {
+            get {
+                return ResourceManager.GetString("ConfirmActionAlertTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Own location.
         /// </summary>
         internal static string CustomLocationLabel {
@@ -259,6 +268,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на No.
+        /// </summary>
+        internal static string NoButton {
+            get {
+                return ResourceManager.GetString("NoButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Now.
         /// </summary>
         internal static string NowLabel {
@@ -381,6 +399,15 @@ namespace WX.Resources.Locales {
         internal static string WindSpeedLabel {
             get {
                 return ResourceManager.GetString("WindSpeedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Yes.
+        /// </summary>
+        internal static string YesButton {
+            get {
+                return ResourceManager.GetString("YesButton", resourceCulture);
             }
         }
     }

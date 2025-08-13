@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using WX.Services.Preferences.Interfaces;
 using WX.Services.Workers;
 using WX.ViewModels.Interfaces;
+using Locale = WX.Resources.Locales.Locale;
 using Location = WX.Models.Location.Location;
 
 namespace WX.ViewModels.Modals
@@ -67,6 +68,21 @@ namespace WX.ViewModels.Modals
                 _locationWorker.AllLocations.Add(SelectedSearchedLocation);
                 SearchedLocations.Clear();
                 SelectedSearchedLocation = null;
+            }
+        }
+
+        [RelayCommand]
+        private async Task RemoveLocation(object param)
+        {
+            if (param is Location location)
+            {
+                if (await Application.Current!.MainPage.DisplayAlert(Locale.ConfirmActionAlertTitle, string.Empty, accept: Locale.YesButton, cancel: Locale.NoButton))
+                {
+                    if(_locationWorker.SelectedLocation == location)
+                        _locationWorker.SelectedLocation = _locationWorker.AllLocations[_locationWorker.AllLocations.IndexOf(location) - 1];
+
+                    _locationWorker.AllLocations.Remove(location);
+                }
             }
         }
 

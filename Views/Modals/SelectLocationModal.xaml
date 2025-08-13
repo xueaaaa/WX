@@ -189,7 +189,9 @@
                                 <Button Grid.Column="1"
                                         HorizontalOptions="End"
                                         Style="{DynamicResource ActionButton}"
-                                        ImageSource="{mi:Material Icon=DeleteOutline, IconColor={StaticResource TextMutedColor}}"/>
+                                        ImageSource="{mi:Material Icon=DeleteOutline, IconColor={StaticResource TextMutedColor}, IconSize=20}"
+                                        Command="{Binding BindingContext.RemoveLocationCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                        CommandParameter="{Binding .}"/>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
