@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using WX.Converters;
 using WX.Models.Message;
 using WX.Models.Weather;
 using WX.Services.API.WeatherAPI.FieldNames;
@@ -14,6 +16,7 @@ namespace WX.ViewModels.Pages
     public partial class HourlyWeatherPageViewModel : ObservableObject, IInitializableViewModel, IRecipient<HourChangedMessage>, IRecipient<LocationChangedMessage>
     {
         private readonly WeatherBackgroudWorker _weatherWorker;
+        private readonly WICToColorConverter _wicToColorConverter;
         private INavigation _navigation;
         private WeakReferenceMessenger _messenger;
 
@@ -25,18 +28,38 @@ namespace WX.ViewModels.Pages
 
         [ObservableProperty]
         private ObservableCollection<HourlyWeather> _data;
-        [ObservableProperty]
         private HourlyWeather _currentHourlyWeather;
+        public HourlyWeather CurrentHourlyWeather
+        {
+            get => _currentHourlyWeather;
+            set 
+            { 
+                SetProperty(ref _currentHourlyWeather, value);
+                base.OnPropertyChanged(nameof(WeatherIconColor));
+            }
+        }
+
+        public object? WeatherIconColor
+        {
+            get
+            {
+                if (CurrentHourlyWeather != null)
+                    return _wicToColorConverter.Convert(CurrentHourlyWeather.WeatherCode, null, null, null);
+                return Color.FromArgb("#ffffff");
+            }
+        }
+
 
         public HourlyWeatherPageViewModel(LocationWorker locationWorker, WeatherBackgroudWorker worker)
         {
             _locationWorker = locationWorker;
             _weatherWorker = worker;
+            _wicToColorConverter = new();
         }
 
         public async Task Initialize()
         {
-            _navigation = Application.Current!.MainPage.Navigation;
+            _navigation = Application.Current.MainPage.Navigation;
             _messenger = WeakReferenceMessenger.Default;
             Data = new();
 

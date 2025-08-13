@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using WX.ViewModels.Interfaces;
 using WX.ViewModels.Pages;
 
@@ -11,7 +12,7 @@ public partial class HourlyWeatherPage : ContentPage
 	{
 		InitializeComponent();
 
-        BindingContext = viewModel;
+		BindingContext = viewModel;
     }
 
     protected override async void OnAppearing()

@@ -24,7 +24,6 @@
         <converters:IsNotNamedLocationConverter x:Key="IsNotNamedLocationConverter"/>
         <converters:CountryCodeToFlagURLConverter x:Key="CountryCodeToFlagURLConverter"/>
         <converters:WICToIconConverter x:Key="WICToIconConverter"/>
-        <converters:WICToColorConverter x:Key="WICToColorConverter"/>
     </ContentPage.Resources>
 
     <Grid>
@@ -105,16 +104,15 @@
             <VerticalStackLayout Grid.Row="1"
                                  HorizontalOptions="Center"
                                  VerticalOptions="Center">
-                <Path Data="clear_sky.svg"
-                      WidthRequest="100"
-                      HeightRequest="100"/>
                 <Image Source="{Binding WeatherCode, Converter={StaticResource WICToIconConverter}}"
                        WidthRequest="148"
                        HeightRequest="148">
-                    </Image>
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{Binding BindingContext.WeatherIconColor, Source={x:Reference HWeatherPage}}"/>
+                    </Image.Behaviors>
+                </Image>
 
                 <Label Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
-                       TextColor="{Binding WeatherCode, Converter={StaticResource WICToColorConverter}}"
                        FontSize="48"
                        FontFamily="{DynamicResource FontBoldName}"
                        HorizontalTextAlignment="Center"/>
