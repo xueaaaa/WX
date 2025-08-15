@@ -133,6 +133,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на There is nothing here so far.
+        /// </summary>
+        internal static string EmptyCollectionLabel {
+            get {
+                return ResourceManager.GetString("EmptyCollectionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на From current location.
         /// </summary>
         internal static string FromCurrentLocationButton {

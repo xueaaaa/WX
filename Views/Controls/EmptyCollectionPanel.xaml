@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+             xmlns:loc="clr-namespace:WX.Resources.Locales"
+             x:Class="WX.Views.Controls.EmptyCollectionPanel">
+    <VerticalStackLayout>
+        <Image Source="{mi:Material Icon=NotificationsNone, IconColor={StaticResource TextColor}, IconSize=28}"/>
+        <Label Style="{DynamicResource PropertyHint}"
+               Text="{x:Static loc:Locale.EmptyCollectionLabel}"/>
+    </VerticalStackLayout>
+</ContentView>

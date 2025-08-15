@@ -116,6 +116,9 @@
 	  <MauiXaml Update="Views\Controls\ControlButtonsPanel.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Controls\EmptyCollectionPanel.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Modals\AboutUVModal.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

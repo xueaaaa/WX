@@ -76,10 +76,19 @@ namespace WX.ViewModels.Modals
         {
             if (param is Location location)
             {
+                if (_locationWorker.AllLocations.Count == 1)
+                    return;
+
                 if (await Application.Current!.MainPage.DisplayAlert(Locale.ConfirmActionAlertTitle, string.Empty, accept: Locale.YesButton, cancel: Locale.NoButton))
                 {
-                    if(_locationWorker.SelectedLocation == location)
-                        _locationWorker.SelectedLocation = _locationWorker.AllLocations[_locationWorker.AllLocations.IndexOf(location) - 1];
+                    if (_locationWorker.SelectedLocation == location)
+                    {
+                        var index = _locationWorker.AllLocations.IndexOf(location);
+                        if (index >= 1)
+                            _locationWorker.SelectedLocation = _locationWorker.AllLocations[index - 1];
+                        if (index <= 1 && _locationWorker.AllLocations.Count >= 2)
+                            _locationWorker.SelectedLocation = _locationWorker.AllLocations[index + 1];
+                    }
 
                     _locationWorker.AllLocations.Remove(location);
                 }

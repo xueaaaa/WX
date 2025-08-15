@@ -4,6 +4,7 @@
              xmlns:m="clr-namespace:WX.Models.Location"
              xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
              xmlns:loc="clr-namespace:WX.Resources.Locales"
+             xmlns:controls="clr-namespace:WX.Views.Controls"
              xmlns:converters="clr-namespace:WX.Converters"
              x:Class="WX.Views.Modals.SelectLocationModal"
              Style="{DynamicResource ContentPage}">
@@ -38,6 +39,12 @@
                 <CollectionView ItemsSource="{Binding SearchedLocations}"
                                 SelectedItem="{Binding SelectedSearchedLocation}"
                                 SelectionMode="Single">
+                    <CollectionView.EmptyViewTemplate>
+                        <DataTemplate>
+                            <controls:EmptyCollectionPanel/>
+                        </DataTemplate>
+                    </CollectionView.EmptyViewTemplate>
+                    
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="{x:Type m:Location}">
                             <HorizontalStackLayout Padding="10">
@@ -102,6 +109,12 @@
                 <CollectionView ItemsSource="{Binding LocationWorker.AllLocations}"
                                 SelectedItem="{Binding LocationWorker.SelectedLocation, Mode=TwoWay}"
                                 SelectionMode="Single">
+                    <CollectionView.EmptyViewTemplate>
+                        <DataTemplate>
+                            <controls:EmptyCollectionPanel/>
+                        </DataTemplate>
+                    </CollectionView.EmptyViewTemplate>
+                    
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="{x:Type m:Location}">
                             <Grid Padding="10">

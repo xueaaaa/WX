@@ -45,7 +45,7 @@ namespace WX.Services.Workers
             WeatherData data = (await _sender.FetchData()).First();
             Data = data;
 
-            _messenger.Send(new HourChangedMessage(_previousCheckTime));
+            _messenger.Send(new HourChangedMessage(DateTime.Now));
         }
 
         private async void UpdateDataTimerCallback(object? _)

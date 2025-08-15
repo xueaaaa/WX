@@ -234,4 +234,7 @@
   <data name="NoButton" xml:space="preserve">
     <value>Нет</value>
   </data>
+  <data name="EmptyCollectionLabel" xml:space="preserve">
+    <value>Здесь пока ничего нет</value>
+  </data>
 </root>

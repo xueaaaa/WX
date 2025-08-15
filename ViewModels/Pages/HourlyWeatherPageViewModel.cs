@@ -86,13 +86,43 @@ namespace WX.ViewModels.Pages
         }
 
         [RelayCommand]
+        private void MoveForward()
+        {
+            var currIndex = Data.IndexOf(CurrentHourlyWeather);
+            if (currIndex + 1 <= Data.Count)
+                CurrentHourlyWeather = Data[currIndex + 1];
+        }
+
+        [RelayCommand]
+        private void MoveBackward() 
+        {
+            var currIndex = Data.IndexOf(CurrentHourlyWeather);
+            if (currIndex - 1 >= 0)
+                CurrentHourlyWeather = Data[currIndex - 1];
+        }
+
+        private void MoveTo(HourlyWeather position)
+        {
+            var posIndex = Data.IndexOf(position);
+            var currIndex = Data.IndexOf(CurrentHourlyWeather);
+
+            if (posIndex != -1 && currIndex != -1)
+            {
+                while (currIndex > posIndex)
+                    CurrentHourlyWeather = Data[currIndex - 1];
+                while (currIndex < posIndex)
+                    CurrentHourlyWeather = Data[currIndex + 1];
+            }
+        }
+
+        [RelayCommand]
         private async Task OpenDetails() =>
             await _navigation.PushModalAsync(new HourlyWeatherDetails(CurrentHourlyWeather, _navigation));
 
         private void SelectCurrentHour(DateTime now)
         {
-            CurrentHourlyWeather = Data.FirstOrDefault(x =>
-                    now.Date == x.Time.Value.Date && now.Hour == x.Time.Value.Hour)!;
+            MoveTo(Data.FirstOrDefault(x =>
+                    now.Date == x.Time.Value.Date && now.Hour == x.Time.Value.Hour)!);
         }
     }
 }
