@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using WX.ViewModels.Interfaces;
 using WX.ViewModels.Pages;
 
@@ -19,10 +18,10 @@ public partial class HourlyWeatherPage : ContentPage
     {
         base.OnAppearing();
 
-		if (!_initialized)
-		{
-			await (BindingContext as IInitializableViewModel)!.Initialize();
-			_initialized = true;
-		}
+        if (!_initialized)
+        {
+            await (BindingContext as IInitializableViewModel)!.Initialize();
+            _initialized = true;
+        }
     }
 }

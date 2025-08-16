@@ -1,12 +1,175 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:WX.Converters"
+             xmlns:loc="clr-namespace:WX.Resources.Locales"
+             xmlns:controls="clr-namespace:WX.Views.Controls"
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+             xmlns:m="clr-namespace:WX.Models.Weather"
              x:Class="WX.Views.Pages.DailyWeatherPage"
              Style="{DynamicResource ContentPage}">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.Resources>
+        <converters:DateToWeekDayConverter x:Key="DateToWeekDayConverter"/>
+        <converters:DateToStringDateConverter x:Key="DateToStringDateConverter"/>
+        <converters:TemperatureAddUnitConverter x:Key="TemperatureAddUnitConverter"/>
+        <converters:NumberToPercentsConverter x:Key="NumberToPercentsConverter"/>
+        <converters:WindAddUnitsConverter x:Key="WindAddUnitsConverter"/>
+        <converters:UVIndexToColorConverter x:Key="UVIndexToColorConverter"/>
+        <converters:TimeToIsCurrentTimeConverter x:Key="TimeToIsCurrentTimeConverter"/>
+        <converters:IsCurrentItemConverter x:Key="IsCurrentItemConverter"/>
+        <converters:IsNotCurrentItemConverter x:Key="IsNotCurrentItemConverter"/>
+        <converters:IsNamedLocationConverter x:Key="IsNamedLocationConverter"/>
+        <converters:IsNotNamedLocationConverter x:Key="IsNotNamedLocationConverter"/>
+        <converters:CountryCodeToFlagURLConverter x:Key="CountryCodeToFlagURLConverter"/>
+        <converters:WICToIconConverter x:Key="WICToIconConverter"/>
+    </ContentPage.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid BindingContext="{Binding CurrentDailyWeather}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid BindingContext="{Binding BindingContext.LocationWorker.SelectedLocation, Source={RelativeSource AncestorType={x:Type ContentPage}}}">
+                    <HorizontalStackLayout IsVisible="{Binding ., Converter={StaticResource IsNamedLocationConverter}}">
+                        <Image Source="{Binding CountryCode, Converter={StaticResource CountryCodeToFlagURLConverter}}"
+                               WidthRequest="20"
+                               HeightRequest="20"
+                               VerticalOptions="Center"/>
+
+                        <Label Margin="5,0,0,0"
+                               VerticalOptions="Center"
+                               Text="{Binding Name}"
+                               FontSize="Header"
+                               FontFamily="{DynamicResource FontBoldName}"/>
+                    </HorizontalStackLayout>
+
+                    <Label IsVisible="{Binding ., Converter={StaticResource IsNotNamedLocationConverter}}"
+                           Text="{x:Static loc:Locale.CustomLocationLabel}"/>
+                </Grid>
+
+                    <Label Grid.Row="1"
+                           FontSize="Large">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Time, Converter={StaticResource DateToWeekDayConverter}}"
+                                      TextColor="{DynamicResource TextColor}"
+                                      FontFamily="{DynamicResource FontBoldName}"/>
+                                <Span Text=", "
+                                      TextColor="{DynamicResource TextMutedColor}"
+                                      FontFamily="{DynamicResource FontBoldName}"/>
+                                <Span Text="{Binding Time, Converter={StaticResource DateToStringDateConverter}}"
+                                      TextColor="{DynamicResource TextMutedColor}"
+                                      FontFamily="{DynamicResource FontBoldName}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                <controls:ControlButtonsPanel Grid.RowSpan="2"
+                                              Grid.Column="1"
+                                              HorizontalOptions="End"                                  
+                                              VerticalOptions="Center"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Style="{DynamicResource ActionButton}"
+                    ImageSource="{mi:Material Icon=ArrowBack, IconColor={StaticResource TextMutedColor}}"
+                    Command="{Binding MoveBackwardCommand}"/>
+
+            <CarouselView Grid.Column="1"
+                          x:Name="DailyWeatherPicker"
+                          ItemsSource="{Binding Data}"
+                          CurrentItem="{Binding CurrentDailyWeather, Mode=TwoWay}"
+                          PeekAreaInsets="{Binding Path=Width, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                          Loop="False"
+                          HorizontalScrollBarVisibility="Never">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"
+                                       ItemSpacing="20"/>
+                </CarouselView.ItemsLayout>
+
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="m:DailyWeather">
+                        <Grid>
+                            <VerticalStackLayout HorizontalOptions="Center">
+                                <VerticalStackLayout.IsVisible>
+                                    <MultiBinding Converter="{StaticResource IsCurrentItemConverter}">
+                                        <Binding Path="."/>
+                                        <Binding Path="CurrentItem" Source="{RelativeSource AncestorType={x:Type CarouselView}}"/>
+                                    </MultiBinding>
+                                </VerticalStackLayout.IsVisible>
+
+                                <Label Text="{x:Static loc:Locale.NowLabel}"
+                                       TextColor="{DynamicResource TextMutedColor}"
+                                       FontSize="Caption"
+                                       FontFamily="{DynamicResource FontLightName}"
+                                       IsVisible="{Binding Time, Converter={StaticResource TimeToIsCurrentTimeConverter}}"/>
+                                <Label Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
+                                       FontSize="Title"
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding Time, StringFormat='{0:DD:MM}'}"
+                                       HorizontalOptions="Center"
+                                       TextColor="{DynamicResource TextMutedColor}"/>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout HorizontalOptions="Center">
+                                <VerticalStackLayout.IsVisible>
+                                    <MultiBinding Converter="{StaticResource IsNotCurrentItemConverter}">
+                                        <Binding Path="."/>
+                                        <Binding Path="CurrentItem" Source="{RelativeSource AncestorType={x:Type CarouselView}}"/>
+                                    </MultiBinding>
+                                </VerticalStackLayout.IsVisible>
+
+                                <Label Text="{x:Static loc:Locale.NowLabel}"
+                                       TextColor="{DynamicResource TextMutedColor}"
+                                       FontSize="Caption"
+                                       FontFamily="{DynamicResource FontLightName}"
+                                       IsVisible="{Binding Time, Converter={StaticResource TimeToIsCurrentTimeConverter}}"/>
+                                <Label Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
+                                       TextColor="{DynamicResource TextMutedColor}"
+                                       FontSize="Title"
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding Time, StringFormat='{0:HH:mm}'}"
+                                       HorizontalOptions="Center"
+                                       TextColor="{DynamicResource TextMutedColor}"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <Button Grid.Column="2"
+                    Style="{DynamicResource ActionButton}"
+                    ImageSource="{mi:Material Icon=ArrowForward, IconColor={StaticResource TextMutedColor}}"
+                    Command="{Binding MoveForwardCommand}"/>
+        </Grid>
+    </Grid>
 </ContentPage>

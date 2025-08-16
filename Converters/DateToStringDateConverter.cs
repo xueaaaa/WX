@@ -6,9 +6,12 @@ namespace WX.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (value is not DateTime) return string.Empty;
+            DateTime val = DateTime.MinValue;
+            if (value is DateTime t)
+                val = t;
+            if (value is DateOnly t1)
+                val = t1.ToDateTime(TimeOnly.MinValue);
 
-            var val = (DateTime)value;
             return val.ToString("M", 
                 new CultureInfo(_preferencesService.GetLanguage()));
         }

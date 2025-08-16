@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using WX.Converters;
 using WX.Models.Message;
 using WX.Models.Weather;
@@ -49,7 +48,6 @@ namespace WX.ViewModels.Pages
             }
         }
 
-
         public HourlyWeatherPageViewModel(LocationWorker locationWorker, WeatherBackgroudWorker worker)
         {
             _locationWorker = locationWorker;
@@ -63,27 +61,18 @@ namespace WX.ViewModels.Pages
             _messenger = WeakReferenceMessenger.Default;
             Data = new();
 
-            await _locationWorker.Initialize();
-            _weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LATITUDE, _locationWorker.SelectedLocation!.Latitude.ToString().Replace(',', '.'));
-            _weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LONGITUDE, _locationWorker.SelectedLocation!.Longitude.ToString().Replace(',', '.'));
-            await _weatherWorker.Initialize();
-
             _messenger.RegisterAll(this);
         }
 
-        public void Receive(HourChangedMessage message)
-        {
-            Data.Clear();
-            Data = _weatherWorker.Data.Hourly;
-            SelectCurrentHour(message.Value);
-        }
+        public void Receive(HourChangedMessage message) =>
+            LoadData(message.Value);
 
         public async void Receive(LocationChangedMessage message)
         {
             _weatherWorker.Sender.SetDefaultParameters();
             _weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LATITUDE, message.Value.Latitude.ToString().Replace(',', '.'));
             _weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LONGITUDE, message.Value.Longitude.ToString().Replace(',', '.'));
-        }
+        } 
 
         [RelayCommand]
         private void MoveForward()
@@ -96,7 +85,7 @@ namespace WX.ViewModels.Pages
         [RelayCommand]
         private void MoveBackward() 
         {
-            var currIndex = Data.IndexOf(CurrentHourlyWeather);
+            var currIndex = Data.IndexOf(CurrentHourlyWeather);   
             if (currIndex - 1 >= 0)
                 CurrentHourlyWeather = Data[currIndex - 1];
         }
@@ -109,9 +98,15 @@ namespace WX.ViewModels.Pages
             if (posIndex != -1 && currIndex != -1)
             {
                 while (currIndex > posIndex)
-                    CurrentHourlyWeather = Data[currIndex - 1];
+                {
+                    currIndex--;
+                    CurrentHourlyWeather = Data[currIndex];
+                }
                 while (currIndex < posIndex)
-                    CurrentHourlyWeather = Data[currIndex + 1];
+                {
+                    currIndex++;
+                    CurrentHourlyWeather = Data[currIndex];
+                }
             }
         }
 
@@ -119,10 +114,17 @@ namespace WX.ViewModels.Pages
         private async Task OpenDetails() =>
             await _navigation.PushModalAsync(new HourlyWeatherDetails(CurrentHourlyWeather, _navigation));
 
+        private void LoadData(DateTime now)
+        {
+            Data.Clear();
+            Data = _weatherWorker.Data.Hourly;
+            SelectCurrentHour(now);
+        }
+
         private void SelectCurrentHour(DateTime now)
         {
             MoveTo(Data.FirstOrDefault(x =>
-                    now.Date == x.Time.Value.Date && now.Hour == x.Time.Value.Hour)!);
+                    now.Date == x.Time.Value.Date && now.Hour == x.Time.Value.Hour));
         }
     }
 }

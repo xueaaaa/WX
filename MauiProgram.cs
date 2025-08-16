@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Maui;
-using CommunityToolkit.Maui.Core;
 using MauiIcons.Material;
 using Microsoft.Extensions.Logging;
 using WX.Models.Weather;
