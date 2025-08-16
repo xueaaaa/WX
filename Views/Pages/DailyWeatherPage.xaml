@@ -118,46 +118,18 @@
 
                 <CarouselView.ItemTemplate>
                     <DataTemplate x:DataType="m:DailyWeather">
-                        <Grid>
+                        <Grid VerticalOptions="End">
                             <VerticalStackLayout HorizontalOptions="Center">
-                                <VerticalStackLayout.IsVisible>
-                                    <MultiBinding Converter="{StaticResource IsCurrentItemConverter}">
-                                        <Binding Path="."/>
-                                        <Binding Path="CurrentItem" Source="{RelativeSource AncestorType={x:Type CarouselView}}"/>
-                                    </MultiBinding>
-                                </VerticalStackLayout.IsVisible>
-
                                 <Label Text="{x:Static loc:Locale.NowLabel}"
                                        TextColor="{DynamicResource TextMutedColor}"
                                        FontSize="Caption"
                                        FontFamily="{DynamicResource FontLightName}"
                                        IsVisible="{Binding Time, Converter={StaticResource TimeToIsCurrentTimeConverter}}"/>
-                                <Label Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
+                                <Label Text="{Binding MeanTemperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
+                                       TextColor="{DynamicResource TextColor}"
                                        FontSize="Title"
                                        FontAttributes="Bold"/>
-                                <Label Text="{Binding Time, StringFormat='{0:DD:MM}'}"
-                                       HorizontalOptions="Center"
-                                       TextColor="{DynamicResource TextMutedColor}"/>
-                            </VerticalStackLayout>
-
-                            <VerticalStackLayout HorizontalOptions="Center">
-                                <VerticalStackLayout.IsVisible>
-                                    <MultiBinding Converter="{StaticResource IsNotCurrentItemConverter}">
-                                        <Binding Path="."/>
-                                        <Binding Path="CurrentItem" Source="{RelativeSource AncestorType={x:Type CarouselView}}"/>
-                                    </MultiBinding>
-                                </VerticalStackLayout.IsVisible>
-
-                                <Label Text="{x:Static loc:Locale.NowLabel}"
-                                       TextColor="{DynamicResource TextMutedColor}"
-                                       FontSize="Caption"
-                                       FontFamily="{DynamicResource FontLightName}"
-                                       IsVisible="{Binding Time, Converter={StaticResource TimeToIsCurrentTimeConverter}}"/>
-                                <Label Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
-                                       TextColor="{DynamicResource TextMutedColor}"
-                                       FontSize="Title"
-                                       FontAttributes="Bold"/>
-                                <Label Text="{Binding Time, StringFormat='{0:HH:mm}'}"
+                                <Label Text="{Binding Time, StringFormat='{0:M}'}"
                                        HorizontalOptions="Center"
                                        TextColor="{DynamicResource TextMutedColor}"/>
                             </VerticalStackLayout>

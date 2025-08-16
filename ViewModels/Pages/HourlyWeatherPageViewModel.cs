@@ -78,7 +78,7 @@ namespace WX.ViewModels.Pages
         private void MoveForward()
         {
             var currIndex = Data.IndexOf(CurrentHourlyWeather);
-            if (currIndex + 1 <= Data.Count)
+            if (currIndex + 1 <= Data.Count - 1)
                 CurrentHourlyWeather = Data[currIndex + 1];
         }
 
@@ -90,26 +90,6 @@ namespace WX.ViewModels.Pages
                 CurrentHourlyWeather = Data[currIndex - 1];
         }
 
-        private void MoveTo(HourlyWeather position)
-        {
-            var posIndex = Data.IndexOf(position);
-            var currIndex = Data.IndexOf(CurrentHourlyWeather);
-
-            if (posIndex != -1 && currIndex != -1)
-            {
-                while (currIndex > posIndex)
-                {
-                    currIndex--;
-                    CurrentHourlyWeather = Data[currIndex];
-                }
-                while (currIndex < posIndex)
-                {
-                    currIndex++;
-                    CurrentHourlyWeather = Data[currIndex];
-                }
-            }
-        }
-
         [RelayCommand]
         private async Task OpenDetails() =>
             await _navigation.PushModalAsync(new HourlyWeatherDetails(CurrentHourlyWeather, _navigation));
@@ -117,14 +97,9 @@ namespace WX.ViewModels.Pages
         private void LoadData(DateTime now)
         {
             Data.Clear();
-            Data = _weatherWorker.Data.Hourly;
-            SelectCurrentHour(now);
-        }
-
-        private void SelectCurrentHour(DateTime now)
-        {
-            MoveTo(Data.FirstOrDefault(x =>
-                    now.Date == x.Time.Value.Date && now.Hour == x.Time.Value.Hour));
+            Data = new(_weatherWorker.Data.Hourly.Where(x => DateOnly.FromDateTime(x.Time.Value.Date) == DateOnly.FromDateTime(DateTime.Now)));
+            CurrentHourlyWeather = Data.FirstOrDefault(x =>
+                    now.Date == x.Time.Value.Date && now.Hour == x.Time.Value.Hour)!;
         }
     }
 }

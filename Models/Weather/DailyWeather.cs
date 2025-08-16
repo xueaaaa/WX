@@ -20,11 +20,17 @@ namespace WX.Models.Weather
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.TEMPERATURE_2M_MIN)]
         private float? _minimumTemperature2m;
         [ObservableProperty]
+        [property: JsonPropertyName(WeatherAPIDailyFieldNames.TEMPERATURE_2M_MEAN)]
+        private float? _meanTemperature2m;
+        [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.APPARENT_TEMPERATURE_MAX)]
         private float? _maximumApparentTemperature2m;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.APPARENT_TEMPERATURE_MIN)]
         private float? _minimumApparentTemperature2m;
+        [ObservableProperty]
+        [property: JsonPropertyName(WeatherAPIDailyFieldNames.APPARENT_TEMPERATURE_MEAN)]
+        private float? _meanApparentTemperature2m;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.SUNRISE)]
         private TimeOnly? _sunrise;

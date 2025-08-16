@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using WX.Converters;
 using WX.Models.Message;
 using WX.Models.Weather;
@@ -59,37 +58,11 @@ namespace WX.ViewModels.Pages
         public void Receive(HourChangedMessage message) =>
             LoadData(message.Value);
 
-        private void MoveTo(DailyWeather position)
-        {
-            var posIndex = Data.IndexOf(position);
-            var currIndex = Data.IndexOf(CurrentDailyWeather);
-
-            if (posIndex != -1 && currIndex != -1)
-            {
-                while (currIndex > posIndex)
-                {
-                    currIndex--;
-                    CurrentDailyWeather = Data[currIndex];
-                }
-                while (currIndex < posIndex)
-                {
-                    currIndex++;
-                    CurrentDailyWeather = Data[currIndex];
-                }
-            }
-        }
-
         private void LoadData(DateTime now)
         {
             Data.Clear();
             Data = _weatherWorker.Data.Daily;
-            SelectCurrentDaily(DateOnly.FromDateTime(now));
-        }
-
-        private void SelectCurrentDaily(DateOnly now)
-        {
-            var t = Data.FirstOrDefault(x => x.Time == now);
-            MoveTo(t);
+            CurrentDailyWeather = Data.FirstOrDefault(x => x.Time == DateOnly.FromDateTime(DateTime.Now))!;
         }
     }
 }

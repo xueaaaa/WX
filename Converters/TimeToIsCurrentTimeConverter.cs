@@ -6,9 +6,11 @@ namespace WX.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            if (value is not DateTime) return false;
-
-            var val = (DateTime)value;
+            DateTime val = DateTime.MinValue;
+            if (value is DateTime t)
+                val = t;
+            if (value is DateOnly t1)
+                val = t1.ToDateTime(TimeOnly.MinValue);
 
             return val.Date == DateTime.Now.Date && val.Hour == DateTime.Now.Hour;
         }

@@ -17,11 +17,17 @@ namespace WX.Models.Weather.DTOs
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.TEMPERATURE_2M_MIN)]
         public List<float?> MinimumTemperature2m { get; set; }
 
+        [property: JsonPropertyName(WeatherAPIDailyFieldNames.TEMPERATURE_2M_MEAN)]
+        public List<float?> MeanTemperature2m { get; set; }
+
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.APPARENT_TEMPERATURE_MAX)]
         public List<float?> MaximumApparentTemperature2m { get; set; }
 
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.APPARENT_TEMPERATURE_MIN)]
         public List<float?> MinimumApparentTemperature2m { get; set; }
+
+        [property: JsonPropertyName(WeatherAPIDailyFieldNames.APPARENT_TEMPERATURE_MEAN)]
+        public List<float?> MeanApparentTemperature2m { get; set; }
 
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.SUNRISE)]
         public List<string?> Sunrise { get; set; }

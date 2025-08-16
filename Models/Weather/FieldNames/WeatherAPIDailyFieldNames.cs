@@ -6,8 +6,10 @@
         public const string WEATHER_CODE = "weather_code";
         public const string TEMPERATURE_2M_MAX = "temperature_2m_max";
         public const string TEMPERATURE_2M_MIN = "temperature_2m_min";
+        public const string TEMPERATURE_2M_MEAN = "temperature_2m_mean";
         public const string APPARENT_TEMPERATURE_MAX = "apparent_temperature_max";
         public const string APPARENT_TEMPERATURE_MIN = "apparent_temperature_min";
+        public const string APPARENT_TEMPERATURE_MEAN = "apparent_temperature_mean";
         public const string SUNRISE = "sunrise";
         public const string SUNSET = "sunset";
         public const string DAYLIGHT_DURATION = "daylight_duration";
@@ -24,8 +26,10 @@
             WEATHER_CODE,
             TEMPERATURE_2M_MAX,
             TEMPERATURE_2M_MIN,
+            TEMPERATURE_2M_MEAN,
             APPARENT_TEMPERATURE_MAX,
             APPARENT_TEMPERATURE_MIN,
+            APPARENT_TEMPERATURE_MEAN,
             SUNRISE,
             SUNSET,
             DAYLIGHT_DURATION,
