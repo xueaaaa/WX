@@ -8,6 +8,7 @@ namespace WX;
 public partial class RootPage : TabbedPage
 {
     private readonly IServiceProvider _serviceProvider;
+    private bool _initialized;
 
 	public RootPage(IServiceProvider serviceProvider)
 	{
@@ -28,12 +29,17 @@ public partial class RootPage : TabbedPage
     {
         base.OnAppearing();
 
-        var locationWorker = _serviceProvider.GetRequiredService<LocationWorker>();
-        var weatherWorker = _serviceProvider.GetRequiredService<WeatherBackgroudWorker>();
+        if (!_initialized)
+        {
+            var locationWorker = _serviceProvider.GetRequiredService<LocationWorker>();
+            var weatherWorker = _serviceProvider.GetRequiredService<WeatherBackgroudWorker>();
 
-        await locationWorker.Initialize();
-        weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LATITUDE, locationWorker.SelectedLocation!.Latitude.ToString().Replace(',', '.'));
-        weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LONGITUDE, locationWorker.SelectedLocation!.Longitude.ToString().Replace(',', '.'));
-        await weatherWorker.Initialize();
+            await locationWorker.Initialize();
+            weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LATITUDE, locationWorker.SelectedLocation!.Latitude.ToString().Replace(',', '.'));
+            weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LONGITUDE, locationWorker.SelectedLocation!.Longitude.ToString().Replace(',', '.'));
+            await weatherWorker.Initialize();
+
+            _initialized = true;
+        }
     }
 }

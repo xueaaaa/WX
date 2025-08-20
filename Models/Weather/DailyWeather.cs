@@ -39,7 +39,7 @@ namespace WX.Models.Weather
         private TimeOnly? _sunset;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.DAYLIGHT_DURATION)]
-        private float? _daylightDuration;
+        private TimeSpan? _daylightDuration;
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.SUNSHINE_DURATION)]
         private float? _sunshineDuration;

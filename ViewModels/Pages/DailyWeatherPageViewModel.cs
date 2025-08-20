@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
 using WX.Converters;
@@ -26,7 +27,11 @@ namespace WX.ViewModels.Pages
         public DailyWeather CurrentDailyWeather
         {
             get => _currentDailyWeather;
-            set => SetProperty(ref _currentDailyWeather, value);
+            set 
+            { 
+                SetProperty(ref _currentDailyWeather, value);
+                base.OnPropertyChanged(nameof(WeatherIconColor));
+            }
         }
 
         public object? WeatherIconColor
@@ -53,6 +58,22 @@ namespace WX.ViewModels.Pages
 
             _messenger.RegisterAll(this);
             LoadData(DateTime.Now);
+        }
+
+        [RelayCommand]
+        private void MoveForward()
+        {
+            var currIndex = Data.IndexOf(CurrentDailyWeather);
+            if (currIndex + 1 <= Data.Count - 1)
+                CurrentDailyWeather = Data[currIndex + 1];
+        }
+
+        [RelayCommand]
+        private void MoveBackward()
+        {
+            var currIndex = Data.IndexOf(CurrentDailyWeather);
+            if (currIndex - 1 >= 0)
+                CurrentDailyWeather = Data[currIndex - 1];
         }
 
         public void Receive(HourChangedMessage message) =>

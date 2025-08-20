@@ -98,7 +98,7 @@ namespace WX.Services.API.WeatherAPI
                     MeanApparentTemperature2m = dailyDTO.MeanApparentTemperature2m[i],
                     Sunrise = TimeOnly.Parse(dailyDTO.Sunrise[i]),
                     Sunset = TimeOnly.Parse(dailyDTO.Sunset[i]),
-                    DaylightDuration = dailyDTO.DaylightDuration[i],
+                    DaylightDuration = TimeSpan.FromSeconds(MathF.Round(dailyDTO.DaylightDuration[i]!.Value)),
                     SunshineDuration = dailyDTO.SunshineDuration[i],
                     UVIndex = (int)Math.Round(dailyDTO.UVIndex[i]!.Value),
                     PrecipitationSum = dailyDTO.PrecipitationSum[i],

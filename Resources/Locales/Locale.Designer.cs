@@ -151,6 +151,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на h.
+        /// </summary>
+        internal static string h {
+            get {
+                return ResourceManager.GetString("h", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на here.
         /// </summary>
         internal static string HereLink {
@@ -219,6 +228,15 @@ namespace WX.Resources.Locales {
         internal static string m {
             get {
                 return ResourceManager.GetString("m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на On average it feels like.
+        /// </summary>
+        internal static string MeanApparentTemperatureLabel {
+            get {
+                return ResourceManager.GetString("MeanApparentTemperatureLabel", resourceCulture);
             }
         }
         

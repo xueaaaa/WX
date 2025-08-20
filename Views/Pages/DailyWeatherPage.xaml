@@ -5,8 +5,10 @@
              xmlns:loc="clr-namespace:WX.Resources.Locales"
              xmlns:controls="clr-namespace:WX.Views.Controls"
              xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:m="clr-namespace:WX.Models.Weather"
              x:Class="WX.Views.Pages.DailyWeatherPage"
+             x:Name="DWeatherPage"
              Style="{DynamicResource ContentPage}">
     <ContentPage.Resources>
         <converters:DateToWeekDayConverter x:Key="DateToWeekDayConverter"/>
@@ -22,6 +24,7 @@
         <converters:IsNotNamedLocationConverter x:Key="IsNotNamedLocationConverter"/>
         <converters:CountryCodeToFlagURLConverter x:Key="CountryCodeToFlagURLConverter"/>
         <converters:WICToIconConverter x:Key="WICToIconConverter"/>
+        <converters:PrecipitationAddUnitsConverter x:Key="PrecipitationAddUnitsConverter"/>
     </ContentPage.Resources>
     
     <Grid>
@@ -91,6 +94,162 @@
                                               HorizontalOptions="End"                                  
                                               VerticalOptions="Center"/>
             </Grid>
+
+            <VerticalStackLayout Grid.Row="1"
+                                 VerticalOptions="Center">
+                <Image Style="{DynamicResource WeatherIconImage}"
+                       Source="{Binding WeatherCode, Converter={StaticResource WICToIconConverter}}">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{Binding BindingContext.WeatherIconColor, Source={x:Reference DWeatherPage}}"/>
+                    </Image.Behaviors>
+                </Image>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <HorizontalStackLayout HorizontalOptions="End"
+                                           VerticalOptions="End"
+                                           Margin="0,0,10,7">
+                        <Image Source="{mi:Material Icon=ArrowDownward, IconColor={StaticResource TextMutedColor}, IconSize=16}"/>
+                        <Label Style="{DynamicResource PropertyHint}"
+                               VerticalOptions="End"
+                               Text="{Binding MinimumTemperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"/>
+                    </HorizontalStackLayout>
+                    
+                    <Label Grid.Column="1"
+                           Style="{DynamicResource ActualTemperatureLabel}"
+                           Text="{Binding MeanTemperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"/>
+
+                    <HorizontalStackLayout Grid.Column="2"
+                                           HorizontalOptions="Start"
+                                           VerticalOptions="Start"
+                                           Margin="10,7,0,0">
+                        <Image Source="{mi:Material Icon=ArrowUpward, IconColor={StaticResource TextMutedColor}, IconSize=16}"/>
+                        <Label Style="{DynamicResource PropertyHint}"
+                               VerticalOptions="End"
+                               Text="{Binding MaximumTemperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"/>
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <Label FontSize="Subtitle"
+                       HorizontalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static loc:Locale.MeanApparentTemperatureLabel}"
+                                  FontFamily="{DynamicResource FontLightName}"
+                                  TextColor="{DynamicResource TextMutedColor}"/>
+                            <Span Text=" "/>
+                            <Span Text="{Binding MeanApparentTemperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
+                                  FontFamily="{DynamicResource FontLightName}"
+                                  TextColor="{DynamicResource TextMutedColor}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </VerticalStackLayout>
+
+            <BoxView Grid.Row="2"
+                     Style="{DynamicResource UpWeatherPageSeparator}"/>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <VerticalStackLayout HorizontalOptions="Center">
+                    <Image Style="{DynamicResource PropertyIcon}"
+                           Source="{mi:Material Icon=WbTwilight, IconColor={StaticResource TextColor}}"/>
+                    <Label Style="{DynamicResource PropertyHint}"
+                           Margin="0,5,0,0"
+                           HorizontalOptions="Center"
+                           Text="{Binding Sunrise}"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1"
+                                     HorizontalOptions="Center">
+                    <Image Style="{DynamicResource PropertyIcon}"
+                           Rotation="180"
+                           Source="{mi:Material Icon=WbTwilight, IconColor={StaticResource TextColor}}"/>
+                    <Label Style="{DynamicResource PropertyHint}"
+                           Margin="0,5,0,0"
+                           HorizontalOptions="Center"
+                           Text="{Binding Sunset}"/>
+                </VerticalStackLayout>
+
+                <Label Grid.ColumnSpan="2"
+                       Grid.Row="1"
+                       Margin="0,5,0,0"
+                       HorizontalOptions="Center"
+                       Style="{DynamicResource PropertyHint}"
+                       Text="{Binding DaylightDuration}"/>
+
+                <Grid Grid.Column="2"
+                      Grid.RowSpan="2"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <BoxView WidthRequest="32"
+                             HeightRequest="32"
+                             BackgroundColor="{Binding UVIndex, Converter={StaticResource UVIndexToColorConverter}}"
+                             CornerRadius="16"/>
+
+                    <Label TextColor="{DynamicResource BackgroundColor}"
+                           Text="{Binding UVIndex}"
+                           FontSize="20"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                </Grid>
+
+                <VerticalStackLayout Grid.Column="3"
+                                     Grid.RowSpan="2"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center">
+                    <Label Style="{DynamicResource PropertyHint}"
+                           HorizontalOptions="Center"
+                           FontSize="Caption">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding PrecipitationHours}"/>
+                                <Span Text=" "/>
+                                <Span Text="{x:Static loc:Locale.h}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Style="{DynamicResource PropertyTitle}"
+                           HorizontalOptions="Center"
+                           Text="{Binding PrecipitationSum, Converter={StaticResource PrecipitationAddUnitsConverter}}"/>
+
+                    <Label Style="{DynamicResource PropertyHint}"
+                           Margin="0,5,0,0"
+                           Text="{x:Static loc:Locale.PrecipitationLabel}"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <BoxView Grid.Row="4"
+                     Style="{DynamicResource DownWeatherPageSeparator}"/>
+
+            <Button Grid.Row="5"
+                    Style="{DynamicResource TransparentButton}"
+                    Margin="15"
+                    ImageSource="{mi:Material Icon=KeyboardArrowDown, IconColor={StaticResource TextMutedColor}}"
+                    Text="{x:Static loc:Locale.MoreButton}"
+                    Command="{Binding BindingContext.OpenDetailsCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -124,11 +283,13 @@
                                        TextColor="{DynamicResource TextMutedColor}"
                                        FontSize="Caption"
                                        FontFamily="{DynamicResource FontLightName}"
+                                       HorizontalOptions="Center"
                                        IsVisible="{Binding Time, Converter={StaticResource TimeToIsCurrentTimeConverter}}"/>
                                 <Label Text="{Binding MeanTemperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
                                        TextColor="{DynamicResource TextColor}"
                                        FontSize="Title"
-                                       FontAttributes="Bold"/>
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"/>
                                 <Label Text="{Binding Time, StringFormat='{0:M}'}"
                                        HorizontalOptions="Center"
                                        TextColor="{DynamicResource TextMutedColor}"/>

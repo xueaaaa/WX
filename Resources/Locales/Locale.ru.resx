@@ -237,4 +237,10 @@
   <data name="EmptyCollectionLabel" xml:space="preserve">
     <value>Здесь пока ничего нет</value>
   </data>
+  <data name="MeanApparentTemperatureLabel" xml:space="preserve">
+    <value>В среднем ощущается как</value>
+  </data>
+  <data name="h" xml:space="preserve">
+    <value>ч</value>
+  </data>
 </root>

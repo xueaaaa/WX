@@ -102,18 +102,15 @@
             <VerticalStackLayout Grid.Row="1"
                                  HorizontalOptions="Center"
                                  VerticalOptions="Center">
-                <Image Source="{Binding WeatherCode, Converter={StaticResource WICToIconConverter}}"
-                       WidthRequest="148"
-                       HeightRequest="148">
+                <Image Style="{DynamicResource WeatherIconImage}"
+                       Source="{Binding WeatherCode, Converter={StaticResource WICToIconConverter}}">
                     <Image.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{Binding BindingContext.WeatherIconColor, Source={x:Reference HWeatherPage}}"/>
                     </Image.Behaviors>
                 </Image>
 
-                <Label Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
-                       FontSize="48"
-                       FontFamily="{DynamicResource FontBoldName}"
-                       HorizontalTextAlignment="Center"/>
+                <Label Style="{DynamicResource ActualTemperatureLabel}"
+                       Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"/>
 
                 <Label FontSize="Subtitle"
                        HorizontalTextAlignment="Center">
@@ -132,8 +129,7 @@
             </VerticalStackLayout>
 
             <BoxView Grid.Row="2"
-                     Style="{DynamicResource Separator}"
-                     Margin="15,0,15,15"/>
+                     Style="{DynamicResource UpWeatherPageSeparator}"/>
 
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
@@ -232,7 +228,7 @@
             </Grid>
 
             <BoxView Grid.Row="4"
-                     Style="{DynamicResource Separator}"
+                     Style="{DynamicResource DownWeatherPageSeparator}"
                      Margin="15,15,15,0"/>
 
             <Button Grid.Row="5"
@@ -274,10 +270,12 @@
                                        TextColor="{DynamicResource TextMutedColor}"
                                        FontSize="Caption"
                                        FontFamily="{DynamicResource FontLightName}"
+                                       HorizontalOptions="Center"
                                        IsVisible="{Binding Time, Converter={StaticResource TimeToIsCurrentTimeConverter}}"/>
                                 <Label Text="{Binding Temperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
                                        FontSize="Title"
-                                       FontAttributes="Bold"/>
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"/>
                                 <Label Text="{Binding Time, StringFormat='{0:t}'}"
                                        HorizontalOptions="Center"
                                        TextColor="{DynamicResource TextMutedColor}"/>
