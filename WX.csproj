@@ -122,6 +122,9 @@
 	  <MauiXaml Update="Views\Modals\AboutUVModal.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Modals\DailyWeatherDetails.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Modals\HourlyWeatherDetails.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

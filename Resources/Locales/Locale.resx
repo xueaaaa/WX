@@ -243,4 +243,10 @@
   <data name="h" xml:space="preserve">
     <value>h</value>
   </data>
+  <data name="MinApparentTemperatureLabel" xml:space="preserve">
+    <value>Minimum apparent temperature</value>
+  </data>
+  <data name="MaxApparentTemperatureLabel" xml:space="preserve">
+    <value>Maximum apparent temperature</value>
+  </data>
 </root>

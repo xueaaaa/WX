@@ -243,4 +243,10 @@
   <data name="h" xml:space="preserve">
     <value>ч</value>
   </data>
+  <data name="MinApparentTemperatureLabel" xml:space="preserve">
+    <value>Мин. температура по ощущениям</value>
+  </data>
+  <data name="MaxApparentTemperatureLabel" xml:space="preserve">
+    <value>Макс. температура по ощущениям</value>
+  </data>
 </root>

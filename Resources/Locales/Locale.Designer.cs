@@ -232,6 +232,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Maximum apparent temperature.
+        /// </summary>
+        internal static string MaxApparentTemperatureLabel {
+            get {
+                return ResourceManager.GetString("MaxApparentTemperatureLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на On average it feels like.
         /// </summary>
         internal static string MeanApparentTemperatureLabel {
@@ -246,6 +255,15 @@ namespace WX.Resources.Locales {
         internal static string min {
             get {
                 return ResourceManager.GetString("min", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Minimum apparent temperature.
+        /// </summary>
+        internal static string MinApparentTemperatureLabel {
+            get {
+                return ResourceManager.GetString("MinApparentTemperatureLabel", resourceCulture);
             }
         }
         

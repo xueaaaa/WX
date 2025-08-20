@@ -7,6 +7,7 @@ using WX.Models.Message;
 using WX.Models.Weather;
 using WX.Services.Workers;
 using WX.ViewModels.Interfaces;
+using WX.Views.Modals;
 
 namespace WX.ViewModels.Pages
 {
@@ -14,6 +15,7 @@ namespace WX.ViewModels.Pages
     {
         private readonly WeatherBackgroudWorker _weatherWorker;
         private readonly WICToColorConverter _wicToColorConverter;
+        private INavigation _navigation;
         private WeakReferenceMessenger _messenger;
         private readonly LocationWorker _locationWorker;
         public LocationWorker LocationWorker
@@ -53,12 +55,16 @@ namespace WX.ViewModels.Pages
 
         public async Task Initialize()
         {
+            _navigation = Application.Current.MainPage.Navigation;
             _messenger = WeakReferenceMessenger.Default;
             Data = new();
 
             _messenger.RegisterAll(this);
             LoadData(DateTime.Now);
         }
+
+        public void Receive(HourChangedMessage message) =>
+            LoadData(message.Value);
 
         [RelayCommand]
         private void MoveForward()
@@ -76,8 +82,9 @@ namespace WX.ViewModels.Pages
                 CurrentDailyWeather = Data[currIndex - 1];
         }
 
-        public void Receive(HourChangedMessage message) =>
-            LoadData(message.Value);
+        [RelayCommand]
+        private async Task OpenDetails() =>
+            await _navigation.PushModalAsync(new DailyWeatherDetails(CurrentDailyWeather, _navigation));
 
         private void LoadData(DateTime now)
         {

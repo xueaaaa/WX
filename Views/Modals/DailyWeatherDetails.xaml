@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:loc="clr-namespace:WX.Resources.Locales"
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+             xmlns:converters="clr-namespace:WX.Converters"
+             x:Class="WX.Views.Modals.DailyWeatherDetails"
+             Style="{DynamicResource ContentPage}">
+    <ContentPage.Resources>
+        <converters:TemperatureAddUnitConverter x:Key="TemperatureAddUnitConverter"/>
+        <converters:PrecipitationAddUnitsConverter x:Key="PrecipitationAddUnitsConverter"/>
+        <converters:WindAddUnitsConverter x:Key="WindAddUnitsConverter"/>
+        <converters:SecondsToMinutesConverter x:Key="SecondsToMinutesConverter"/>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Text="{x:Static loc:Locale.AdditionalInfoLabel}"
+               FontSize="Title"
+               FontFamily="{DynamicResource FontBoldName}"
+               HorizontalOptions="Center"/>
+
+        <Grid Grid.Row="1"
+              Margin="0,30,0,0"
+              BindingContext="{Binding Weather}"
+              VerticalOptions="Start">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="{mi:Material Icon=Thermostat, IconColor={StaticResource TextColor}}"/>
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Style="{DynamicResource PropertyTitle}"
+                           Text="{x:Static loc:Locale.MinApparentTemperatureLabel}"/>
+                    <Label Style="{DynamicResource PropertyHint}"
+                           Text="{Binding MinimumApparentTemperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
+                           Margin="4,0,0,0"
+                           HorizontalOptions="Start"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="{mi:Material Icon=Thermostat, IconColor={StaticResource TextColor}}"/>
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Style="{DynamicResource PropertyTitle}"
+                           Text="{x:Static loc:Locale.MaxApparentTemperatureLabel}"/>
+                    <Label Style="{DynamicResource PropertyHint}"
+                           Text="{Binding MaximumApparentTemperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
+                           Margin="4,0,0,0"
+                           HorizontalOptions="Start"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+
+        <Button Grid.Row="2"
+                Style="{DynamicResource TransparentButton}"
+                Text="{x:Static loc:Locale.CloseButton}"
+                ImageSource="{mi:Material Icon=Close, IconColor={StaticResource TextMutedColor}}"
+                Command="{Binding CloseDetailsCommand}"/>
+    </Grid>
+</ContentPage>
