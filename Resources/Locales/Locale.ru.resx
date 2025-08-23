@@ -249,4 +249,13 @@
   <data name="MaxApparentTemperatureLabel" xml:space="preserve">
     <value>Макс. температура по ощущениям</value>
   </data>
+  <data name="MaxPrecipitationProbabilityLabel" xml:space="preserve">
+    <value>Макс. вероятность осадков</value>
+  </data>
+  <data name="MaxWindSpeedLabel" xml:space="preserve">
+    <value>Макс. скорость ветра</value>
+  </data>
+  <data name="MaxWindGustsLabel" xml:space="preserve">
+    <value>Макс. порывы ветра</value>
+  </data>
 </root>

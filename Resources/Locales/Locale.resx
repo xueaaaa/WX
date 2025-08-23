@@ -249,4 +249,13 @@
   <data name="MaxApparentTemperatureLabel" xml:space="preserve">
     <value>Maximum apparent temperature</value>
   </data>
+  <data name="MaxPrecipitationProbabilityLabel" xml:space="preserve">
+    <value>Max. precipitation probability</value>
+  </data>
+  <data name="MaxWindSpeedLabel" xml:space="preserve">
+    <value>Maximum wind speed</value>
+  </data>
+  <data name="MaxWindGustsLabel" xml:space="preserve">
+    <value>Maximum wind gusts</value>
+  </data>
 </root>

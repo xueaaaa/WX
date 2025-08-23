@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:loc="clr-namespace:WX.Resources.Locales"
              xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+             xmlns:m="clr-namespace:WX.Models.Weather"
              xmlns:converters="clr-namespace:WX.Converters"
              x:Class="WX.Views.Modals.DailyWeatherDetails"
              Style="{DynamicResource ContentPage}">
@@ -28,6 +29,7 @@
         <Grid Grid.Row="1"
               Margin="0,30,0,0"
               BindingContext="{Binding Weather}"
+              x:DataType="{x:Type m:DailyWeather}"
               VerticalOptions="Start">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*"/>
@@ -35,6 +37,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
+                <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
@@ -70,6 +73,84 @@
                            Text="{x:Static loc:Locale.MaxApparentTemperatureLabel}"/>
                     <Label Style="{DynamicResource PropertyHint}"
                            Text="{Binding MaximumApparentTemperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
+                           Margin="4,0,0,0"
+                           HorizontalOptions="Start"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  Margin="0,30,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="{mi:Material Icon=Shower, IconColor={StaticResource TextColor}}"/>
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Style="{DynamicResource PropertyTitle}"
+                           Text="{x:Static loc:Locale.MaxPrecipitationProbabilityLabel}"/>
+                    <Label Style="{DynamicResource PropertyHint}"
+                           Text="{Binding PrecipitationProbabilityMax, Converter={StaticResource TemperatureAddUnitConverter}}"
+                           Margin="4,0,0,0"
+                           HorizontalOptions="Start"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  Grid.Column="1"
+                  Margin="0,30,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="{mi:Material Icon=Timelapse, IconColor={StaticResource TextColor}}"/>
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Style="{DynamicResource PropertyTitle}"
+                           Text="{x:Static loc:Locale.SunshineDurationLabel}"/>
+                    <Label Style="{DynamicResource PropertyHint}"
+                           Text="{Binding SunshineDuration, Converter={StaticResource SecondsToMinutesConverter}}"
+                           Margin="4,0,0,0"
+                           HorizontalOptions="Start"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid Grid.Row="2"
+                  Margin="0,30,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="{mi:Material Icon=Air, IconColor={StaticResource TextColor}}"/>
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Style="{DynamicResource PropertyTitle}"
+                           Text="{x:Static loc:Locale.MaxWindSpeedLabel}"/>
+                    <Label Style="{DynamicResource PropertyHint}"
+                           Text="{Binding MaximumWindSpeed, Converter={StaticResource TemperatureAddUnitConverter}}"
+                           Margin="4,0,0,0"
+                           HorizontalOptions="Start"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid Grid.Row="2"
+                  Grid.Column="1"
+                  Margin="0,30,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="{mi:Material Icon=Air, IconColor={StaticResource TextColor}}"/>
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Style="{DynamicResource PropertyTitle}"
+                           Text="{x:Static loc:Locale.MaxWindGustsLabel}"/>
+                    <Label Style="{DynamicResource PropertyHint}"
+                           Text="{Binding MaximumWindGusts, Converter={StaticResource TemperatureAddUnitConverter}}"
                            Margin="4,0,0,0"
                            HorizontalOptions="Start"/>
                 </VerticalStackLayout>

@@ -241,6 +241,33 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Max. precipitation probability.
+        /// </summary>
+        internal static string MaxPrecipitationProbabilityLabel {
+            get {
+                return ResourceManager.GetString("MaxPrecipitationProbabilityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Maximum wind gusts.
+        /// </summary>
+        internal static string MaxWindGustsLabel {
+            get {
+                return ResourceManager.GetString("MaxWindGustsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Maximum wind speed.
+        /// </summary>
+        internal static string MaxWindSpeedLabel {
+            get {
+                return ResourceManager.GetString("MaxWindSpeedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на On average it feels like.
         /// </summary>
         internal static string MeanApparentTemperatureLabel {
