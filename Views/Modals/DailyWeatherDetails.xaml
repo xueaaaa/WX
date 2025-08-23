@@ -4,6 +4,7 @@
              xmlns:loc="clr-namespace:WX.Resources.Locales"
              xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
              xmlns:m="clr-namespace:WX.Models.Weather"
+             xmlns:controls="clr-namespace:WX.Views.Controls"
              xmlns:converters="clr-namespace:WX.Converters"
              x:Class="WX.Views.Modals.DailyWeatherDetails"
              Style="{DynamicResource ContentPage}">
@@ -48,7 +49,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Source="{mi:Material Icon=Thermostat, IconColor={StaticResource TextColor}}"/>
+                <controls:ExtendedIcon Primary="Thermostat"
+                                       Secondary="ArrowDownward"/>
 
                 <VerticalStackLayout Grid.Column="1">
                     <Label Style="{DynamicResource PropertyTitle}"
@@ -66,7 +68,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Source="{mi:Material Icon=Thermostat, IconColor={StaticResource TextColor}}"/>
+                <controls:ExtendedIcon Primary="Thermostat"
+                                       Secondary="ArrowUpward"/>
 
                 <VerticalStackLayout Grid.Column="1">
                     <Label Style="{DynamicResource PropertyTitle}"
@@ -124,7 +127,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Source="{mi:Material Icon=Air, IconColor={StaticResource TextColor}}"/>
+                <controls:ExtendedIcon Primary="Air"
+                                       Secondary="Speed"
+                                       SecondaryMargin="-3,0,0,10"/>
 
                 <VerticalStackLayout Grid.Column="1">
                     <Label Style="{DynamicResource PropertyTitle}"
@@ -144,7 +149,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Source="{mi:Material Icon=Air, IconColor={StaticResource TextColor}}"/>
+                <controls:ExtendedIcon Primary="Air"
+                                       Secondary="Cyclone"
+                                       SecondaryMargin="0,-5,0,10"/>
 
                 <VerticalStackLayout Grid.Column="1">
                     <Label Style="{DynamicResource PropertyTitle}"
