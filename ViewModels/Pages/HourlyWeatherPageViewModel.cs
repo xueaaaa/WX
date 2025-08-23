@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
-using WX.Converters;
 using WX.Models.Message;
 using WX.Models.Weather;
 using WX.Services.API.WeatherAPI.FieldNames;
@@ -15,7 +14,6 @@ namespace WX.ViewModels.Pages
     public partial class HourlyWeatherPageViewModel : ObservableObject, IInitializableViewModel, IRecipient<HourChangedMessage>, IRecipient<LocationChangedMessage>
     {
         private readonly WeatherBackgroudWorker _weatherWorker;
-        private readonly WICToColorConverter _wicToColorConverter;
         private INavigation _navigation;
         private WeakReferenceMessenger _messenger;
 
@@ -26,68 +24,73 @@ namespace WX.ViewModels.Pages
         }
 
         [ObservableProperty]
-        private ObservableCollection<HourlyWeather> _data;
-        private HourlyWeather _currentHourlyWeather;
-        public HourlyWeather CurrentHourlyWeather
+        private DateTime _minDate;
+        [ObservableProperty]
+        private DateTime _maxDate;
+
+        private DateTime _selectedDate;
+        public DateTime SelectedDate
         {
-            get => _currentHourlyWeather;
-            set 
-            { 
-                SetProperty(ref _currentHourlyWeather, value);
-                base.OnPropertyChanged(nameof(WeatherIconColor));
+            get => _selectedDate;
+            set
+            {
+                SetProperty(ref _selectedDate, value);
+                if(SelectedTime != TimeSpan.Zero)
+                    OnDateTimeChanged();
             }
         }
 
-        public object? WeatherIconColor
+        [ObservableProperty]
+        private ObservableCollection<TimeSpan> _times;
+
+        private TimeSpan _selectedTime;
+        public TimeSpan SelectedTime
         {
-            get
-            {
-                if (CurrentHourlyWeather != null)
-                    return _wicToColorConverter.Convert(CurrentHourlyWeather.WeatherCode, null, null, null);
-                return Color.FromArgb("#ffffff");
+            get => _selectedTime;
+            set 
+            { 
+                SetProperty(ref _selectedTime, value);
+                if(SelectedDate != DateTime.MinValue)
+                    OnDateTimeChanged();
             }
         }
+
+        [ObservableProperty]
+        private ObservableCollection<HourlyWeather> _weatherForecast;
+        [ObservableProperty]
+        private HourlyWeather _currentHourlyWeather;
 
         public HourlyWeatherPageViewModel(LocationWorker locationWorker, WeatherBackgroudWorker worker)
         {
             _locationWorker = locationWorker;
             _weatherWorker = worker;
-            _wicToColorConverter = new();
+            Times = new();
         }
 
         public async Task Initialize()
         {
             _navigation = Application.Current.MainPage.Navigation;
             _messenger = WeakReferenceMessenger.Default;
-            Data = new();
+            for (int i = 0; i < 24; i++)
+                Times.Add(TimeSpan.FromHours(i));
 
             _messenger.RegisterAll(this);
         }
 
-        public void Receive(HourChangedMessage message) =>
-            LoadData(message.Value);
+        public void Receive(HourChangedMessage message)
+        {
+            MaxDate = _weatherWorker.Data.Daily.MaxBy(x => x.Time)!.Time.ToDateTime(TimeOnly.MinValue);
+            SelectedDate = message.Value.Date;
+            MinDate = _weatherWorker.Data.Daily.MinBy(x => x.Time)!.Time.ToDateTime(TimeOnly.MinValue);
+
+            SelectedTime = Times.Where(x => x.Hours == message.Value.Hour).First();
+        }
 
         public async void Receive(LocationChangedMessage message)
         {
             _weatherWorker.Sender.SetDefaultParameters();
             _weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LATITUDE, message.Value.Latitude.ToString().Replace(',', '.'));
             _weatherWorker.Sender.RegisterParameter(WeatherAPIFieldNames.LONGITUDE, message.Value.Longitude.ToString().Replace(',', '.'));
-        } 
-
-        [RelayCommand]
-        private void MoveForward()
-        {
-            var currIndex = Data.IndexOf(CurrentHourlyWeather);
-            if (currIndex + 1 <= Data.Count - 1)
-                CurrentHourlyWeather = Data[currIndex + 1];
-        }
-
-        [RelayCommand]
-        private void MoveBackward() 
-        {
-            var currIndex = Data.IndexOf(CurrentHourlyWeather);   
-            if (currIndex - 1 >= 0)
-                CurrentHourlyWeather = Data[currIndex - 1];
         }
 
         [RelayCommand]
@@ -98,12 +101,11 @@ namespace WX.ViewModels.Pages
         private async Task OpenDetails() =>
             await _navigation.PushModalAsync(new HourlyWeatherDetails(CurrentHourlyWeather, _navigation));
 
-        private void LoadData(DateTime now)
+        private void OnDateTimeChanged()
         {
-            Data.Clear();
-            Data = new(_weatherWorker.Data.Hourly.Where(x => DateOnly.FromDateTime(x.Time.Value.Date) == DateOnly.FromDateTime(DateTime.Now)));
-            CurrentHourlyWeather = Data.FirstOrDefault(x =>
-                    now.Date == x.Time.Value.Date && now.Hour == x.Time.Value.Hour)!;
+            var combinedDate = new DateTime(DateOnly.FromDateTime(SelectedDate), TimeOnly.FromTimeSpan(SelectedTime));
+            CurrentHourlyWeather = _weatherWorker.Data.Hourly.Where(x => x.Time == combinedDate).First();
+            WeatherForecast = new(_weatherWorker.Data.Hourly.Where(x => x.Time > combinedDate).Take(3));
         }
     }
 }

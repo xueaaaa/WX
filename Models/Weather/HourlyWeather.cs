@@ -1,12 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using WX.Models.Weather.FieldNames;
 using System.Text.Json.Serialization;
+using WX.Converters;
 
 namespace WX.Models.Weather
 {
     [ObservableObject]
     public partial class HourlyWeather
     {
+        private readonly WICToColorConverter _wicToColorConverter;
+
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.TIME)]
         private DateTime? _time;
@@ -55,5 +58,15 @@ namespace WX.Models.Weather
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIHourlyFieldNames.SUNSHINE_DURATION)]
         private float? _sunshineDuration;
+
+        public object? WeatherIconColor
+        {
+            get => _wicToColorConverter.Convert(WeatherCode, null, null, null);
+        }
+
+        public HourlyWeather()
+        {
+            _wicToColorConverter = new();
+        }
     }
 }

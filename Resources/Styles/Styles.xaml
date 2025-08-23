@@ -99,8 +99,8 @@
     </Style>
 
     <Style x:Key="DownWeatherPageSeparator"
-       TargetType="BoxView"
-       BasedOn="{StaticResource Separator}">
+           TargetType="BoxView"
+           BasedOn="{StaticResource Separator}">
         <Setter Property="Margin" Value="15,15,15,0"/>
     </Style>
 </ResourceDictionary>
