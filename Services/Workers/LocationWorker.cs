@@ -56,7 +56,7 @@ namespace WX.Services.Workers
 
         public async Task Initialize()
         {
-			AllLocations = new(LoadAllLocations() ?? []);
+			AllLocations = new(LoadAllLocations());
 
 			var loadedLocation = LoadCurrentLocation();
 			SelectedLocation = AllLocations.FirstOrDefault(x => x.Equals(loadedLocation));
@@ -98,23 +98,23 @@ namespace WX.Services.Workers
 			}
 		}
 
-		public IEnumerable<Location>? LoadAllLocations()
-		{
-			var data = _preferencesService.Get(PreferencesNames.ALL_LOCATIONS, "[]");
-			var locations = JsonSerializer.Deserialize<IEnumerable<Location>>(data);
+        public IEnumerable<Location>? LoadAllLocations()
+        {
+            var data = _preferencesService.Get(PreferencesNames.ALL_LOCATIONS, $"[{GetDefaultLocation()}]");
+            var locations = JsonSerializer.Deserialize<IEnumerable<Location>>(data);
 
-			return locations;
-		}
+            return locations;
+        }
 
-		public Location? LoadCurrentLocation()
-		{
-			var data = _preferencesService.Get(PreferencesNames.CURRENT_LOCATION, "{}");
-			var location = JsonSerializer.Deserialize<Location>(data);
+        public Location? LoadCurrentLocation()
+        {
+            var data = _preferencesService.Get(PreferencesNames.CURRENT_LOCATION, GetDefaultLocation());
+            var location = JsonSerializer.Deserialize<Location>(data);
 
-			return location;
-		}
+            return location;
+        }
 
-		public void SaveAllLocations(IEnumerable<Location> data)
+        public void SaveAllLocations(IEnumerable<Location> data)
 		{
             var json = JsonSerializer.Serialize(data);
 			_preferencesService.Set(PreferencesNames.ALL_LOCATIONS, json);
@@ -125,5 +125,8 @@ namespace WX.Services.Workers
 			var json = JsonSerializer.Serialize(data);
 			_preferencesService.Set(PreferencesNames.CURRENT_LOCATION, json);
 		}
+
+		private string GetDefaultLocation() => 
+			"{\"name\": \"Moscow\", \"latitude\": 55.75222, \"longitude\": 37.61556, \"elevation\": 144.0, \"country_code\": \"RU\", \"country\": \"Russia\"}";
     }
 }
