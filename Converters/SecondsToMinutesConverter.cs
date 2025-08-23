@@ -9,7 +9,7 @@ namespace WX.Converters
         {
             if (value is not float) return string.Empty;
 
-            return $"{(float)value / 60} {Locale.min}";
+            return $"{Math.Round((float)value / 60)} {Locale.min}";
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

@@ -83,6 +83,10 @@ namespace WX.ViewModels.Pages
         }
 
         [RelayCommand]
+        private async Task MoreAboutUV() =>
+            await _navigation.PushModalAsync(new AboutUVModal(_navigation));
+
+        [RelayCommand]
         private async Task OpenDetails() =>
             await _navigation.PushModalAsync(new DailyWeatherDetails(CurrentDailyWeather, _navigation));
 

@@ -52,7 +52,8 @@
                 <controls:ExtendedIcon Primary="Thermostat"
                                        Secondary="ArrowDownward"/>
 
-                <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout Grid.Column="1"
+                                     VerticalOptions="Center">
                     <Label Style="{DynamicResource PropertyTitle}"
                            Text="{x:Static loc:Locale.MinApparentTemperatureLabel}"/>
                     <Label Style="{DynamicResource PropertyHint}"
@@ -71,7 +72,8 @@
                 <controls:ExtendedIcon Primary="Thermostat"
                                        Secondary="ArrowUpward"/>
 
-                <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout Grid.Column="1"
+                                     VerticalOptions="Center">
                     <Label Style="{DynamicResource PropertyTitle}"
                            Text="{x:Static loc:Locale.MaxApparentTemperatureLabel}"/>
                     <Label Style="{DynamicResource PropertyHint}"
@@ -90,13 +92,20 @@
 
                 <Image Source="{mi:Material Icon=Shower, IconColor={StaticResource TextColor}}"/>
 
-                <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout Grid.Column="1"
+                                     VerticalOptions="Center">
                     <Label Style="{DynamicResource PropertyTitle}"
                            Text="{x:Static loc:Locale.MaxPrecipitationProbabilityLabel}"/>
                     <Label Style="{DynamicResource PropertyHint}"
-                           Text="{Binding PrecipitationProbabilityMax, Converter={StaticResource TemperatureAddUnitConverter}}"
                            Margin="4,0,0,0"
-                           HorizontalOptions="Start"/>
+                           HorizontalOptions="Start">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding PrecipitationProbabilityMax}"/>
+                                <Span Text=" %"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </VerticalStackLayout>
             </Grid>
 
@@ -110,7 +119,8 @@
 
                 <Image Source="{mi:Material Icon=Timelapse, IconColor={StaticResource TextColor}}"/>
 
-                <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout Grid.Column="1"
+                                     VerticalOptions="Center">
                     <Label Style="{DynamicResource PropertyTitle}"
                            Text="{x:Static loc:Locale.SunshineDurationLabel}"/>
                     <Label Style="{DynamicResource PropertyHint}"
@@ -131,11 +141,12 @@
                                        Secondary="Speed"
                                        SecondaryMargin="-3,0,0,10"/>
 
-                <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout Grid.Column="1"
+                                     VerticalOptions="Center">
                     <Label Style="{DynamicResource PropertyTitle}"
                            Text="{x:Static loc:Locale.MaxWindSpeedLabel}"/>
                     <Label Style="{DynamicResource PropertyHint}"
-                           Text="{Binding MaximumWindSpeed, Converter={StaticResource TemperatureAddUnitConverter}}"
+                           Text="{Binding MaximumWindSpeed, Converter={StaticResource WindAddUnitsConverter}}"
                            Margin="4,0,0,0"
                            HorizontalOptions="Start"/>
                 </VerticalStackLayout>
@@ -153,11 +164,12 @@
                                        Secondary="Cyclone"
                                        SecondaryMargin="0,-5,0,10"/>
 
-                <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout Grid.Column="1"
+                                     VerticalOptions="Center">
                     <Label Style="{DynamicResource PropertyTitle}"
                            Text="{x:Static loc:Locale.MaxWindGustsLabel}"/>
                     <Label Style="{DynamicResource PropertyHint}"
-                           Text="{Binding MaximumWindGusts, Converter={StaticResource TemperatureAddUnitConverter}}"
+                           Text="{Binding MaximumWindGusts, Converter={StaticResource WindAddUnitsConverter}}"
                            Margin="4,0,0,0"
                            HorizontalOptions="Start"/>
                 </VerticalStackLayout>

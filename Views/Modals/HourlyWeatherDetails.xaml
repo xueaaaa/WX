@@ -38,7 +38,6 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
 
             <Grid>
@@ -49,7 +48,8 @@
 
                 <Image Source="{mi:Material Icon=WaterDrop, IconColor={StaticResource TextColor}}"/>
 
-                <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout Grid.Column="1"
+                                     VerticalOptions="Center">
                     <Label Style="{DynamicResource PropertyTitle}"
                            Text="{x:Static loc:Locale.PrecipitationLabel}"/>
                     <Label Style="{DynamicResource PropertyHint}"
@@ -67,7 +67,8 @@
 
                 <Image Source="{mi:Material Icon=Snowing, IconColor={StaticResource TextColor}}"/>
 
-                <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout Grid.Column="1"
+                                     VerticalOptions="Center">
                     <Label Style="{DynamicResource PropertyTitle}"
                            Text="{x:Static loc:Locale.SnowDepthLabel}"/>
                     <Label Style="{DynamicResource PropertyHint}"
@@ -86,7 +87,8 @@
 
                 <Image Source="{mi:Material Icon=Compress, IconColor={StaticResource TextColor}}"/>
 
-                <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout Grid.Column="1"
+                                     VerticalOptions="Center">
                     <Label Style="{DynamicResource PropertyTitle}"
                            Text="{x:Static loc:Locale.SurfacePressureLabel}"/>
                     <Label Style="{DynamicResource PropertyHint}"
@@ -113,7 +115,8 @@
 
                 <Image Source="{mi:Material Icon=Cloud, IconColor={StaticResource TextColor}}"/>
 
-                <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout Grid.Column="1"
+                                     VerticalOptions="Center">
                     <Label Style="{DynamicResource PropertyTitle}"
                            Text="{x:Static loc:Locale.CloudCoverTotalLabel}"/>
                     <Label Style="{DynamicResource PropertyHint}"
@@ -138,7 +141,8 @@
 
                 <Image Source="{mi:Material Icon=Visibility, IconColor={StaticResource TextColor}}"/>
 
-                <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout Grid.Column="1"
+                                     VerticalOptions="Center">
                     <Label Style="{DynamicResource PropertyTitle}"
                            Text="{x:Static loc:Locale.VisibilityLabel}"/>
                     <Label Style="{DynamicResource PropertyHint}"
@@ -165,7 +169,8 @@
 
                 <Image Source="{mi:Material Icon=Air, IconColor={StaticResource TextColor}}"/>
 
-                <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout Grid.Column="1"
+                                     VerticalOptions="Center">
                     <Label Style="{DynamicResource PropertyTitle}"
                            Text="{x:Static loc:Locale.WindGustsLabel}"/>
                     <Label Style="{DynamicResource PropertyHint}"
@@ -184,7 +189,8 @@
 
                 <Image Source="{mi:Material Icon=Timelapse, IconColor={StaticResource TextColor}}"/>
 
-                <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout Grid.Column="1"
+                                     VerticalOptions="Center">
                     <Label Style="{DynamicResource PropertyTitle}"
                            Text="{x:Static loc:Locale.SunshineDurationLabel}"/>
                     <Label Style="{DynamicResource PropertyHint}"
@@ -193,18 +199,6 @@
                            HorizontalOptions="Start"/>
                 </VerticalStackLayout>
             </Grid>
-
-            <VerticalStackLayout Grid.ColumnSpan="2"
-                                 Grid.Row="4"
-                                 Margin="0,30,0,0">
-                <Label Text="{x:Static loc:Locale.MoreAboutUVLabel}"
-                       TextColor="{DynamicResource TextMutedColor}"
-                       TextDecorations="Underline">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding BindingContext.MoreAboutUVCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"/>
-                    </Label.GestureRecognizers>
-                </Label>
-            </VerticalStackLayout>
         </Grid>
 
         <Button Grid.Row="2"

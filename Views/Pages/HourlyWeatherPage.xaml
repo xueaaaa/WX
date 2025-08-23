@@ -211,6 +211,10 @@
                       Margin="0,5,0,0"
                       VerticalOptions="Center"
                       HorizontalOptions="Start">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.MoreAboutUVCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"/>
+                    </Grid.GestureRecognizers>
+
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
