@@ -24,27 +24,26 @@ namespace WX.ViewModels.Pages
         }
 
         [ObservableProperty]
-        private ObservableCollection<DailyWeather> _data;
-        private DailyWeather _currentDailyWeather;
-        public DailyWeather CurrentDailyWeather
+        private DateTime _minDate;
+        [ObservableProperty]
+        private DateTime _maxDate;
+
+        private DateTime _selectedDate;
+        public DateTime SelectedDate
         {
-            get => _currentDailyWeather;
-            set 
-            { 
-                SetProperty(ref _currentDailyWeather, value);
-                base.OnPropertyChanged(nameof(WeatherIconColor));
+            get => _selectedDate;
+            set
+            {
+                SetProperty(ref _selectedDate, value);
+                if(value != DateTime.MinValue)
+                    OnDateChanged();
             }
         }
 
-        public object? WeatherIconColor
-        {
-            get
-            {
-                if (CurrentDailyWeather != null)
-                    return _wicToColorConverter.Convert(CurrentDailyWeather.WeatherCode, null, null, null);
-                return Color.FromArgb("#ffffff");
-            }
-        }
+        [ObservableProperty]
+        private DailyWeather _currentDailyWeather;
+        [ObservableProperty]
+        private ObservableCollection<DailyWeather> _weatherForecast;
 
         public DailyWeatherPageViewModel(WeatherBackgroudWorker worker, LocationWorker locationWorker)
         {
@@ -57,29 +56,16 @@ namespace WX.ViewModels.Pages
         {
             _navigation = Application.Current.MainPage.Navigation;
             _messenger = WeakReferenceMessenger.Default;
-            Data = new();
 
             _messenger.RegisterAll(this);
-            LoadData(DateTime.Now);
+            Receive(new(DateTime.Today));
         }
 
-        public void Receive(HourChangedMessage message) =>
-            LoadData(message.Value);
-
-        [RelayCommand]
-        private void MoveForward()
+        public void Receive(HourChangedMessage message)
         {
-            var currIndex = Data.IndexOf(CurrentDailyWeather);
-            if (currIndex + 1 <= Data.Count - 1)
-                CurrentDailyWeather = Data[currIndex + 1];
-        }
-
-        [RelayCommand]
-        private void MoveBackward()
-        {
-            var currIndex = Data.IndexOf(CurrentDailyWeather);
-            if (currIndex - 1 >= 0)
-                CurrentDailyWeather = Data[currIndex - 1];
+            MaxDate = _weatherWorker.Data.Daily.MaxBy(x => x.Time)!.Time.ToDateTime(TimeOnly.MinValue);
+            SelectedDate = message.Value.Date;
+            MinDate = _weatherWorker.Data.Daily.MinBy(x => x.Time)!.Time.ToDateTime(TimeOnly.MinValue);
         }
 
         [RelayCommand]
@@ -90,11 +76,11 @@ namespace WX.ViewModels.Pages
         private async Task OpenDetails() =>
             await _navigation.PushModalAsync(new DailyWeatherDetails(CurrentDailyWeather, _navigation));
 
-        private void LoadData(DateTime now)
+        private void OnDateChanged()
         {
-            Data.Clear();
-            Data = _weatherWorker.Data.Daily;
-            CurrentDailyWeather = Data.FirstOrDefault(x => x.Time == DateOnly.FromDateTime(DateTime.Now))!;
+            var date = DateOnly.FromDateTime(SelectedDate);
+            CurrentDailyWeather = _weatherWorker.Data.Daily.Where(x => x.Time == date).First();
+            WeatherForecast = new(_weatherWorker.Data.Daily.Where(x => x.Time > date).Take(4));
         }
     }
 }

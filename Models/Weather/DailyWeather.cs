@@ -1,12 +1,15 @@
 ﻿using WX.Models.Weather.FieldNames;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Text.Json.Serialization;
+using WX.Converters;
 
 namespace WX.Models.Weather
 {
     [ObservableObject]
     public partial class DailyWeather
     {
+        private readonly WICToColorConverter _wicToColorConverter;
+
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.TIME)]
         private DateOnly _time;
@@ -61,5 +64,15 @@ namespace WX.Models.Weather
         [ObservableProperty]
         [property: JsonPropertyName(WeatherAPIDailyFieldNames.WIND_GUSTS_10M_MAX)]
         private float? _maximumWindGusts;
+
+        public object? WeatherIconColor
+        {
+            get => _wicToColorConverter.Convert(WeatherCode, null, null, null);
+        }
+
+        public DailyWeather()
+        {
+            _wicToColorConverter = new();
+        }
     }
 }

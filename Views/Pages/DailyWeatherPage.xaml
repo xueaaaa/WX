@@ -98,9 +98,10 @@
             <VerticalStackLayout Grid.Row="1"
                                  VerticalOptions="Center">
                 <Image Style="{DynamicResource WeatherIconImage}"
-                       Source="{Binding WeatherCode, Converter={StaticResource WICToIconConverter}}">
+                       Source="{Binding WeatherCode, Converter={StaticResource WICToIconConverter}}"
+                       x:Name="weatherIcon">
                     <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{Binding BindingContext.WeatherIconColor, Source={x:Reference DWeatherPage}}"/>
+                        <toolkit:IconTintColorBehavior TintColor="{Binding BindingContext.WeatherIconColor, Source={x:Reference weatherIcon}}"/>
                     </Image.Behaviors>
                 </Image>
 
@@ -258,55 +259,67 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.75*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Style="{DynamicResource ActionButton}"
-                    ImageSource="{mi:Material Icon=ArrowBack, IconColor={StaticResource TextMutedColor}}"
-                    Command="{Binding MoveBackwardCommand}"/>
+            <DatePicker MinimumDate="{Binding MinDate}"
+                        MaximumDate="{Binding MaxDate}"
+                        Date="{Binding SelectedDate, Mode=TwoWay}"
+                        Format="M"/>
 
-            <CarouselView Grid.Column="1"
-                          x:Name="DailyWeatherPicker"
-                          ItemsSource="{Binding Data}"
-                          CurrentItem="{Binding CurrentDailyWeather, Mode=TwoWay}"
-                          PeekAreaInsets="{Binding Path=Width, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                          Loop="False"
-                          HorizontalScrollBarVisibility="Never">
-                <CarouselView.ItemsLayout>
+            <CollectionView Grid.Column="1"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            ItemsSource="{Binding WeatherForecast}"
+                            SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <controls:EmptyCollectionPanel/>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal"
-                                       ItemSpacing="20"/>
-                </CarouselView.ItemsLayout>
+                                       ItemSpacing="7"/>
+                </CollectionView.ItemsLayout>
 
-                <CarouselView.ItemTemplate>
-                    <DataTemplate x:DataType="m:DailyWeather">
-                        <Grid VerticalOptions="End">
-                            <VerticalStackLayout HorizontalOptions="Center">
-                                <Label Text="{x:Static loc:Locale.NowLabel}"
-                                       TextColor="{DynamicResource TextMutedColor}"
-                                       FontSize="Caption"
-                                       FontFamily="{DynamicResource FontLightName}"
-                                       HorizontalOptions="Center"
-                                       IsVisible="{Binding Time, Converter={StaticResource TimeToIsCurrentTimeConverter}}"/>
-                                <Label Text="{Binding MeanTemperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
-                                       TextColor="{DynamicResource TextColor}"
-                                       FontSize="Title"
-                                       FontAttributes="Bold"
-                                       HorizontalOptions="Center"/>
-                                <Label Text="{Binding Time, StringFormat='{0:M}'}"
-                                       HorizontalOptions="Center"
-                                       TextColor="{DynamicResource TextMutedColor}"/>
-                            </VerticalStackLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type m:DailyWeather}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Image Source="{Binding WeatherCode, Converter={StaticResource WICToIconConverter}}"
+                                   WidthRequest="18"
+                                   HeightRequest="18"
+                                   x:Name="forecastWeatherIcon">
+                                <Image.Behaviors>
+                                    <toolkit:IconTintColorBehavior TintColor="{Binding BindingContext.WeatherIconColor, Source={x:Reference forecastWeatherIcon}}"/>
+                                </Image.Behaviors>
+                            </Image>
+
+                            <Label Grid.Column="1"
+                                   VerticalOptions="End"
+                                   Text="{Binding MeanTemperature2m, Converter={StaticResource TemperatureAddUnitConverter}}"
+                                   FontFamily="{DynamicResource FontBoldName}"
+                                   FontSize="14"/>
+
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
+                                   Text="{Binding Time, StringFormat='{0:dd.MM}'}"
+                                   TextColor="{DynamicResource TextMutedColor}"
+                                   FontFamily="{DynamicResource FontLightName}"
+                                   FontSize="Caption"/>
                         </Grid>
                     </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
-
-            <Button Grid.Column="2"
-                    Style="{DynamicResource ActionButton}"
-                    ImageSource="{mi:Material Icon=ArrowForward, IconColor={StaticResource TextMutedColor}}"
-                    Command="{Binding MoveForwardCommand}"/>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
     </Grid>
 </ContentPage>
