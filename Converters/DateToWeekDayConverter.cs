@@ -13,7 +13,7 @@ namespace WX.Converters
                 val = t1.ToDateTime(TimeOnly.MinValue);
 
             return val.ToString("dddd", 
-                new CultureInfo(_preferencesService.GetLanguage()));
+                _preferencesService.GetLanguage());
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

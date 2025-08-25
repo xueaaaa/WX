@@ -5,11 +5,13 @@
              xmlns:loc="clr-namespace:WX.Resources.Locales"
              xmlns:sv="clr-namespace:AiForms.Settings;assembly=SettingsView"
              xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+             xmlns:controls="clr-namespace:WX.Views.Controls"
              Style="{DynamicResource ContentPage}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <HorizontalStackLayout>
@@ -23,8 +25,23 @@
                    Margin="10,0,0,0"/>
         </HorizontalStackLayout>
 
-        <sv:SettingsView Grid.Row="1">
-
+        <sv:SettingsView Grid.Row="1"
+                         x:Name="settings"
+                         HasUnevenRows="True"
+                         HeightRequest="{Binding VisibleContentHeight, Source={x:Reference settings}}">
+            <sv:Section Title="{x:Static loc:Locale.AppSectionTitle}">
+                <sv:TextPickerCell Title="{x:Static loc:Locale.LocaleCellTitle}"
+                                   Description="{x:Static loc:Locale.LocaleCellDescription}"
+                                   Items="{Binding AvaliableLocales}"
+                                   SelectedItem="{Binding SelectedLocale}"/>
+            </sv:Section>
         </sv:SettingsView>
+
+        <controls:Alert Grid.Row="2"
+                        AlertBackground="{DynamicResource InfoBackgroundColor}"
+                        AlertColor="{DynamicResource InfoTextColor}"
+                        Icon="InfoOutline"
+                        Title="{x:Static loc:Locale.InfoTitle}"
+                        Text="{x:Static loc:Locale.RestartRequiredLabel}"/>
     </Grid>
 </ContentPage>

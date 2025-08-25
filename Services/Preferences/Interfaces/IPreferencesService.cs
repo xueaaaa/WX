@@ -7,7 +7,7 @@ namespace WX.Services.Preferences.Interfaces
         public void Set(string key, string value);
         public string Get(string key, string defaultValue);
         public void SetLanguage(CultureInfo lang);
-        public string GetLanguage();
+        public CultureInfo GetLanguage();
         public string GetDefaultLanguage();
     }
 }

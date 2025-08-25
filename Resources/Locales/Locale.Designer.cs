@@ -88,6 +88,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на App.
+        /// </summary>
+        internal static string AppSectionTitle {
+            get {
+                return ResourceManager.GetString("AppSectionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Close.
         /// </summary>
         internal static string CloseButton {
@@ -196,6 +205,24 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на inch.
+        /// </summary>
+        internal static string inch {
+            get {
+                return ResourceManager.GetString("inch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Info.
+        /// </summary>
+        internal static string InfoTitle {
+            get {
+                return ResourceManager.GetString("InfoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на km/h.
         /// </summary>
         internal static string kmh {
@@ -210,6 +237,24 @@ namespace WX.Resources.Locales {
         internal static string kn {
             get {
                 return ResourceManager.GetString("kn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на All content in the app will be displayed in this language. When searching for locations, you must also use this language..
+        /// </summary>
+        internal static string LocaleCellDescription {
+            get {
+                return ResourceManager.GetString("LocaleCellDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Language.
+        /// </summary>
+        internal static string LocaleCellTitle {
+            get {
+                return ResourceManager.GetString("LocaleCellTitle", resourceCulture);
             }
         }
         
@@ -295,6 +340,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на mm.
+        /// </summary>
+        internal static string mm {
+            get {
+                return ResourceManager.GetString("mm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на More about UV-index.
         /// </summary>
         internal static string MoreAboutUVLabel {
@@ -372,6 +426,15 @@ namespace WX.Resources.Locales {
         internal static string PrecipitationProbabilityLabel {
             get {
                 return ResourceManager.GetString("PrecipitationProbabilityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на For the settings to take effect, you need to restart the application..
+        /// </summary>
+        internal static string RestartRequiredLabel {
+            get {
+                return ResourceManager.GetString("RestartRequiredLabel", resourceCulture);
             }
         }
         

@@ -8,6 +8,9 @@
     <Color x:Key="BackgroundColor">#F0EDE5</Color>
     <Color x:Key="TextColor">#312F2C</Color>
     <Color x:Key="TextMutedColor">#817C74</Color>
+    
+    <Color x:Key="InfoBackgroundColor">#83A8D4</Color>
+    <Color x:Key="InfoTextColor">#305A8D</Color>
 
     <Color x:Key="UVIndexLowColor">#819A91</Color>
     <Color x:Key="UVIndexModerateColor">#FADA7A</Color>

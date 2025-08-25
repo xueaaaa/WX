@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Locale = WX.Resources.Locales.Locale;
 using WX.Services.Preferences.FieldNames;
 
 namespace WX.Converters
@@ -9,7 +10,15 @@ namespace WX.Converters
         {
             if (value is not float) return string.Empty;
 
-            return $"{value} {_preferencesService.Get(PreferencesNames.PRECIPITATION_UNIT, Units.Millimeters.ToStrValue())}";
+            switch (_preferencesService.Get(PreferencesNames.PRECIPITATION_UNIT, Units.Millimeters.ToStrValue())
+            {
+                case "mm":
+                    return $"{value} {Locale.mm}";
+                case "inch":
+                    return $"{value} {Locale.inch}";
+                default:
+                    return string.Empty;
+            }
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+             x:Class="WX.Views.Controls.Alert"
+             x:Name="alert">
+    <Border BackgroundColor="{Binding Source={x:Reference alert}, Path=AlertBackground}"
+            Stroke="{Binding Source={x:Reference alert}, Path=AlertColor}"
+            Padding="10">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="20"/>
+        </Border.StrokeShape>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   Source="{mi:Material Icon={Binding Source={x:Reference alert}, Path=Icon},
+                            IconColor={Binding Source={x:Reference alert}, Path=AlertColor}}"/>
+
+            <VerticalStackLayout Grid.Column="1"
+                                 Margin="5,0,0,0">
+                <Label TextColor="{Binding Source={x:Reference alert}, Path=AlertColor}"
+                       Text="{Binding Source={x:Reference alert}, Path=Title}"
+                       FontFamily="{DynamicResource FontBoldName}"
+                       FontSize="Subtitle"/>
+                <Label TextColor="{Binding Source={x:Reference alert}, Path=AlertColor}"
+                       Text="{Binding Source={x:Reference alert}, Path=Text}"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Border>
+</ContentView>

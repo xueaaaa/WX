@@ -29,7 +29,7 @@ namespace WX.Services.API.LocationAPI
 
             RegisterParameter(LocationAPIFieldNames.COUNT, "10");
             RegisterParameter(LocationAPIFieldNames.FORMAT, "json");
-            RegisterParameter(LocationAPIFieldNames.LANGUAGE, _preferencesService.GetLanguage());
+            RegisterParameter(LocationAPIFieldNames.LANGUAGE, _preferencesService.GetLanguage().TwoLetterISOLanguageName);
         }
 
         public async Task<IEnumerable<Location>> FetchData()

@@ -261,4 +261,25 @@
   <data name="SettingsLabel" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="AppSectionTitle" xml:space="preserve">
+    <value>App</value>
+  </data>
+  <data name="LocaleCellTitle" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LocaleCellDescription" xml:space="preserve">
+    <value>All content in the app will be displayed in this language. When searching for locations, you must also use this language.</value>
+  </data>
+  <data name="InfoTitle" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="RestartRequiredLabel" xml:space="preserve">
+    <value>For the settings to take effect, you need to restart the application.</value>
+  </data>
+  <data name="mm" xml:space="preserve">
+    <value>mm</value>
+  </data>
+  <data name="inch" xml:space="preserve">
+    <value>inch</value>
+  </data>
 </root>
