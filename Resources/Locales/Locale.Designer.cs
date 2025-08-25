@@ -394,6 +394,15 @@ namespace WX.Resources.Locales {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Settings.
+        /// </summary>
+        internal static string SettingsLabel {
+            get {
+                return ResourceManager.GetString("SettingsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Snow depth.
         /// </summary>
         internal static string SnowDepthLabel {

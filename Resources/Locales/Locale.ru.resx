@@ -258,4 +258,7 @@
   <data name="MaxWindGustsLabel" xml:space="preserve">
     <value>Макс. порывы ветра</value>
   </data>
+  <data name="SettingsLabel" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
 </root>

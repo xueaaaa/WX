@@ -2,6 +2,7 @@ using WX.Services;
 using WX.Services.Preferences.Interfaces;
 using WX.Services.Workers;
 using WX.Views.Modals;
+using WX.Views.Pages;
 
 namespace WX.Views.Controls;
 
@@ -30,4 +31,10 @@ public partial class ControlButtonsPanel : ContentView
 		CheckNavigation();
 		await _navigation.PushModalAsync(new SelectLocationModal(_preferencesService, _navigation, _locationWorker));
 	}
+
+    private async void OpenSettingsButton_Clicked(object sender, EventArgs e)
+    {
+		CheckNavigation();
+		await _navigation.PushModalAsync(new SettingsPage(_preferencesService, _navigation));
+    }
 }

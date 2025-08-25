@@ -85,11 +85,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="AathifMahir.Maui.MauiIcons.Material" Version="4.0.0" />
+		<PackageReference Include="AiForms.Maui.SettingsView" Version="1.0.17" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="12.2.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.8" />
-		<PackageReference Include="Microsoft.Maui.Core" Version="9.0.90" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.90" />
+		<PackageReference Include="Microsoft.Maui.Core" Version="9.0.100" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.100" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -136,6 +137,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\HourlyWeatherPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Pages\SettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

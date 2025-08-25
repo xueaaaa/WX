@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui;
+﻿using AiForms.Settings;
+using CommunityToolkit.Maui;
 using MauiIcons.Material;
 using Microsoft.Extensions.Logging;
 using WX.Models.Weather;
@@ -29,6 +30,7 @@ namespace WX
 
             builder.UseMaterialMauiIcons();
             builder.UseMauiCommunityToolkit();
+            builder.UseSettingsView(true);
 
 #if DEBUG
     		builder.Logging.AddDebug();

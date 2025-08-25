@@ -13,6 +13,7 @@
         <Button x:Name="OpenSettingsButton"
                 Style="{DynamicResource ActionButton}"
                 ImageSource="{mi:Material Icon=Settings, IconColor={StaticResource TextColor}}"
-                Margin="5,0,0,0"/>
+                Margin="5,0,0,0"
+                Clicked="OpenSettingsButton_Clicked"/>
     </HorizontalStackLayout>
 </ContentView>

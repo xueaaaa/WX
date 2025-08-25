@@ -258,4 +258,7 @@
   <data name="MaxWindGustsLabel" xml:space="preserve">
     <value>Maximum wind gusts</value>
   </data>
+  <data name="SettingsLabel" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>
